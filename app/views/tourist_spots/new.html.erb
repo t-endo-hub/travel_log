@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <%= form_with(model: @tourist_spot, local: true) do |f| %>
+      <%= f.label :spot_image, '画像' %>
+      <%= f.file_field :spot_image, class: 'form-control' %>
+
+      <%= f.label :name, '施設、観光地名' %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :postcode, '郵便番号' %>
+      <%= f.text_field :postcode, class: 'form-control' %>
+
+      <%= f.label :prefecture_code, '都道府県' %>
+      <%= f.text_field :prefecture_code, class: 'form-control' %>
+
+      <%= f.label :address_city, '市区町村' %>
+      <%= f.text_field :address_city, class: 'form-control' %>
+
+      <%= f.label :address_street, '番地' %>
+      <%= f.text_field :address_street, class: 'form-control' %>
+
+      <%= f.label :address_building, '建物' %>
+      <%= f.text_field :address_building, class: 'form-control' %>
+
+      <%= f.label :introduction, '紹介文' %>
+      <%= f.text_field :introduction, class: 'form-control' %>
+
+      <%= f.label :access, 'アクセス方法' %>
+      <%= f.text_field :access, class: 'form-control' %>
+
+      <%= f.label :phone_number, '電話番号' %>
+      <%= f.text_field :phone_number, class: 'form-control' %>
+
+      <%= f.label :business_hour, 'ホームページ' %>
+      <%= f.text_field :business_hour, class: 'form-control' %>
+
+      <%= f.label :is_parking, '駐車場' %>
+      <%= f.text_field :is_parking, class: 'form-control' %>
+
+      <%= f.submit '登録', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
