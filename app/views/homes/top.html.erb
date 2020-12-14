@@ -1,1 +1,5 @@
-<h1 class="ml-5">テスト</h1>
+<h1 class="ml-5">テスト!</h1>
+<% if @user %>
+<%= @user.name %>
+<%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "100x100" %>
+<% end %>
