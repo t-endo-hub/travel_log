@@ -3,6 +3,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: "users/sessions",
   }
-  resources :tourist_spots
+  resources :tourist_spots do
+    resources :wents, only: [:create, :destroy]
+    resources :favorites, only: [:create, :destroy]
+  end
   root 'homes#top'
 end

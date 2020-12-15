@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   attachment :profile_image
+
+  has_many :tourist_spots
+  has_many :favorites
+  has_many :wents
 end
