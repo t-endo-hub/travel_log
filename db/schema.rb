@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_14_070818) do
+ActiveRecord::Schema.define(version: 2020_12_14_125534) do
+
+  create_table "tourist_spots", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name", null: false
+    t.string "spot_image_id", null: false
+    t.integer "postcode", null: false
+    t.integer "prefecture_code", null: false
+    t.string "address_city", null: false
+    t.string "address_street", null: false
+    t.string "address_building"
+    t.text "introduction", null: false
+    t.text "access", null: false
+    t.string "phone_number", null: false
+    t.string "business_hour", null: false
+    t.boolean "is_parking", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tourist_spots_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -37,4 +56,5 @@ ActiveRecord::Schema.define(version: 2020_12_14_070818) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tourist_spots", "users"
 end
