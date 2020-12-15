@@ -1,0 +1,2 @@
+module WentsHelper
+end
