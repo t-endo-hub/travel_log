@@ -1,0 +1,25 @@
+<div class="row">
+<h3>レビュー詳細</h3>
+  <div class="col-md-8 mx-auto">
+    <table class="table table-bodered">
+      <tr>
+        <th>画像</th>
+        <td><%= attachment_image_tag @review, :review_image, fallback: "no_image.jpg", size:'300x300' %></td>
+      </tr>
+      <tr>
+        <th>スコア</th>
+        <td><%= @review.score %></td>
+      </tr>
+      <tr>
+        <th>タイトル</th>
+        <td><%= @review.title %></td>
+      </tr>
+      <tr>
+        <th>本文</th>
+        <td><%= @review.body %></td>
+      </tr>
+      
+    </table>
+    <%= link_to '編集', edit_tourist_spot_review_path(@review.tourist_spot, @review), class: 'btn btn-primary' %>
+  </div>
+</div>

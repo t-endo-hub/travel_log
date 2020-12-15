@@ -2,7 +2,7 @@
   <h3>レビュー一覧</h3>
   <% @tourist_spot_reviews.each do |review| %>
     <div class="col-md-4">
-      <%= link_to tourist_spot_reviews_path(review) do %>
+      <%= link_to tourist_spot_review_path(review.tourist_spot,review) do %>
         <%= attachment_image_tag review, :review_image, fallback: "no_image.jpg", size:'300x300' %><br>
         <%= review.score %><br>
         <%= review.title %><br>
