@@ -4,6 +4,7 @@ class TouristSpot < ApplicationRecord
   belongs_to :user
   has_many :favorites
   has_many :wents
+  has_many :reviews
 
    # 「行きたい！」に追加しているかを確認
    def favorited_by?(user)
