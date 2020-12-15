@@ -15,6 +15,10 @@ class TouristSpotsController < ApplicationController
     end
   end
 
+  def show
+    @tourist_spot = TouristSpot.find(params[:id])
+  end
+
   private
   def tourist_spot_params
     params.require(:tourist_spot).permit(

@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <table class="table table-bodered">
+      <tr>
+        <th>画像</th>
+        <td><%= attachment_image_tag @tourist_spot, :spot_image, format: 'jpeg', size: '200x150' %></td>
+      </tr>
+      <tr>
+        <th>観光地名</th>
+        <td><%= @tourist_spot.name %></td>
+      </tr>
+      <tr>
+        <th>紹介文</th>
+        <td><%= @tourist_spot.introduction %></td>
+      </tr>
+      <tr>
+        <th>アクセス</th>
+        <td><%= @tourist_spot.access %></td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td><%= @tourist_spot.phone_number %></td>
+      </tr>
+      <tr>
+        <th>営業時間</th>
+        <td><%= @tourist_spot.business_hour %></td>
+      </tr>
+      <tr>
+        <th>駐車場</th>
+        <td><%= @tourist_spot.is_parking %></td>
+      </tr>
+    </table>
+  </div>
+</div>
