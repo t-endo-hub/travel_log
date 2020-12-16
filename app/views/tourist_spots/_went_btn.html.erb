@@ -1,0 +1,23 @@
+<% if tourist_spot.wented_by?(current_user) %>
+  <%= link_to tourist_spot_went_path(tourist_spot), method: :delete, class: 'btn btn-primary', style: 'border-color: green' do %>
+    <%= tourist_spot.wents.count %>
+    行った
+  <% end %>
+<% else %>
+  <%= link_to tourist_spot_wents_path(tourist_spot), method: :post, class: 'btn btn-primary', style: 'border-color: green' do %>
+    <%= tourist_spot.wents.count %>
+    行った
+  <% end %>
+<% end %>
+
+<% if tourist_spot.favorited_by?(current_user) %>
+  <%= link_to tourist_spot_favorite_path(tourist_spot), method: :delete, class: 'btn btn-success', style: 'border-color: green' do %>
+    <%= tourist_spot.favorites.count %>
+    行きたい
+  <% end %>
+<% else %>
+  <%= link_to tourist_spot_favorites_path(tourist_spot), method: :post, class: 'btn btn-success', style: 'border-color: green' do %>
+    <%= tourist_spot.favorites.count %>
+    行きたい
+  <% end %>
+<% end %>

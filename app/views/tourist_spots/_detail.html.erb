@@ -1,0 +1,9 @@
+<div class="row">
+  <%= tourist_spot.name %>
+  <%= render '/tourist_spots/went_btn', tourist_spot: tourist_spot %>
+</div>
+<div class="row">
+  <div class="col-md-8">
+  <%= attachment_image_tag tourist_spot, :spot_image, fallback: "no_image.jpg", size: '1000x500' %>
+  </div>
+</div>
