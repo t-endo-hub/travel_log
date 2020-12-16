@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :tourist_spots
   has_many :favorites
   has_many :wents
+  has_many :reviews
 end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :tourist_spots do
     resources :wents, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
+    resources :reviews
   end
   root 'homes#top'
 end
