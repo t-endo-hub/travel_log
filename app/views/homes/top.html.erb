@@ -1,12 +1,12 @@
-<h1 class="ml-5">テスト!</h1>
-<% if @user %>
-  <%= @user.name %>
-  <%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "100x100" %>
-<% end %>
-
-<% @tourist_spots.each do |tourist_spot| %>
-  <%= link_to tourist_spot_path(tourist_spot) do %>
-    <%= tourist_spot.name %>
-    <%= attachment_image_tag tourist_spot, :spot_image, format: 'jpeg', size: '150x100' %>
-  <% end %>
-<% end %>
+<h3>ジャンルから探す</h3>
+<div class="row">
+    <% @genres.each do |genre| %>
+      <%= link_to genre_search_path(genre) do %>
+        <div class="col-md-3">
+          <%= attachment_image_tag genre, :genre_image, fallback: 'no_image.jpg', size: '150x150' %>
+          <p><%= genre.name %></p>
+        </div>
+      <% end %>
+    <% end %>
+</div>
+      
