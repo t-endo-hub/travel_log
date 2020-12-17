@@ -1,14 +1,21 @@
 class TouristSpotsController < ApplicationController
-  before_action :set_tourist_spot, except: [:new, :create]
+  before_action :set_tourist_spot, except: [:new, :create, :genre_search]
 
   def new
     @tourist_spot = TouristSpot.new
+    @genres = Genre.all
+    @genre_names = []
+    @genres.each do |genre|
+      @genre_names.push(genre.name)
+    end
   end
 
   def create
     tourist_spot = TouristSpot.new(tourist_spot_params)
     tourist_spot.user_id = current_user.id
     if tourist_spot.save
+      # 中間テーブルも同時に作成
+      TouristSpotGenre.create(tourist_spot_id: tourist_spot.id, genre_id: Genre.find_by(name: params[:genre]).id)
       flash[:notice] = "観光地を登録しました"
       redirect_to root_path
     else
@@ -41,6 +48,11 @@ class TouristSpotsController < ApplicationController
       flash[:alert] = '観光地の削除に失敗しました'
       render root_path
     end
+  end
+
+  def genre_search
+    @genre = Genre.find(params[:genre_id])
+    @select_genres = TouristSpotGenre.where(genre_id: params[:genre_id])
   end
 
   private

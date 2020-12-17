@@ -1,0 +1,59 @@
+<div class="row">
+  <%= link_to 'ジャンル一覧', root_path, class: 'margin-left--10px' %>
+  <i class="fas fa-angle-right margin-left--10px">
+  <%= link_to @genre.name, genre_search_path(@genre), class: 'margin-left--10px' %>
+  <br>
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h3><%= @genre.name %></h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <% if @select_genres.present? %>
+      <% @select_genres.each.with_index(1) do |select_genre, index| %>
+        <div class="card mb-3">
+          <% link_to tourist_spot_path(select_genre.tourist_spot) do %>
+            <% if index == 1 || index == 2 || index == 3 %>
+              <div class="ribbon-wrapper">
+                <span class="ribbon">
+                  <div class="text-center">
+                    <% case index when 1 %>
+                      # 金王冠
+                    <% when 2 %>
+                      # 銀王冠
+                    <% when 3 %>
+                      銅王冠
+                    <% end %>
+                  </div>
+                </span>
+              </div>
+            <% end %>
+          <% end %>
+
+          <%= attachment_image_tag select_genre.tourist_spot, :spot_image, fallback: 'no_image_jpg' %>
+          <div class="caption">
+            <p>
+              <div class="score">
+                平均点
+              </div>
+              <%= link_to "#{ select_genre.tourist_spot.reviews.count }レビュー", tourist_spot_reviews_path(select_genre.tourist_spot), class: 'btn btn-default margin-left--10px' %>
+            </p>
+            <%= link_to select_genre.tourist_spot.name, tourist_spot_path(select_genre.tourist_spot) %>
+            <% if select_genre.tourist_spot.genres.present? %>
+              <% select_genre.tourist_spot.genres.each do |genre| %>
+                <%= genre.name %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>観光スポットは存在しません</p>
+    <% end %>
+  </div>
+</div>
+
