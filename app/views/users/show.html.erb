@@ -1,0 +1,52 @@
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table">
+        <tbody class="text-center">
+          <tr>
+            <td>
+              <div>
+                <%= attachment_image_tag @user, :profile_image, size: '400x400', fallback: 'no_image.jpg', class: 'img-thumbnail img-responsive' %>
+                <br>
+                <h4>
+                  <strong>
+                    <%= @user.name %>
+                    | (
+                    <%= @user.age %>
+                    | 歳
+                    <%= @user.sex %>
+                    |)
+                  </strong>
+                </h4>
+                <br>
+
+                <% if @user == current_user %>
+                  <%= link_to 'プロフィールを編集', edit_user_path(@user), class: 'btn btn-primary' %>
+                  <%= link_to '退会', user_path(@user), method: :delete, date: { confirm: '本当に退会しますか' }, class: 'btn btn-danger margin-left--10px' %>
+                  <br>
+                <% end %>
+
+                フォローボタン、メッセージボタン入れる予定
+                <br>
+                <p><%= @user.introduction %></p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+    <ul class="nav nav-tabs nav-justified">
+      <li class="nav-item" role='presentation'>
+        <%= link_to 'ユーザートップ', user_path(@user) %>
+      </li>
+      <li class="nav-item" role='presentation'>
+        <%= link_to '行った観光地', '#' %>
+      </li>
+      <li class="nav-item" role='presentation'>
+        <%= link_to '行きたい観光地', '#' %>
+      </li>
+    </ul>
+    </div>
+  </div>
