@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: "users/sessions",
   }
+  
+  resources :users
   resources :tourist_spots do
     resources :wents, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]

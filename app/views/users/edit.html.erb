@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= form_with model: @user, local: true do |f| %>
+      <%= f.file_field :profile_image %>
+      <%= attachment_image_tag @user, :profile_image, fallback: 'no_image.jpg', size: '400x400' %>
+      <br>
+
+      <%= f.label :name, '指名' %>
+      <span class="label label-danger">
+        | 必須
+      </span>
+      <br>
+      <%= f.text_field :name, autofocus: true, placeholder: '例）田中　太郎', autocomplete: 'name', class: 'form-control' %>
+      <br>
+
+      <%= f.label :age, '年齢' %>
+      <span class="label label-danger">
+        | 必須
+      </span>
+      <br>
+      <%= f.text_field :age, placeholder: '例）22', autocomplete: 'age', class: 'form-control' %>
+      <br>
+
+      <%= f.label :sex, '性別' %>
+      <span class="label label-danger">
+        | 必須
+      </span>
+      <br>
+      <%= f.select :sex, User.sexes.keys, { prompt: '選択してください' },class: 'form-control' %>
+      <br>
+
+      <%= f.label :introduction, '自己紹介文' %>
+      <span class="label label-default">
+        | 任意
+      </span>
+      <br>
+      <%= f.text_area :introduction, placeholder: '例) よろしくお願いします。', autocomplete: 'introduction', class: 'form-control', style: 'height: 100px;' %>
+      <br>
+
+      <%= f.label :postcode, '郵便番号' %>
+      <span class="label label-default">
+        | 任意
+      </span>
+      <br>
+      <%= f.text_field :postcode, placeholder: '例) 111-1111', autofocus: true, autocomplete: 'postcode', class: 'form-control' %>
+      <br>
+      
+      <%= f.label :prefecture_code, '都道府県' %>
+      <span class="label label-default">
+        | 任意
+      </span>
+      <br>
+      <br>
+    
+      <%= f.label :address_city, '市区町村' %>
+      <span class="label label-default">
+        | 任意
+      </span>
+      <br>
+      <%= f.text_field :address_city, placeholder: '例) 新宿区', autocomplete: 'address_city', class: 'form-control' %>
+      <br>
+
+      <%= f.label :address_street, '番地' %>
+      <span class="label label-default">
+        | 任意
+      </span>
+      <br>
+      <%= f.text_field :address_street, placeholder: '例) 西新宿2-8-1', autocomplete: 'address_street', class: 'form-control' %>
+      <br>
+
+      <%= f.label :address_building, '建物' %>
+      <span class="label label-default">
+        | 任意
+      </span>
+      <br>
+      <%= f.text_field :address_building, placeholder: '例) グランドハイツ 123号', autocomplete: 'address_building', class: 'form-control' %>
+    
+      <%= f.label :email, 'メールアドレス' %>
+      <span class="label label-danger">
+        | 必須
+      </span>
+      <br>
+      <%= f.email_field :email, placeholder: '例) abc@abc.abc', autocomplete: 'email', class: 'form-control' %>
+
+     <%= f.submit '保存', class: 'btn btn-primary btn-lg btn-block' %>
+    <% end %>
+  </div>
+</div>
+

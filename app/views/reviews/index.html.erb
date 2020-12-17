@@ -3,22 +3,29 @@
 <div class="row">
   <% @tourist_spot_reviews.each do |review| %>
     <div class="col-md-8 my-4 mx-auto">
-        <div class="card">
-          <div class="border-bottom p-3">
+      <div class="card">
+        <div class="border-bottom p-3">
+          <%= link_to user_path(review.user) do %>
             <%= attachment_image_tag review.user,:profile_image, fallback: "no_image.jpg", class: "icon-image" %>
             <strong><%= review.user.name %></strong>
-          </div>
-          <div class="border-bottom p-3">
-            <strong><%= review.score %>点</strong>
-          </div>
-            <p class="m-3"><strong><%= review.title %></strong></p>
+          <% end %>
+        </div>
+        <div class="border-bottom p-3">
+          <strong><%= review.score %>点</strong>
+        </div>
+        <%= link_to tourist_spot_review_path(review.tourist_spot, review) do %>
+          <p class="m-3"><strong><%= review.title %></strong></p>
           <div class="ml-3">
             <%= review.body %>
           </div>
           <div class="col-md-3 p-3">
             <%= attachment_image_tag review, :review_image, fallback: "no_image.jpg" %>
           </div>
-        </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
+
+
+
