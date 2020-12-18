@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 2020_12_18_052048) do
 
   create_table "tourist_spot_scenes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "tourist_spot_id"
-    t.bigint "genre_id"
+    t.bigint "scene_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["genre_id"], name: "index_tourist_spot_scenes_on_genre_id"
+    t.index ["scene_id"], name: "index_tourist_spot_scenes_on_scene_id"
     t.index ["tourist_spot_id"], name: "index_tourist_spot_scenes_on_tourist_spot_id"
   end
 
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 2020_12_18_052048) do
   add_foreign_key "reviews", "users"
   add_foreign_key "tourist_spot_genres", "genres"
   add_foreign_key "tourist_spot_genres", "tourist_spots"
-  add_foreign_key "tourist_spot_scenes", "genres"
+  add_foreign_key "tourist_spot_scenes", "scenes"
   add_foreign_key "tourist_spot_scenes", "tourist_spots"
   add_foreign_key "tourist_spots", "users"
   add_foreign_key "wents", "tourist_spots"
