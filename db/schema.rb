@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_050950) do
+ActiveRecord::Schema.define(version: 2020_12_18_052048) do
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 2020_12_17_050950) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "scenes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "scene_image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tourist_spot_genres", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "tourist_spot_id"
     t.bigint "genre_id"
@@ -49,6 +56,15 @@ ActiveRecord::Schema.define(version: 2020_12_17_050950) do
     t.datetime "updated_at", null: false
     t.index ["genre_id"], name: "index_tourist_spot_genres_on_genre_id"
     t.index ["tourist_spot_id"], name: "index_tourist_spot_genres_on_tourist_spot_id"
+  end
+
+  create_table "tourist_spot_scenes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "tourist_spot_id"
+    t.bigint "scene_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["scene_id"], name: "index_tourist_spot_scenes_on_scene_id"
+    t.index ["tourist_spot_id"], name: "index_tourist_spot_scenes_on_tourist_spot_id"
   end
 
   create_table "tourist_spots", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -110,6 +126,8 @@ ActiveRecord::Schema.define(version: 2020_12_17_050950) do
   add_foreign_key "reviews", "users"
   add_foreign_key "tourist_spot_genres", "genres"
   add_foreign_key "tourist_spot_genres", "tourist_spots"
+  add_foreign_key "tourist_spot_scenes", "scenes"
+  add_foreign_key "tourist_spot_scenes", "tourist_spots"
   add_foreign_key "tourist_spots", "users"
   add_foreign_key "wents", "tourist_spots"
   add_foreign_key "wents", "users"

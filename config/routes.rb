@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :genres
+  resources :scenes
   get 'tourist_spot/genre/search', to: 'tourist_spots#genre_search'
+  get 'tourist_spot/scene/search', to: 'tourist_spots#scene_search'
 
 
   devise_for :users, controllers: {
