@@ -51,8 +51,9 @@ class TouristSpotsController < ApplicationController
   end
 
   def genre_search
-    @genre = Genre.find(params[:genre_id])
-    @select_genres = TouristSpotGenre.where(genre_id: params[:genre_id])
+    @tourist_spots = TouristSpot.genre_search(params[:genre_search])
+    @genre = Genre.find(params[:genre_search])
+    @select_genres = TouristSpotGenre.where(genre_id: params[:genre_search])
   end
 
   private

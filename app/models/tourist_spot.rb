@@ -17,4 +17,10 @@ class TouristSpot < ApplicationRecord
   def wented_by?(user)
     wents.where(user_id: user.id).exists?
   end
+
+    # ジャンル検索
+    def self.genre_search(genre_search)
+      TouristSpot.joins(:tourist_spot_genres).where("tourist_spot_genres.genre_id = #{genre_search}")
+    end
+  
 end
