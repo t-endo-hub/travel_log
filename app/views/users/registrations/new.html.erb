@@ -19,6 +19,26 @@
   </div>
 
   <div class="field">
+    <%= f.label :postcode, '郵便番号' %>
+    <%= f.text_field :postcode, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :prefecture_code, '都道府県' %><br />
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address_city, '市区町村' %>
+    <%= f.text_field :address_city, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address_street, '番地' %>
+    <%= f.text_field :address_street, class: 'form-control' %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -37,3 +57,6 @@
 <% end %>
 
 <%= render "users/shared/links" %>
+
+
+

@@ -16,10 +16,11 @@
       <%= select_tag 'scene', options_for_select(@scene_names), class: 'form-control' %>
 
       <%= f.label :postcode, '郵便番号' %>
-      <%= f.text_field :postcode, class: 'form-control' %>
+      <%= f.text_field :postcode, placeholder: '例) 531-6023', class: 'form-control' %>
 
-      <%= f.label :prefecture_code, '都道府県' %>
-      <%= f.text_field :prefecture_code, class: 'form-control' %>
+      <%= f.label :prefecture_name, '都道府県' %><br />
+      <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: 'form-control' %>
+
 
       <%= f.label :address_city, '市区町村' %>
       <%= f.text_field :address_city, class: 'form-control' %>
