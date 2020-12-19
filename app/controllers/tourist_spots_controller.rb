@@ -1,5 +1,5 @@
 class TouristSpotsController < ApplicationController
-  before_action :set_tourist_spot, except: [:new, :create, :genre_search, :scene_search]
+  before_action :set_tourist_spot, only: [:show, :update, :edit, :destroy]
 
   def new
     @tourist_spot = TouristSpot.new
@@ -56,15 +56,24 @@ class TouristSpotsController < ApplicationController
     end
   end
 
+  # ジャンル検索
   def genre_search
     @tourist_spots = TouristSpot.genre_search(params[:genre_search])
     @genre = Genre.find(params[:genre_search])
   end
   
+  # 利用シーン検索
   def scene_search
     @tourist_spots = TouristSpot.scene_search(params[:scene_search])
     @scene = Scene.find(params[:scene_search])
   end
+
+  # 都道府県検索
+  def prefecture_search
+    @tourist_spots = TouristSpot.prefecture_search(params[:prefecture_search])
+    @prefecture = JpPrefecture::Prefecture.find(code: params[:prefecture_search])
+  end
+  
   private
 
   def set_tourist_spot

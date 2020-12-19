@@ -24,6 +24,7 @@ class UsersController < ApplicationController
       :age, 
       :email, 
       :sex, 
+      :prefecture_code,
       :postcode, 
       :address_city, 
       :address_street, 
