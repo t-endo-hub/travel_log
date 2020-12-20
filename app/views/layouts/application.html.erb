@@ -11,29 +11,13 @@
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
     <div class="container">
-      <header>
-        <nav>
-          <% if user_signed_in? %>
-            <%= link_to 'home', root_path %>
-            <%= link_to 'プロフィール変更', edit_user_registration_path %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-            <%= link_to '観光地登録', new_tourist_spot_path %>
-            <%= link_to 'ジャンル登録', genres_path %>
-            <%= link_to 'シーン登録', scenes_path %>
-
-        <% else %>
-            <%= link_to 'サインアップ', new_user_registration_path %>
-            <%= link_to 'ログイン', new_user_session_path %>
-            <% end %>
-        </nav>
-    </header>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%= yield %>
-  </div>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+      <%= render 'layouts/footer' %>
 
   </body>
 </html>
