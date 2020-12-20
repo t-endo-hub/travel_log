@@ -49,5 +49,10 @@ class TouristSpot < ApplicationRecord
   def self.prefecture_search(prefecture_search)
     TouristSpot.where(prefecture_code: prefecture_search)
   end
+
+  # 「行きたい！」ランキング
+  def self.fav_ranking
+    self.find(Favorite.group(:tourist_spot_id).order('count(tourist_spot_id) DESC').limit(10).pluck(:tourist_spot_id))
+  end
   
 end
