@@ -1,0 +1,30 @@
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <span>
+          <i class="fas fa-piggy-back"></i>
+          Toravel log
+        </span>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <ul class="menu">
+          <span>Menu</span>
+          <li>
+            <%= link_to root_path, 'data-turbolinks': false do %>
+              <i class="fas fa-home"></i>
+              トップ
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_tourist_spot_path, 'data-tubolinks': false do %>
+              <i class="fas fa-pen-square"></i>
+              観光地登録
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

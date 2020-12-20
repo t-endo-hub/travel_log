@@ -52,11 +52,40 @@
             アカウント
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to user_path(current_user) do %>
-              <i class="fas fa-user"></i>
-              <span>マイページ</span>
-            <% end %>
+            <ul>
+              <%= link_to user_path(current_user) do %>
+                <li>
+                <i class="fas fa-user"></i>
+                <span>マイページ</span>
+                </li>
+              <% end %>
+              <%= link_to edit_user_path(current_user) do %>
+                <li>
+                <i class="fas fa-user-cog"></i>
+                <span>プロフィール編集</span>
+                </li>
+              <% end %>
+              <%= link_to destroy_user_session_path(current_user), method: :delete do %>
+                <li>
+                <i class="fas fa-sign-out-alt"></i>
+                <span>ログアウト</span>
+                </li>
+              <% end %>
+            </ul>
           </div>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to new_user_registration_path do %>
+            <i class="fas fa-user-plus"></i>
+            新規会員登録
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_session_path do %>
+            <i class="fas fa-sign-in-alt"></i>
+            ログイン
+          <% end %>
         </li>
       <% end %>
     </ul>
