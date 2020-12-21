@@ -1,5 +1,7 @@
 class TouristSpot < ApplicationRecord
   attachment :spot_image
+  is_impressionable counter_cache: true # PV数取得
+
 
   belongs_to :user
   has_many :favorites
@@ -54,5 +56,11 @@ class TouristSpot < ApplicationRecord
   def self.fav_ranking
     self.find(Favorite.group(:tourist_spot_id).order('count(tourist_spot_id) DESC').limit(10).pluck(:tourist_spot_id))
   end
+
+  # PVランキング
+  def self.pv_ranking
+    self.order(impressions_count: 'DESC').limit(10)
+  end
+  
   
 end
