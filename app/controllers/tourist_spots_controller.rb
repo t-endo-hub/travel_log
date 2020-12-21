@@ -74,6 +74,13 @@ class TouristSpotsController < ApplicationController
     @tourist_spots = TouristSpot.prefecture_search(params[:prefecture_search])
     @prefecture = JpPrefecture::Prefecture.find(code: params[:prefecture_search])
   end
+
+  # タグ検索
+  def tag_search
+    @tourist_spots = TouristSpot.tagged_with(params[:tag_name])
+    @tags = TouristSpot.tag_counts.order(taggings_count: 'DESC').limit(20)
+  end
+
   
   private
 
