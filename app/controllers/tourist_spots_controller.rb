@@ -94,6 +94,7 @@ class TouristSpotsController < ApplicationController
       :access,
       :phone_number,
       :business_hour,
-      :parking,)
+      :parking,
+      :tag_list)
   end
 end

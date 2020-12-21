@@ -17,6 +17,14 @@
         <td><%= @tourist_spot.introduction %></td>
       </tr>
       <tr>
+        <th class="active">タグ</th>
+        <td>
+          <% @tourist_spot.tag_list.each do |tag| %>
+            <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag), class: 'label label-default margin-left--10px' %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
         <th>アクセス</th>
         <td><%= @tourist_spot.access %></td>
       </tr>

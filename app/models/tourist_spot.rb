@@ -1,6 +1,8 @@
 class TouristSpot < ApplicationRecord
   attachment :spot_image
   is_impressionable counter_cache: true # PV数取得
+  acts_as_taggable # タグ付け
+
 
 
   belongs_to :user
