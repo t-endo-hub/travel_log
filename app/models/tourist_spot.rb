@@ -64,5 +64,10 @@ class TouristSpot < ApplicationRecord
     self.order(impressions_count: 'DESC').limit(10)
   end
   
+  # タグランキング
+  def self.tag_ranking
+    self.all.tag_counts.order(taggings_count: 'DESC').limit(10)
+  end
+  
   
 end

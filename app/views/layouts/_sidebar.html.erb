@@ -106,3 +106,51 @@
     </table>
   </div>
 
+  <div class="row">
+    <div class="page-header">
+      <h5>
+        <i class="fas fa-eye"></i>
+        タグランキング
+      </h5>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">
+            順位
+          </th>
+          <th class="text-center">
+            タグ
+          </th>
+          <th class="text-center">
+            投稿数
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% tags.each.with_index(1) do |tag, index| %>
+          <tr>
+            <td class="text-center">
+              <% case index when 1 %>
+                <i class="fas fa-crown" style='color: gold;'></i>
+              <% when 2 %>
+                <i class="fas fa-crown" style='color: silver;'></i>
+              <% when 3 %>
+                <i class="fas fa-crown" style='color: #B08A1C;'></i>
+              <% else %>
+                <%=  index %>
+              <% end %>
+            </td>
+            <td class="text-center">
+              <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag.name) %>
+            </td>
+            <td class="text-center">
+              <%= tag.taggings_count %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
