@@ -13,10 +13,11 @@
 
 
 //= require rails-ujs
-//= require turbolinks
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require jquery.jpostal
+//= require tag-it
 //= require_tree.
 

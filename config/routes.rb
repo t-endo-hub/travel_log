@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'tourist_spot/genre/search', to: 'tourist_spots#genre_search'
   get 'tourist_spot/scene/search', to: 'tourist_spots#scene_search'
   get 'tourist_spot/prefecture/search', to: 'tourist_spots#prefecture_search'
+  get 'tourist_spot/tag/search', to: 'tourist_spots#tag_search'
 
 
 

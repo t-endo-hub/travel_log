@@ -31,6 +31,7 @@ class TouristSpotsController < ApplicationController
   end
 
   def show
+    impressionist(@tourist_spot, nil, unique: [:impressionable_id, :ip_address])
   end
 
   def edit
@@ -73,6 +74,13 @@ class TouristSpotsController < ApplicationController
     @tourist_spots = TouristSpot.prefecture_search(params[:prefecture_search])
     @prefecture = JpPrefecture::Prefecture.find(code: params[:prefecture_search])
   end
+
+  # タグ検索
+  def tag_search
+    @tourist_spots = TouristSpot.tagged_with(params[:tag_name])
+    @tags = TouristSpot.tag_counts.order(taggings_count: 'DESC').limit(20)
+  end
+
   
   private
 
@@ -93,6 +101,7 @@ class TouristSpotsController < ApplicationController
       :access,
       :phone_number,
       :business_hour,
-      :parking,)
+      :parking,
+      :tag_list)
   end
 end

@@ -8,6 +8,11 @@
       <%= f.label :name, '施設、観光地名' %>
       <%= f.text_field :name, class: 'form-control' %>
 
+      <%= f.label :tag_list, 'タグ' %>
+      <span class="label label-default">任意</span>
+      <br>
+      <%= f.text_field :tag_list, value: @tourist_spot.tag_list.join(','), id: 'tags' %>
+
       <%= f.label :postcode, '郵便番号' %>
       <%= f.text_field :postcode, class: 'form-control' %>
 

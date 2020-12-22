@@ -7,6 +7,11 @@
       <%= f.label :name, '施設、観光地名' %>
       <%= f.text_field :name, class: 'form-control' %>
 
+      <%= f.label :tag_list, 'タグ' %>
+      <span class="label label-default">任意</span>
+      <br>
+      <%= f.text_field :tag_list, value: @tourist_spot.tag_list.join(','), class: 'form-control', id: 'tags' %>
+
       <%= label_tag 'ジャンル' %>
       <span class="label label-danger">必須</span>
       <%= select_tag 'genre', options_for_select(@genre_names), class: 'form-control' %>
