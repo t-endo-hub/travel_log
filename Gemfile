@@ -70,3 +70,6 @@ gem 'jp_prefecture'
 gem 'impressionist', '~>1.6.1'
 gem 'acts-as-taggable-on'
 gem 'jquery-ui-rails'
+gem 'gon'
+gem 'geocoder'
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_21_030548) do
+ActiveRecord::Schema.define(version: 2020_12_22_084017) do
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 2020_12_21_030548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "impressions_count", default: 0
+    t.float "latitude"
+    t.float "longitude"
     t.index ["user_id"], name: "index_tourist_spots_on_user_id"
   end
 

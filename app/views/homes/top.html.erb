@@ -57,7 +57,79 @@
         </div>
       <% end %>
     </div>
+
+    <div class="row">
+      <div class="page-header">
+        <h3>
+          <i class="fas fa-map-marker-alt"></i>
+          現在地から探す
+        </h3>
+      </div>
+    </div>
+
+<div id='map'></div>
+<style>
+  #map{
+    height: 800px; width: 100%;
+  }
+</style>
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap">
+</script>
+
+<script>
+   let map;
+    let marker = [];
+    let infoWindow = [];
+    let markerData = gon.tourist_spots;
+
+    function initMap() {
+      // 位置情報を取得
+      navigator.geolocation.getCurrentPosition(function (position) {
+        LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        // 取得した位置情報を中心に表示
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: LatLng,
+          zoom: 15
+        });
+
+        // 繰り返し処理でマーカーと吹き出しを複数表示
+        for (var i = 0; i < markerData.length; i++) {
+          let id = markerData[i]['id']
+
+          // 各地点にマーカーを立てる
+          markerLatLng = new google.maps.LatLng({
+            lat: markerData[i]['latitude'],
+            lng: markerData[i]['longitude']
+          });
+          marker[i] = new google.maps.Marker({
+            position: markerLatLng,
+            map: map
+          });
+
+          // 各地点の吹き出しを作成
+          infoWindow[i] = new google.maps.InfoWindow({
+            // 吹き出しに表示する内容
+            content: `<a href='/tourist_spots/${id}'>詳細を見る</a>` + markerData[i]['name']
+          });
+
+          // マーカーにクリックイベントを追加
+          markerEvent(i);
+        }
+      })
+    }
+
+    // マーカーをクリックすると吹き出しが表示される
+    function markerEvent(i) {
+      marker[i].addListener('click', function () {
+        infoWindow[i].open(map, marker[i]);
+      });
+    }
+</script>
+
   </div>
+
+
   <div class="col-md-1"></div>
   <div class="col-md-4">
     <%= render 'layouts/sidebar', tourist_spots_fav: @tourist_spots_fav,
@@ -65,4 +137,7 @@
                                   tags: @tags %>  
   </div>
 </div>
+
+
+
 

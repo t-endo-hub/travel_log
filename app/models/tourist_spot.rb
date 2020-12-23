@@ -68,6 +68,16 @@ class TouristSpot < ApplicationRecord
   def self.tag_ranking
     self.all.tag_counts.order(taggings_count: 'DESC').limit(10)
   end
+
+  # 緯度経度を取得
+  geocoded_by :geocode_full_address
+  after_validation :geocode
+
+  # geocoder用の住所
+  def geocode_full_address
+    self.address_city + self.address_street
+  end
+  
   
   
 end
