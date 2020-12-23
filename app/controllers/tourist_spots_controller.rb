@@ -23,7 +23,7 @@ class TouristSpotsController < ApplicationController
       TouristSpotGenre.create(tourist_spot_id: tourist_spot.id, genre_id: Genre.find_by(name: params[:genre]).id)
       TouristSpotScene.create(tourist_spot_id: tourist_spot.id, scene_id: Scene.find_by(name: params[:scene]).id)
       flash[:notice] = "観光地を登録しました"
-      redirect_to root_path
+      redirect_to tourist_spot_path(tourist_spot)
     else
       flash[:alert] = "観光地の登録に失敗しました"
       render 'new'
@@ -97,6 +97,8 @@ class TouristSpotsController < ApplicationController
       :address_city,
       :address_street,
       :address_building,
+      :latitude,
+      :longitude,
       :introduction,
       :access,
       :phone_number,
