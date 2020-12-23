@@ -81,6 +81,14 @@ class TouristSpotsController < ApplicationController
     @tags = TouristSpot.tag_counts.order(taggings_count: 'DESC').limit(20)
   end
 
+  # 地図
+  def map
+    @tourist_spot = TouristSpot.find(params[:tourist_spot_id])
+    gon.latitude = @tourist_spot.latitude
+    gon.longitude = @tourist_spot.longitude
+  end
+  
+
   
   private
 
