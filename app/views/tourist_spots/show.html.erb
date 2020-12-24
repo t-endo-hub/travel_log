@@ -1,11 +1,4 @@
-<h3>観光地詳細</h3>
-
 <%= render 'detail', tourist_spot: @tourist_spot %>
-
-<%= link_to 'レビュー一覧', tourist_spot_reviews_path(@tourist_spot) %>
-<%= link_to 'レビューを書く', new_tourist_spot_review_path(@tourist_spot) %>
-<%= link_to '地図', tourist_spot_map_path(@tourist_spot) %>
-
 <div class="row">
   <div class="col-md-8 mx-auto">
     <table class="table table-bordered">
@@ -24,6 +17,18 @@
             <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag), class: 'label label-default margin-left--10px' %>
           <% end %>
         </td>
+      </tr>
+      <tr>
+        <th class="active">ジャンル</th>
+        <td>
+          <% @tourist_spot.genres.each do |genre| %>
+            <%= link_to genre.name, tourist_spot_genre_search_path(genre_search: genre.id) %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= @tourist_spot.full_address %></td>
       </tr>
       <tr>
         <th>アクセス</th>

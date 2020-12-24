@@ -1,9 +1,39 @@
 <div class="row">
-  <%= tourist_spot.name %>
-  <%= render '/tourist_spots/went_btn', tourist_spot: tourist_spot %>
-</div>
-<div class="row">
-  <div class="col-md-8">
-  <%= attachment_image_tag tourist_spot, :spot_image, fallback: "no_image.jpg", size: '1000x500' %>
+  <div class="col-md-6">
+    <div class="page-header">
+      <h3>
+        <%= tourist_spot.name %>
+        <div class="score margin-left--10px">
+          <%= tourist_spot.average_score %>点
+        </div>
+      </h3>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="pull-right">
+      <% if user_signed_in? %>
+        <span><%= render 'went_btn', tourist_spot: tourist_spot %></span>
+      <% end %>
+    </div>
   </div>
 </div>
+
+<div class="row">
+  <%= attachment_image_tag tourist_spot, :spot_image, size: '500x300', fallback: 'others/no_image.jpg', class: 'img-responsive img-rounded carousel-image mx-auto' %>
+</div>
+
+  <ul class="nav nav-justified border-bottom">
+    <li class="nav-item">
+      <%= link_to '観光地トップ', tourist_spot_path(tourist_spot), class: 'nav-link'%>
+    </li>
+    <li class="nav-item">
+      <%= link_to "#{ tourist_spot.reviews.count}レビュー", tourist_spot_reviews_path(tourist_spot), class: 'nav-link' %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'レビュー投稿', new_tourist_spot_review_path(tourist_spot), class: 'nav-link' %>
+    </li>
+    <li class="nav-item">
+      <%= link_to '地図', tourist_spot_map_path(tourist_spot), class: 'nav-link', 'data-turbolinks': false %>
+    </li>
+  </ul>
+  <br>

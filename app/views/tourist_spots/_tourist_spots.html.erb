@@ -25,7 +25,7 @@
               <div class="score">
                 平均点
               </div>
-              <%= link_to "#{ tourist_spot.reviews.count }レビュー", tourist_spot_reviews_path(tourist_spot), class: 'btn btn-default margin-left--10px' %>
+              <%= link_to "#{ tourist_spot.reviews.count }レビュー", tourist_spot_reviews_path(tourist_spot), class: 'btn btn-secondary margin-left--10px' %>
             </p>
             <%= link_to tourist_spot.name, tourist_spot_path(tourist_spot) %>
             <% if tourist_spot.genres.present? %>
