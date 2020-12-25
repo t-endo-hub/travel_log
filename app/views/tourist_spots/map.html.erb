@@ -1,10 +1,7 @@
-= provide(:title, '観光スポット 地図')
+<%= render 'detail', tourist_spot: @tourist_spot %>
 
 <div class="row">
-  <%= render 'detail', tourist_spot: @tourist_spot %>
-</div>
-<div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 mx-auto">
     <div id="map" style='height: 550px; width: 100%; margin-top: 30px;'></div>
     <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap">
     </script>

@@ -12,10 +12,16 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <%= render 'layouts/main' %>
     <div class="container">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
       <%= yield %>
+      <span id="go-top">
+        <a href="#">
+          <%= image_tag 'others/arrow.png' %>
+        </a>
+      </span>
     </div>
       <%= render 'layouts/footer' %>
 

@@ -3,8 +3,6 @@ class TouristSpot < ApplicationRecord
   is_impressionable counter_cache: true # PV数取得
   acts_as_taggable # タグ付け
 
-
-
   belongs_to :user
   has_many :favorites
   has_many :wents
@@ -77,6 +75,24 @@ class TouristSpot < ApplicationRecord
   def geocode_full_address
     self.address_city + self.address_street
   end
+
+  # レビューの平均点
+  def average_score
+    @sum = 0
+    reviews.each do |review|
+      @sum += review.score
+    end
+    if @sum > 0
+      @sum /= reviews.length
+    end
+    return @sum
+  end
+
+   # 住所を結合
+   def full_address
+    '〒' + self.postcode.to_s + ' ' + prefecture_name + ' ' + self.address_city + ' ' + self.address_street + ' ' + self.address_building
+  end
+
   
   
   
