@@ -37,6 +37,14 @@ class TouristSpot < ApplicationRecord
     wents.where(user_id: user.id).exists?
   end
 
+  #キーワード検索
+  def self.keyword_search(keyword_search)
+    TouristSpot.where([
+      'name LIKE ? OR introduction LIKE ? OR address_city LIKE ? OR address_street LIKE ?',
+      "%#{ keyword_search }%", "%#{ keyword_search }%", "%#{ keyword_search }%", "%#{ keyword_search }%"
+    ])
+  end
+
   # ジャンル検索
   def self.genre_search(genre_search)
     TouristSpot.joins(:tourist_spot_genres).where("tourist_spot_genres.genre_id = #{genre_search}")
