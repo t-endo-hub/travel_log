@@ -57,6 +57,13 @@ class TouristSpotsController < ApplicationController
     end
   end
 
+  # キーワード検索
+  def keyword_search
+    @keyword = params[:keyword_search]
+    @tourist_spots = TouristSpot.keyword_search(params[:keyword_search])
+  end
+  
+
   # ジャンル検索
   def genre_search
     @tourist_spots = TouristSpot.genre_search(params[:genre_search])

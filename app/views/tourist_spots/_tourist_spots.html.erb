@@ -1,43 +1,66 @@
 <div class="row">
-  <div class="col-md-6  mx-auto">
-    <% if tourist_spots.present? %>
-      <% tourist_spots.each.with_index(1) do |tourist_spot, index| %>
-        <div class="card mb-3">
-          <%= link_to tourist_spot_path(tourist_spot) do %>
-            <% if index == 1 || index == 2 || index == 3 %>
-              <div class="ribbon-wrapper">
-                <span class="ribbon">
-                    <% case index when 1 %>
-                      <i class="fas fa-crown" style="color: gold;"></i>
-                    <% when 2 %>
-                      <i class="fas fa-crown" style="color: silver;"></i>
-                    <% when 3 %>
-                      <i class="fas fa-crown" style="color: #B08A1C;"></i>
-                    <% end %>
-                </span>
-              </div>
-            <% end %>
-          <% end %>
-
-          <%= attachment_image_tag tourist_spot, :spot_image, fallback: 'no_image_jpg' %>
-          <div class="caption">
-            <p>
-              <div class="score">
-                平均点
-              </div>
-              <%= link_to "#{ tourist_spot.reviews.count }レビュー", tourist_spot_reviews_path(tourist_spot), class: 'btn btn-secondary margin-left--10px' %>
-            </p>
-            <%= link_to tourist_spot.name, tourist_spot_path(tourist_spot) %>
-            <% if tourist_spot.genres.present? %>
-              <% tourist_spot.genres.each do |genre| %>
-                <%= genre.name %>
+  <div class="col-md-8">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <% if tourist_spots.present? %>
+        <% tourist_spots.each.with_index(1) do |tourist_spot, index| %>
+          <div class="thumbnail">
+            <%= link_to tourist_spot_path(tourist_spot) do %>
+              <% if index == 1 || index == 2 || index == 3 %>
+                <div class="ribbon-wrapper">
+                  <span class="ribbon">
+                    <div class="text-center">
+                      <% case index when 1 %>
+                        <i class="fas fa-crown" style="color: gold;"></i>
+                      <% when 2 %>
+                        <i class="fas fa-crown" style="color: silver;"></i>
+                      <% when 3 %>
+                        <i class="fas fa-crown" style="color: #B08A1C;"></i>
+                      <% end %>
+                    </div>
+                  </span>
+                </div>
               <% end %>
+              <%= attachment_image_tag tourist_spot, :spot_image, fallback: 'no_image_jpg' %>
             <% end %>
+
+            <div class="caption">
+              <p>
+                <div class="score">
+                  <%= tourist_spot.average_score %>点
+                </div>
+                <%= link_to "#{ tourist_spot.reviews.count }レビュー", tourist_spot_reviews_path(tourist_spot), class: 'btn btn-default margin-left--10px' %>
+              </p>
+              <p>
+                <%= link_to tourist_spot.name, tourist_spot_path(tourist_spot) %>
+              </p>
+              <p>
+                <%= link_to tourist_spot.prefecture_name %>
+              </p>
+              <p class="text-muted">
+                <% if tourist_spot.genres.present? %>
+                  <% tourist_spot.genres.each do |genre| %>
+                    <%= genre.name %>
+                  <% end %>
+                <% end %>
+              </p>
+              <p>
+                <% tourist_spot.tag_list.each do |tag| %>
+                  <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag), class: 'label label-default margin-left--10px' %>
+                <% end %>
+              </p>
+            </div>
           </div>
-        </div>
+        <% end %>
+      <% else %>
+        <p class="centered">観光スポットは存在しません</p>
       <% end %>
-    <% else %>
-      <p>観光スポットは存在しません</p>
-    <% end %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <%= render 'layouts/sidebar', tourist_spots_fav: TouristSpot.fav_ranking,
+                                  tourist_spots_pv: TouristSpot.pv_ranking,
+                                  tags: TouristSpot.tag_ranking
+    %>
   </div>
 </div>
