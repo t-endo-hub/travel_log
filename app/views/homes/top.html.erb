@@ -7,14 +7,13 @@
           ジャンルから探す
         </h3>
       </div>
-    </div>
-    <div class="row">
       <% @genres.each do |genre| %>
         <div class="col-md-4">
           <%= link_to tourist_spot_genre_search_path(genre_search: genre.id) do %>
-            <%= attachment_image_tag genre, :genre_image, fallback: 'no_image.jpg', size: '150x150' %>
+            <%= attachment_image_tag genre, :genre_image, fallback: 'no_image.jpg', size: '150x150', class: 'img-responsive img-rounded img-hover top-image' %>
             <p><%= genre.name %></p>
           <% end %>
+          <br>
         </div>
       <% end %>
     </div>
@@ -27,14 +26,13 @@
           利用シーンから探す
         </h3>
       </div>
-    </div>
-    <div class="row">
       <% @scenes.each do |scene| %>
         <div class="col-md-4">
           <%= link_to tourist_spot_scene_search_path(scene_search: scene.id) do %>
-            <%= attachment_image_tag scene, :scene_image, fallback: 'no_image.jpg', size: '150x150' %>
+            <%= attachment_image_tag scene, :scene_image, fallback: 'no_image.jpg', size: '150x150', class: 'img-responsive img-rounded img-hover top-image' %>
             <p><%= scene.name %></p>
           <% end %>
+          <br>
         </div>
       <% end %>
     </div>
@@ -46,17 +44,28 @@
           都道府県から探す
         </h3>
       </div>
-    </div>
-    <div class="row">
       <% JpPrefecture::Prefecture.all.each do |prefecture| %>
         <div class="col-md-4">
           <%= link_to tourist_spot_prefecture_search_path(prefecture_search: prefecture.code) do %>
             <%= image_tag "prefectures/#{ prefecture.name }.jpg", class: 'img-responsive img-rounded img-hover top-image' %>
             <p><%= prefecture.name %></p>
           <% end %>
+          <br>
         </div>
       <% end %>
     </div>
+  </div>
+
+  <div class="col-md-1"></div>
+
+  <div class="col-md-4">
+    <%= render 'layouts/sidebar', tourist_spots_fav: @tourist_spots_fav,
+                                  tourist_spots_pv: @tourist_spots_pv,    
+                                  tags: @tags %>  
+  </div>
+</div>
+
+
 
     <div class="row">
       <div class="page-header">
@@ -67,76 +76,62 @@
       </div>
     </div>
 
-<div id='map'></div>
-<style>
-  #map{
-    height: 800px; width: 100%;
-  }
-</style>
-<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap">
-</script>
+    <div id='map' style='height: 800px; width: 100%;'></div>
 
-<script>
-   let map;
-    let marker = [];
-    let infoWindow = [];
-    let markerData = gon.tourist_spots;
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap">
+    </script>
 
-    function initMap() {
-      // 位置情報を取得
-      navigator.geolocation.getCurrentPosition(function (position) {
-        LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    <script>
+      let map;
+        let marker = [];
+        let infoWindow = [];
+        let markerData = gon.tourist_spots;
 
-        // 取得した位置情報を中心に表示
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: LatLng,
-          zoom: 15
-        });
+        function initMap() {
+          // 位置情報を取得
+          navigator.geolocation.getCurrentPosition(function (position) {
+            LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-        // 繰り返し処理でマーカーと吹き出しを複数表示
-        for (var i = 0; i < markerData.length; i++) {
-          let id = markerData[i]['id']
+            // 取得した位置情報を中心に表示
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: LatLng,
+              zoom: 15
+            });
 
-          // 各地点にマーカーを立てる
-          markerLatLng = new google.maps.LatLng({
-            lat: markerData[i]['latitude'],
-            lng: markerData[i]['longitude']
-          });
-          marker[i] = new google.maps.Marker({
-            position: markerLatLng,
-            map: map
-          });
+            // 繰り返し処理でマーカーと吹き出しを複数表示
+            for (var i = 0; i < markerData.length; i++) {
+              let id = markerData[i]['id']
 
-          // 各地点の吹き出しを作成
-          infoWindow[i] = new google.maps.InfoWindow({
-            // 吹き出しに表示する内容
-            content: `<a href='/tourist_spots/${id}'>詳細を見る</a>` + markerData[i]['name']
-          });
+              // 各地点にマーカーを立てる
+              markerLatLng = new google.maps.LatLng({
+                lat: markerData[i]['latitude'],
+                lng: markerData[i]['longitude']
+              });
+              marker[i] = new google.maps.Marker({
+                position: markerLatLng,
+                map: map
+              });
 
-          // マーカーにクリックイベントを追加
-          markerEvent(i);
+              // 各地点の吹き出しを作成
+              infoWindow[i] = new google.maps.InfoWindow({
+                // 吹き出しに表示する内容
+                content: `<a href='/tourist_spots/${id}'>詳細を見る</a>` + markerData[i]['name']
+              });
+
+              // マーカーにクリックイベントを追加
+              markerEvent(i);
+            }
+          })
         }
-      })
-    }
 
-    // マーカーをクリックすると吹き出しが表示される
-    function markerEvent(i) {
-      marker[i].addListener('click', function () {
-        infoWindow[i].open(map, marker[i]);
-      });
-    }
-</script>
+        // マーカーをクリックすると吹き出しが表示される
+        function markerEvent(i) {
+          marker[i].addListener('click', function () {
+            infoWindow[i].open(map, marker[i]);
+          });
+        }
+    </script>
 
-  </div>
-
-
-  <div class="col-md-1"></div>
-  <div class="col-md-4">
-    <%= render 'layouts/sidebar', tourist_spots_fav: @tourist_spots_fav,
-                                  tourist_spots_pv: @tourist_spots_pv,    
-                                  tags: @tags %>  
-  </div>
-</div>
 
 
 
