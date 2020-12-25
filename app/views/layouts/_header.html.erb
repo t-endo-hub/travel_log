@@ -1,131 +1,133 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button class="navbar-toggle collapsed" type='button' data-toggle='collapse' data-target='#navbarEexample7'>
-        <span class="sr-only">
-          Toggle nabigation
-        </span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/"><img src="images/others/logo.png" alt="ロゴ"></a>
-    </div>
-
-    <div id='navbarEexample7' class='collapse navbar-collapse'>
-      <% if user_signed_in? %>
-        <p class="nabvar-text">
-          <span>
-            ようこそ
-            <%= link_to current_user.name, user_path(current_user) %>
-            さん！
+<header>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button class="navbar-toggle collapsed" type='button' data-toggle='collapse' data-target='#navbarEexample7'>
+          <span class="sr-only">
+            Toggle nabigation
           </span>
-        </p>
-      <% end %>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="images/others/logo.png" alt="ロゴ"></a>
+      </div>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
-            <i class="fas fa-list-ul"></i>
-            <span>
-              ジャンルから探す
-            </span>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role='menu'>
-            <li>
-              <% Genre.all.each do |genre| %>
-                <%= link_to  genre.name, tourist_spot_genre_search_path(genre_search: genre.id) %>
-              <% end %>
-            </li>
-            <br>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
-            <i class="fas fas-bullseye"></i>
-            <span>
-              利用シーンから探す
-            </span>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role='menu'>
-            <li>
-              <% Scene.all.each do |scene| %>
-                <%= link_to  scene.name, tourist_spot_scene_search_path(scene_search: scene.id) %>
-              <% end %>
-            </li>
-            <br>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
-            <i class="fas fa-globe-asia"></i>
-            <span>
-              都道府県から探す
-            </span>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role='menu'>
-            <li>
-              <% JpPrefecture::Prefecture.all.each do |prefecture| %>
-                <%= link_to prefecture.name, tourist_spot_prefecture_search_path(prefecture_search: prefecture.code)%>
-              <% end %>
-            </li>
-            <br>
-          </ul>
-        </li>
-
+      <div id='navbarEexample7' class='collapse navbar-collapse'>
         <% if user_signed_in? %>
+          <p class="nabvar-text">
+            <span>
+              ようこそ
+              <%= link_to current_user.name, user_path(current_user) %>
+              さん！
+            </span>
+          </p>
+        <% end %>
+
+        <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a class="dropdown-toggle header__acount-link" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
-              <%= attachment_image_tag current_user, :profile_image, size: '30x30', fallback: 'others/no_image.jpg',class: 'img-thumbnail img-responsive img-hover' %>
+            <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
+              <i class="fas fa-list-ul"></i>
               <span>
-                アカウント
+                ジャンルから探す
               </span>
               <span class="caret"></span>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" role='menu'>
               <li>
-                <%= link_to user_path(current_user) do %>
-                  <i class="fas fa-user"></i>
-                  マイページ
+                <% Genre.all.each do |genre| %>
+                  <%= link_to  genre.name, tourist_spot_genre_search_path(genre_search: genre.id) %>
                 <% end %>
               </li>
-              <li>
-                <%= link_to edit_user_path(current_user) do %>
-                  <i class="fas fa-user-cog"></i>
-                  プロフィール編集
-                <% end %>
-              </li>
-              <li>
-                <%= link_to destroy_user_session_path, method: :delete do %>
-                  <i class="fas fa-sign-out-alt"></i>
-                  マイページ
-                <% end %>
-              </li>
+              <br>
             </ul>
           </li>
-        <% else %>
-          <li>
-            <%= link_to new_user_registration_path do %>
-              <i class="fas fa-user-plus"></i>
-              新規会員登録
-            <% end %>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
+              <i class="fas fas-bullseye"></i>
+              <span>
+                利用シーンから探す
+              </span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role='menu'>
+              <li>
+                <% Scene.all.each do |scene| %>
+                  <%= link_to  scene.name, tourist_spot_scene_search_path(scene_search: scene.id) %>
+                <% end %>
+              </li>
+              <br>
+            </ul>
           </li>
-          <li>
-            <%= link_to new_user_session_path do %>
-              <i class="fas fa-sign-in-alt"></i>
-              ログイン
-            <% end %>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
+              <i class="fas fa-globe-asia"></i>
+              <span>
+                都道府県から探す
+              </span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role='menu'>
+              <li>
+                <% JpPrefecture::Prefecture.all.each do |prefecture| %>
+                  <%= link_to prefecture.name, tourist_spot_prefecture_search_path(prefecture_search: prefecture.code)%>
+                <% end %>
+              </li>
+              <br>
+            </ul>
           </li>
-        <% end %>
-      </ul>
+
+          <% if user_signed_in? %>
+            <li class="dropdown">
+              <a class="dropdown-toggle header__acount-link" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
+                <%= attachment_image_tag current_user, :profile_image, size: '30x30', fallback: 'others/no_image.jpg',class: 'img-thumbnail img-responsive img-hover' %>
+                <span>
+                  アカウント
+                </span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to user_path(current_user) do %>
+                    <i class="fas fa-user"></i>
+                    マイページ
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to edit_user_path(current_user) do %>
+                    <i class="fas fa-user-cog"></i>
+                    プロフィール編集
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                    <i class="fas fa-sign-out-alt"></i>
+                    マイページ
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to new_user_registration_path do %>
+                <i class="fas fa-user-plus"></i>
+                新規会員登録
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_session_path do %>
+                <i class="fas fa-sign-in-alt"></i>
+                ログイン
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>
 
 
 
