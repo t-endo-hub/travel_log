@@ -1,25 +1,141 @@
 <div class="row">
-<h3>レビュー詳細</h3>
-  <div class="col-md-8 mx-auto">
-    <table class="table table-bodered">
-      <tr>
-        <th>画像</th>
-        <td><%= attachment_image_tag @review, :review_image, fallback: "no_image.jpg", size:'300x300' %></td>
-      </tr>
-      <tr>
-        <th>スコア</th>
-        <td><%= @review.score %></td>
-      </tr>
-      <tr>
-        <th>タイトル</th>
-        <td><%= @review.title %></td>
-      </tr>
-      <tr>
-        <th>本文</th>
-        <td><%= @review.body %></td>
-      </tr>
-      
-    </table>
-    <%= link_to '編集', edit_tourist_spot_review_path(@review.tourist_spot, @review), class: 'btn btn-primary' %>
+  <div class="page-header">
+    <h3>
+      <%= @review.title %>
+      <% if user_signed_in? %>
+        <span id='likebutton_#{ @review.id }' class='margin-left--10px'>
+          <%= render 'reviews/likebutton', review: @review %>
+        </span>
+      <% end %>
+      <div class="score margin-left--10px">
+        <%= @review.score %>
+      </div>
+    </h3>
   </div>
 </div>
+
+<div class="row">
+  <%= attachment_image_tag @review.tourist_spot, :spot_image, fallback: 'no_image.jpg', class: 'img-responsive img-rounded carousel-image' %>
+</div>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>
+            <% @user = @review.user %>
+            <%= link_to user_path(@user) do %>
+              <%= attachment_image_tag @user, :profile_image, fallback: 'no_image.jpg', size: '100x100', class: 'img-thumbnail img-responsive img-hover' %>
+              <span class="margin-left--10px">
+                <%= @user.name %>(<%= @user.age %>歳<%= @user.sex %>)
+              </span>
+            <% end %>
+            <% if user_signed_in? %>
+              <% unless @user == current_user %>
+                <span id='followbutton_#{ @user.id }' class='margin-left--10px'>
+                  <%= render 'users/followbutton', user:@user %>
+                </span>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= @review.body %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <% if @user == current_user %>
+      <div class="pull-right">
+        <%= link_to '編集', edit_tourist_spot_review_path(@review), class: 'btn btn-primary' %>
+        <%= link_to '削除', tourist_spot_review_path(@review), method: :delete,  data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger margin-left--10px' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <% if user_signed_in? %>
+      <%= form_with model: @comment, url: tourist_spot_review_comments_path(@review.tourist_spot, @review), local: true do |f| %>
+        <%= f.label :title, 'タイトル' %>
+        <br>
+        <%= f.text_field :title, class: 'form-control' %>
+        <br>
+        <%= f.label :body, '本文' %>
+        <br>
+        <%= f.text_area :body, class: 'form-control', style: 'height: 100px;' %>
+        <br>
+        <%= f.hidden_field :review_id, value: @review.id %>
+        <%= f.submit '投稿', class: 'btn btn-success btn-block' %>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+<div class="row">
+  <% if @comments.present? %>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">
+              投稿者
+            </th>
+            <th class="text-center">
+              タイトル
+            </th>
+            <th class="text-center">
+              本文
+            </th>
+            <th class="text-center">
+              投稿日時
+            </th>
+            <th class="text-center">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td>
+                <%= link_to user_path(comment.user) do %>
+                  <%= attachment_image_tag comment.user, :profile_image, fallback: 'others/no_image.jpg', size: '50x50', class: 'img-thumbnail img-responsive img-hover' %>
+                  <span class="margin-left--10px">
+                    <%= comment.user.name %>
+                  </span>
+                <% end %>
+              </td>
+              <td>
+                <%= comment.title %>
+              </td>
+              <td>
+                <%= comment.body %>
+              </td>
+              <td>
+                <%= comment.created_at %>
+              </td>
+              <td>
+                <% if comment.user == current_user %>
+                  <%= link_to '編集', edit_tourist_spot_review_comment_path(@review.tourist_spot, @review, comment), class:'btn btn-primary' %>
+                  <%= link_to '削除', tourist_spot_review_comment_path(@review.tourist_spot, @review, comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger margin-left--10px' %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="centered">
+      コメントは存在しません
+    </p>
+  <% end %>
+</div>            

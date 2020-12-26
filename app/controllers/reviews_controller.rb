@@ -24,7 +24,8 @@ class ReviewsController < ApplicationController
   end
 
   def show
-   
+    @comment = Comment.new
+    @comments = @review.comments
   end
 
   def edit

@@ -18,7 +18,10 @@ Rails.application.routes.draw do
   resources :tourist_spots do
     resources :wents, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
-    resources :reviews
+    resources :reviews do
+      resource :likes, only: [:index, :create, :destroy]
+      resources :comments, only: [:create, :edit, :update, :destroy]
+    end
     get 'map', to: 'tourist_spots#map'
   end
   root 'homes#top'
