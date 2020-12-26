@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_comment, only: [:edit, :update, :destroy]
 
   def create
     @comment = Comment.new(comment_params)
@@ -11,6 +12,26 @@ class CommentsController < ApplicationController
       @comments = @review.comments.all
       render '/reviews/show'
     end
+  end
+
+  def edit
+    unless @comment.user == current_user
+      redirect_to root_path
+    end
+  end
+
+  def update
+    if @comment.update(comment_params)
+      redirect_to tourist_spot_review_path(@comment.review.tourist_spot, @comment.review)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @review = @comment.review
+    @comment.destroy
+    redirect_to tourist_spot_review_path(@comment.review.tourist_spot, @comment.review)
   end
 
   private
