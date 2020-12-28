@@ -3,7 +3,7 @@
     <h3>
       <%= @review.title %>
       <% if user_signed_in? %>
-        <span id='likebutton_#{ @review.id }' class='margin-left--10px'>
+        <span id="likebutton-<%= @review.id %>" class='margin-left--10px'>
           <%= render 'reviews/likebutton', review: @review %>
         </span>
       <% end %>
