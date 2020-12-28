@@ -9,10 +9,16 @@
       </h3>
     </div>
   </div>
+
   <div class="col-md-6">
     <div class="pull-right">
       <% if user_signed_in? %>
-        <span><%= render 'tourist_spots/went_btn', tourist_spot: tourist_spot %></span>
+        <span id="favoritebutton-<%= tourist_spot.id %>">
+          <%= render 'tourist_spots/favoritebutton', tourist_spot: tourist_spot %>
+        </span>
+        <span id="wentbutton-<%= tourist_spot.id %>">
+          <%= render 'tourist_spots/wentbutton', tourist_spot: tourist_spot %>
+        </span>
       <% end %>
     </div>
   </div>
