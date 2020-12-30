@@ -131,7 +131,7 @@
         </tr>
       </thead>
       <tbody>
-        <% reviews.each.with_index(1) do |tag, index| %>
+        <% tags.each.with_index(1) do |tag, index| %>
           <tr>
             <td class="text-center">
               <% case index when 1 %>
@@ -144,16 +144,12 @@
                 <%=  index %>
               <% end %>
             </td>
-            <%
-=begin%>
- <td class="text-center">
+            <td class="text-center">
               <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag.name) %>
             </td>
             <td class="text-center">
               <%= tag.taggings_count %>
             </td> 
-<%
-=end%>
           </tr>
         <% end %>
       </tbody>
@@ -201,21 +197,11 @@
               <% end %>
             </td>
             <td class="text-center">
-              <%
-=begin%>
- <%= link_to review, tourist_spot_review_path(review.tourist_spot, review) do %> 
-<%
-=end%>
-                <%= attachment_image_tag review, :review_image, size: '50x50', class: 'img-thumbnail img-rounded img-responsive img-hover' %>
-                <br>
-                <span>
-                  <%= review.title %>
-                </span>
-              <%
-=begin%>
- <% end %> 
-<%
-=end%>
+              <%= attachment_image_tag review, :review_image, size: '50x50', class: 'img-thumbnail img-rounded img-responsive img-hover' %>
+              <br>
+              <span>
+                <%= review.title %>
+              </span>
               <div class="text-muted">
                 <%= truncate review.body, length: 20 %>
               </div>
