@@ -1,5 +1,5 @@
 <% if tourist_spot.favorited_by?(current_user) %>
-  <%= link_to tourist_spot_favorite_path(tourist_spot), method: :delete, remote: true, class: 'btn btn-default', style: 'border-color: #FF9933;' do %>
+  <%= link_to tourist_spot_favorites_path(tourist_spot), method: :delete, remote: true, class: 'btn btn-default', style: 'border-color: #FF9933;' do %>
     <i class="fas fa-star" style='color: #FF9933'></i>
     <%= tourist_spot.favorites.count %>
     行きたい！

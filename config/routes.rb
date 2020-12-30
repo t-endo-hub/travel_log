@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   
   resources :users
   resources :tourist_spots do
-    resources :wents, only: [:create, :destroy]
-    resources :favorites, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
+    resource :wents, only: [:create, :destroy]
     resources :reviews do
       resource :likes, only: [:index, :create, :destroy]
       resources :comments, only: [:create, :edit, :update, :destroy]

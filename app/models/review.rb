@@ -11,4 +11,7 @@ class Review < ApplicationRecord
     likes.where(user_id: user.id).exists?
   end
 
+  def self.ranking
+    self.find(Like.group(:review_id).order('count(review_id) DESC').limit(10).pluck(:review_id))
+  end
 end
