@@ -1,52 +1,120 @@
 <%= render 'detail', tourist_spot: @tourist_spot %>
 <div class="row">
-  <div class="col-md-8 mx-auto">
-    <table class="table table-bordered">
-      <tr>
-        <th>観光地名</th>
-        <td><%= @tourist_spot.name %></td>
-      </tr>
-      <tr>
-        <th>紹介文</th>
-        <td><%= @tourist_spot.introduction %></td>
-      </tr>
-      <tr>
-        <th class="active">タグ</th>
-        <td>
-          <% @tourist_spot.tag_list.each do |tag| %>
-            <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag), class: 'label label-default margin-left--10px' %>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <th class="active">ジャンル</th>
-        <td>
-          <% @tourist_spot.genres.each do |genre| %>
-            <%= link_to genre.name, tourist_spot_genre_search_path(genre_search: genre.id) %>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <th>住所</th>
-        <td><%= @tourist_spot.full_address %></td>
-      </tr>
-      <tr>
-        <th>アクセス</th>
-        <td><%= @tourist_spot.access %></td>
-      </tr>
-      <tr>
-        <th>電話番号</th>
-        <td><%= @tourist_spot.phone_number %></td>
-      </tr>
-      <tr>
-        <th>営業時間</th>
-        <td><%= @tourist_spot.business_hour %></td>
-      </tr>
-      <tr>
-        <th>駐車場</th>
-        <td><%= @tourist_spot.is_parking %></td>
-      </tr>
-    </table>
-    <%= link_to '編集', edit_tourist_spot_path(@tourist_spot), class: 'btn btn-primary' %>
+  <div class="col-md-3">
+    <div class="page-header">
+      <h3 class="text-center">
+        天気予報
+      </h3>
+    </div>
+
+    <p class="weather-text">
+      <%= @tourist_spot.prefecture_name %>
+    </p>
+    <div id="weather"></div>
+
+    <script>
+      window.onload = function() {
+        var api_key = gon.open_weather_api;
+        var city = gon.prefecture_name;
+        var url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + api_key;
+        $.ajax({
+          url: url,
+          dataType: "json",
+          type: 'GET',
+        })
+        .done(function(data) {
+          var insertHTML = "";
+          //無料枠で5日分の天気表示。デフォルトでは3時間ごとの天気を取得するため、
+          //8の倍数の時のみデータを取得することにより、24時間ごとの天気が取得される
+          for (var i = 0; i <= 32; i = i + 8) {
+            insertHTML += buildHTML(data, i);
+          }
+            $('#weather').html(insertHTML);
+          })
+        .fail(function(data) {
+          console.log("失敗しました");
+        });
+      };
+      
+      function buildHTML(data, i) {
+        var Week = new Array('(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)');
+        var date = new Date(data.list[i].dt_txt);
+        date.setHours(date.getHours() + 9);
+        var month = date.getMonth() + 1;
+        var day = month + '/' + date.getDate() + Week[date.getDay()];
+        var icon = data.list[i].weather[0].icon;
+        var html =
+          '<div class="weather-report">' +
+            '<img src="https://openweathermap.org/img/w/' + icon + '.png">' +
+            '<span class="weather-date">' + day + "</span>" +
+            '<div class="weather-temp-max">' + '最高：' + Math.round(data.list[i].main.temp_max) + "℃</div>" +
+            '<span class="weather-temp-min">' + '最低：' + Math.floor(data.list[i].main.temp_min) + "℃</span>" +
+          '</div>';
+        return html
+      }
+    </script>
+  </div>
+
+  <div class="col-md-9">
+
+    <div class="page-header">
+      <h3 class="text-center">
+        観光スポット詳細情報
+      </h3>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tr>
+          <th class="active">紹介文</th>
+          <td><%= @tourist_spot.introduction %></td>
+        </tr>
+        <tr>
+          <th class="active">タグ</th>
+          <td>
+            <% @tourist_spot.tag_list.each do |tag| %>
+              <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag), class: 'label label-default margin-left--10px' %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th class="active">ジャンル</th>
+          <td>
+            <% @tourist_spot.genres.each do |genre| %>
+              <%= genre.name %>
+            <% end %>
+          </td>
+        </tr>
+        
+        <tr>
+          <th class="active">住所</th>
+          <td><%= @tourist_spot.full_address %></td>
+        </tr>
+        <tr>
+          <th class="active">アクセス</th>
+          <td><%= @tourist_spot.access %></td>
+        </tr>
+        <tr>
+          <th class="active">電話番号</th>
+          <td><%= @tourist_spot.phone_number %></td>
+        </tr>
+        <tr>
+          <th class="active">営業時間</th>
+          <td><%= @tourist_spot.business_hour %></td>
+        </tr>
+        <tr>
+          <th class="active">駐車場</th>
+          <td><%= @tourist_spot.is_parking %></td>
+        </tr>
+      </table>
+    </div>
+
+    <% if @tourist_spot.user == current_user %>
+      <div class="pull-right">
+        <%= link_to '編集', edit_tourist_spot_path(@tourist_spot), class: 'btn btn-primary' %>
+        <%= link_to '削除', tourist_spot_path(@tourist_spot), method: :delete,  data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger margin-left--10px' %>
+      </div>
+    <% end %>
   </div>
 </div>
+
