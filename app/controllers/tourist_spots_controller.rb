@@ -32,6 +32,8 @@ class TouristSpotsController < ApplicationController
 
   def show
     impressionist(@tourist_spot, nil, unique: [:impressionable_id, :ip_address])
+    gon.open_weather_api = ENV['OPEN_WEATHER_MAP_API']
+    gon.prefecture_name = @tourist_spot.prefecture_name
   end
 
   def edit
@@ -93,6 +95,8 @@ class TouristSpotsController < ApplicationController
     @tourist_spot = TouristSpot.find(params[:tourist_spot_id])
     gon.latitude = @tourist_spot.latitude
     gon.longitude = @tourist_spot.longitude
+    gon.open_weather_api = ENV['OPEN_WEATHER_MAP_API']
+    gon.prefecture_name = @tourist_spot.prefecture_name
   end
   
 
