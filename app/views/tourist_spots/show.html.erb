@@ -24,34 +24,34 @@
         })
         .done(function(data) {
           var insertHTML = "";
-          var cityName = '<h2>' + data.city.name + '</h2>';
-          $('#city-name').html(cityName);
-          for (var i = 0; i <= 8; i = i + 2) {
+          //無料枠で5日分の天気表示。デフォルトでは3時間ごとの天気を取得するため、
+          //8の倍数の時のみデータを取得することにより、24時間ごとの天気が取得される
+          for (var i = 0; i <= 32; i = i + 8) {
             insertHTML += buildHTML(data, i);
           }
-          $('#weather').html(insertHTML);
-        })
+            $('#weather').html(insertHTML);
+          })
         .fail(function(data) {
           console.log("失敗しました");
         });
       };
       
       function buildHTML(data, i) {
-        var Week = new Array("（日）","（月）","（火）","（水）","（木）","（金）","（土）");
-        var date = new Date (data.list[i].dt_txt);
+        var Week = new Array('(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)');
+        var date = new Date(data.list[i].dt_txt);
         date.setHours(date.getHours() + 9);
-        var month = date.getMonth()+1;
-        var day = month + "月" + date.getDate() + "日" + Week[date.getDay()] + date.getHours() + "：00";
+        var month = date.getMonth() + 1;
+        var day = month + '/' + date.getDate() + Week[date.getDay()];
         var icon = data.list[i].weather[0].icon;
         var html =
-        '<div class="weather-report">' +
-          '<img src="http://openweathermap.org/img/w/' + icon + '.png">' +
-          '<div class="weather-date">' + day + '</div>' +
-          '<div class="weather-main">'+ data.list[i].weather[0].main + '</div>' +
-          '<div class="weather-temp">' + Math.round(data.list[i].main.temp) + '℃</div>' +
-        '</div>';
+          '<div class="weather-report">' +
+            '<img src="https://openweathermap.org/img/w/' + icon + '.png">' +
+            '<span class="weather-date">' + day + "</span>" +
+            '<div class="weather-temp-max">' + '最高：' + Math.round(data.list[i].main.temp_max) + "℃</div>" +
+            '<span class="weather-temp-min">' + '最低：' + Math.floor(data.list[i].main.temp_min) + "℃</span>" +
+          '</div>';
         return html
-      };
+      }
     </script>
   </div>
 
