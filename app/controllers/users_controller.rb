@@ -30,7 +30,9 @@ class UsersController < ApplicationController
       :address_street, 
       :address_building, 
       :introduction,
-      :profile_image
+      :profile_image,
+      :point,
+      :rank
     )
   end
 

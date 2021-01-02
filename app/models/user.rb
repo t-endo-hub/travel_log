@@ -30,5 +30,23 @@ class User < ApplicationRecord
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
 
+  # 次のランクまでのポイント数を計算
+  def next_rank(user)
+    case user.rank
+    when 'レギュラー'
+      10 - user.point
+    when 'シルバー'
+      50 - user.point
+    when 'ゴールド'
+      100 - user.point
+    when 'プラチナ'
+      300 - user.point
+    end
+  end
+
+  # ランキング
+  def self.ranking
+    self.all.order(point: 'DESC').limit(10)
+  end
 
 end
