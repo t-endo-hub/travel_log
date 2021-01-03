@@ -49,4 +49,5 @@ class User < ApplicationRecord
     self.all.order(point: 'DESC').limit(10)
   end
 
+  
 end
