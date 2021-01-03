@@ -56,5 +56,18 @@ class User < ApplicationRecord
     end
   end
   
+  # ログインユーザーの順位を計算
+  def my_rank(current_user)
+    users = User.ranking
+    @my_rank = 0
+    users.each do |user|
+      @my_rank += 1
+      if user.id == current_user.id
+        break
+      end
+    end
+    return @my_rank
+  end
+  
   
 end
