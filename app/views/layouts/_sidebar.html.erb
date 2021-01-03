@@ -247,6 +247,16 @@
   </div>
 
   <div class="row">
+    <% if user_signed_in? %>
+      あなたの順位は
+      <%= users.count %>
+      人中
+      <strong>
+        <%= current_user.my_rank(current_user) %>
+        位
+      </strong>
+      です
+    <% end %>
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
