@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: [:show, :edit, :update] 
   def show
   end
 
@@ -14,6 +14,11 @@ class UsersController < ApplicationController
       flash[:alert] = 'ユーザー情報の編集に失敗しました'
       render 'edit'
     end
+  end
+
+  # キーワード検索
+  def keyword_search
+    @users = User.keyword_search(params[:search])
   end
   
 
