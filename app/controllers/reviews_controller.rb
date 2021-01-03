@@ -15,6 +15,8 @@ class ReviewsController < ApplicationController
     review = @tourist_spot.reviews.new(review_params)
     review.user_id = current_user.id
     if review.save
+      review.user.point += 1 # レビューを投稿したユーザーにポイントを与える
+      review.user_rank_update(review.user) # レビューを投稿したユーザーのランクをアップデート
       flash[:notice] = 'レビューを追加しました'
       redirect_to tourist_spot_path(@tourist_spot)
     else

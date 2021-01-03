@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: [:show, :edit, :update] 
   def show
   end
 
@@ -16,6 +16,12 @@ class UsersController < ApplicationController
     end
   end
 
+  # キーワード検索
+  def keyword_search
+    @users = User.keyword_search(params[:search])
+  end
+  
+
   private
   
   def user_params
@@ -30,7 +36,9 @@ class UsersController < ApplicationController
       :address_street, 
       :address_building, 
       :introduction,
-      :profile_image
+      :profile_image,
+      :point,
+      :rank
     )
   end
 

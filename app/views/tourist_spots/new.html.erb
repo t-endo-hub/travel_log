@@ -5,7 +5,7 @@
       <%= f.label :spot_image, '画像' %>
       <span class="label label-danger">必須</span>
       <br>
-      <%= f.file_field :spot_image, multiple: true, class: 'img_field', style: 'display:none;' %>
+      <%= f.attachment_field :spot_image, class: 'img_field', style: 'display:none;' %>
       <div class="btn btn-warning" onclick="$('.img_field').click()">
         写真アップロード
       </div>
@@ -30,7 +30,7 @@
 
       <%= label_tag '利用シーン' %>
       <span class="label label-danger">必須</span>
-      <%= select_tag 'scene', options_for_select(Scene.all), class: 'form-control' %>
+      <%= select_tag 'scene', options_for_select(@scene_names), class: 'form-control' %>
       <br>
 
       <%= f.label :postcode, '郵便番号' %>

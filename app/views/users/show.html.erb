@@ -1,9 +1,55 @@
   <div class="row">
+    <div class="col-md-2"></div>
     <div class="col-md-8">
       <table class="table">
         <tbody class="text-center">
           <tr>
             <td>
+              <h3>
+              </h3>
+                <% case @user.rank when 'レギュラー' %>
+                  <div class="label label-default">
+                    <%= @user.rank %>
+                    <div class="badge">
+                      <%= @user.point %>
+                    </div>
+                  </div>
+                <% when 'シルバー' %>
+                  <div class="label label-primary">
+                    <%= @user.rank %>
+                    <div class="badge">
+                      <%= @user.point %>
+                    </div>
+                  </div>
+                <% when 'ゴールド' %>
+                  <div class="label label-warning">
+                    <%= @user.rank %>
+                    <div class="badge">
+                      <%= @user.point %>
+                    </div>
+                  </div>
+                <% when 'プラチナ' %>
+                  <div class="label label-info">
+                    <%= @user.rank %>
+                    <div class="badge">
+                      <%= @user.point %>
+                    </div>
+                <% when 'ダイヤモンド' %>
+                  <div class="label label-danger">
+                    <%= @user.rank %>
+                    <div class="badge">
+                      <%= @user.point %>
+                    </div>
+                  </div>
+                <% end %>
+              </h3>
+              <% if @user == current_user %>
+                <p>
+                  次のランクまであと
+                  <%= @user.next_rank(@user) %>
+                  ポイント
+                </p>
+              <% end %>
               <div>
                 <%= attachment_image_tag @user, :profile_image, size: '400x400', fallback: 'no_image.jpg', class: 'img-thumbnail img-responsive' %>
                 <br>

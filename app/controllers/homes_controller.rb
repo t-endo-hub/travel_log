@@ -8,6 +8,7 @@ class HomesController < ApplicationController
     @tourist_spots_pv = TouristSpot.pv_ranking # 観光スポットPVランキング
     @tags = TouristSpot.tag_ranking # タグランキング
     @reviews = Review.ranking # レビューランキング
+    @users = User.ranking
     gon.tourist_spots = TouristSpot.all
   end
 end
