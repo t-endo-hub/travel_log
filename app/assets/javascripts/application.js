@@ -83,3 +83,42 @@ $(function () {
   });
 });
 
+
+// 画像プレビュー
+document.addEventListener("turbolinks:load", function() {
+  console.log("aaaa");
+
+	$(function() {
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('.img_field').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$('.img_prev').change(function(){
+			readURL(this);
+		});
+	});
+})
+
+$(function () {
+  function readURL(input) {
+    console.log("aaaa");
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('.img_prev').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $('.img_field').change(function () {
+    readURL(this);
+  });
+});
+
+

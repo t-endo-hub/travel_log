@@ -5,6 +5,7 @@
       <%= f.label :spot_image, '画像' %>
       <span class="label label-danger">必須</span>
       <br>
+      <div class="img_prev"></div>
       <%= f.attachment_field :spot_image, class: 'img_field', style: 'display:none;' %>
       <div class="btn btn-warning" onclick="$('.img_field').click()">
         写真アップロード
