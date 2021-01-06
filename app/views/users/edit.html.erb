@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-6">
     <%= form_with model: @user, local: true do |f| %>
-      <%= f.file_field :profile_image %>
-      <%= attachment_image_tag @user, :profile_image, fallback: 'no_image.jpg', size: '400x400' %>
+      <%= f.file_field :profile_image, class: 'img_field', style: 'display:none;' %>
+      <%= attachment_image_tag @user, :profile_image, fallback: 'others/no_image.png', onClick: "$('.img_field').click()", class: 'center-block img-thumbnail img-responseve img_prev' %>
       <br>
 
       <%= f.label :name, '指名' %>
@@ -87,3 +87,20 @@
   </div>
 </div>
 
+<script>
+$(function () {
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('.img_prev').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $('.img_field').change(function () {
+    readURL(this);
+  });
+});
+</script>
