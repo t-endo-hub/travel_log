@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+
 
   enum sex: { '男性': 0, '女性': 1, 'その他': 2 }
   enum is_valid: { '有効': true, '退会済': false }
