@@ -12,6 +12,20 @@ class TouristSpot < ApplicationRecord
   has_many :tourist_spot_scenes, dependent: :destroy
   has_many :scenes, through: :tourist_spot_scenes
 
+  validates :spot_image, presence: true
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :postcode, presence: true, format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
+  validates :prefecture_code, presence: true
+  validates :address_city, presence: true, length: { maximum: 50 }
+  validates :address_street, presence: true, length: { maximum: 50 }
+  validates :address_building, length: { maximum: 50 }
+  validates :introduction, presence: true, length: { maximum: 400 }
+  validates :access, presence: true, length: { maximum: 200 }
+  validates :business_hour, presence: true, length: { maximum: 100 }
+  validates :phone_number, presence: true, uniqueness: true, format: { with: /\A[0-9]{1,4}-[0-9]{1,4}-[0-9]{4}\z/ }
+  validates :parking, presence: true, length: { maximum: 100 }
+
+
 
   # 住所自動入力
   include JpPrefecture

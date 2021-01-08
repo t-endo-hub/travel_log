@@ -16,6 +16,16 @@ class User < ApplicationRecord
   enum sex: { '男性': 0, '女性': 1, 'その他': 2 }
   enum is_valid: { '有効': true, '退会済': false }
 
+  validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
+  validates :sex, presence: true
+  validates :age, presence: true
+  validates :postcode, allow_blank: true, format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
+  validates :address_city, length: { maximum: 50 }
+  validates :address_street, length: { maximum: 50 }
+  validates :address_building, length: { maximum: 50 }
+  validates :introduction, length: { maximum: 200 }
+
+
   # 住所自動入力
   include JpPrefecture
   jp_prefecture :prefecture_code
