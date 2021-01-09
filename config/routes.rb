@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'rooms/index'
+  get 'rooms/show'
   resources :genres
   resources :scenes
   get 'user/keyword/search', to: 'users#keyword_search'
