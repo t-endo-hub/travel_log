@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'rooms/index'
+  get 'rooms/show'
   resources :genres
   resources :scenes
   get 'user/keyword/search', to: 'users#keyword_search'
@@ -16,6 +18,9 @@ Rails.application.routes.draw do
   }
   
   resources :users
+  resources :messages, only: [:create, :destroy]
+  resources :rooms, only: [:create, :show, :index]
+
   resources :tourist_spots do
     resource :favorites, only: [:create, :destroy]
     resource :wents, only: [:create, :destroy]

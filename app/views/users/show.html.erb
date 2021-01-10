@@ -72,6 +72,21 @@
                 <% end %>
 
                 フォローボタン、メッセージボタン入れる予定
+                <% if user_signed_in? %>
+                  <% unless @user == current_user %>
+                    <% if @is_room == true %>
+                      <%= link_to 'メッセージ', room_path(@room_id), class: 'btn btn-success' %>
+                    <% else %>
+                      <%= form_with model :@room, local: true do |f| %>
+                        <%= fields_for @entry do |e| %>
+                          <%= e.hidden_field :user_id, value: @user.id %>
+                        <% end %>
+                        <%= f.submit 'メッセージ', class: 'btn btn-success' %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                               
                 <br>
                 <p><%= @user.introduction %></p>
               </div>
