@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   }
   
   resources :users
+  resources :messages, only: [:create, :destroy]
+  resources :rooms, only: [:create, :show, :index]
+
   resources :tourist_spots do
     resource :favorites, only: [:create, :destroy]
     resource :wents, only: [:create, :destroy]
