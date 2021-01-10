@@ -3,57 +3,55 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
     <%= f.label :profile_imate %><br />
     <%= f.attachment_field :profile_image, autofocus: true %>
-  </div>
 
-  <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
-  </div>
 
-  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <br>
+    
+    <%= f.label :age, '年齢' %>
+    <span class="label label-danger">
+      必須
+    </span>
+    <br>
+    <%= f.number_field :age, placeholder: '例) 22', autocomplete: 'age', class: "form-control" %>
+    <br>
 
-  <div class="field">
+    <%= f.label :sex, '性別' %>
+    <span class="label label-danger">
+      必須
+    </span>
+    <br>
+    <%= f.select :sex, User.sexes.keys, { prompt: '選択してください'}, class: 'form-control' %>
+    <br>
+
     <%= f.label :postcode, '郵便番号' %>
     <%= f.text_field :postcode, class: 'form-control' %>
-  </div>
 
-  <div class="field">
     <%= f.label :prefecture_code, '都道府県' %><br />
     <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: 'form-control' %>
-  </div>
 
-  <div class="field">
     <%= f.label :address_city, '市区町村' %>
     <%= f.text_field :address_city, class: 'form-control' %>
-  </div>
 
-  <div class="field">
     <%= f.label :address_street, '番地' %>
     <%= f.text_field :address_street, class: 'form-control' %>
-  </div>
 
-  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
-  </div>
 <% end %>
 
 <%= render "users/shared/links" %>
