@@ -73,7 +73,7 @@
 
                 <% if user_signed_in? %>
                   <% unless @user == current_user %>
-                    <div>
+                    <div id="followbutton-<%= @user.id %>">
                       <%= render 'users/followbutton', user:@user %>
                     </div>
                     <% if @is_room == true %>

@@ -7,7 +7,6 @@ class RelationshipsController < ApplicationController
     unless current_user.following?(@user)
       current_user.follow(params[:id])
     end
-    redirect_to user_path(@user)
   end
 
   # アンフォローする
@@ -16,7 +15,6 @@ class RelationshipsController < ApplicationController
     if current_user.following?(@user)
       current_user.unfollow(params[:id])
     end
-    redirect_to user_path(@user)
   end
 
 end
