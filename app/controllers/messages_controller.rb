@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   def create
     message = Message.new(message_params)
     message.user_id = current_user.id
-    message.save ? (redirect_to user_room_path(message.room)) : (redirect_back(fallback_location: root_path))
+    message.save ? (redirect_to room_path(message.room)) : (redirect_back(fallback_location: root_path))
   end
 
   def destroy
