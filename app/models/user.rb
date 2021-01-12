@@ -14,6 +14,11 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :follower, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  has_many :followed, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :following_user, through: :follower, source: :followed
+  has_many :follower_user, through: :followed, source: :follower
+
 
 
   enum sex: { '男性': 0, '女性': 1, 'その他': 2 }
@@ -41,6 +46,21 @@ class User < ApplicationRecord
   # 都道府県名
   def prefecture_name=(prefecture_name)
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
+
+  # ユーザーをフォローする
+  def follow(user_id)
+    follower.create(followed_id: user_id)
+  end
+
+  # ユーザーをアンフォローする
+  def unfollow(user_id)
+      follower.find_by(followed_id: user_id).destroy
+  end
+
+  # フォローしているかを確認
+  def following?(user)
+      following_user.include?(user)
   end
 
   # 次のランクまでのポイント数を計算
