@@ -48,6 +48,21 @@ class User < ApplicationRecord
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
 
+  # ユーザーをフォローする
+  def follow(user_id)
+    follower.create(followed_id: user_id)
+  end
+
+  # ユーザーをアンフォローする
+  def unfollow(user_id)
+      follower.find_by(followed_id: user_id).destroy
+  end
+
+  # フォローしているかを確認
+  def following?(user)
+      following_user.include?(user)
+  end
+
   # 次のランクまでのポイント数を計算
   def next_rank(user)
     case user.rank

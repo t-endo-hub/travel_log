@@ -71,9 +71,11 @@
                   <br>
                 <% end %>
 
-                フォローボタン、メッセージボタン入れる予定
                 <% if user_signed_in? %>
                   <% unless @user == current_user %>
+                    <div>
+                      <%= render 'users/followbutton', user:@user %>
+                    </div>
                     <% if @is_room == true %>
                       <%= link_to 'メッセージ', room_path(@room_id), class: 'btn btn-success' %>
                     <% else %>
