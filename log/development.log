@@ -25462,3 +25462,423 @@ Refile::App: [2021-01-13 03:21:56 +0000] GET "/ae003d8c8f30bbdf6a52f0b7f0d96647c
 
 Refile::App: [2021-01-13 03:21:56 +0000] GET "/f0feaf8397200e0dc5505534915cbd90be6f07d3/store/fd7c7bf6ef40ddbadb643e514a78e761b06c922fad5469a3f8bc921711bf/review_image" 200 20.6ms
 
+Started GET "/" for 172.26.0.1 at 2021-01-13 03:26:03 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /usr/local/bundle/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /usr/local/bundle/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by HomesController#top as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/homes_controller.rb:3
+DEPRECATION WARNING: Dangerous query method (method whose arguments are used as raw SQL) called with non-attribute argument(s): "count(tourist_spot_id) DESC". Non-attribute arguments will be disallowed in Rails 6.0. This method should not be called with user-provided values, such as request parameters or model attributes. Known-safe values can be passed by wrapping them in Arel.sql(). (called from fav_ranking at /app_name/app/models/tourist_spot.rb:79)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT  `favorites`.`tourist_spot_id` FROM `favorites` GROUP BY `favorites`.`tourist_spot_id` ORDER BY count(tourist_spot_id) DESC LIMIT 10[0m
+  ↳ app/models/tourist_spot.rb:79
+  [1m[36mTouristSpot Load (0.6ms)[0m  [1m[34mSELECT  `tourist_spots`.* FROM `tourist_spots` WHERE `tourist_spots`.`id` = 1 LIMIT 1[0m
+  ↳ app/models/tourist_spot.rb:79
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT tourist_spots.id FROM `tourist_spots`[0m
+  ↳ app/models/tourist_spot.rb:89
+DEPRECATION WARNING: Dangerous query method (method whose arguments are used as raw SQL) called with non-attribute argument(s): "count(review_id) DESC". Non-attribute arguments will be disallowed in Rails 6.0. This method should not be called with user-provided values, such as request parameters or model attributes. Known-safe values can be passed by wrapping them in Arel.sql(). (called from ranking at /app_name/app/models/review.rb:22)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT  `likes`.`review_id` FROM `likes` GROUP BY `likes`.`review_id` ORDER BY count(review_id) DESC LIMIT 10[0m
+  ↳ app/models/review.rb:22
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` IN (1, 2, 3)[0m
+  ↳ app/models/review.rb:22
+  Rendering homes/top.html.erb within layouts/application
+  [1m[36mGenre Load (0.8ms)[0m  [1m[34mSELECT `genres`.* FROM `genres`[0m
+  ↳ app/views/homes/top.html.erb:12
+  [1m[36mScene Load (0.8ms)[0m  [1m[34mSELECT `scenes`.* FROM `scenes`[0m
+  ↳ app/views/homes/top.html.erb:31
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorites` WHERE `favorites`.`tourist_spot_id` = 1[0m
+  ↳ app/views/layouts/_sidebar.html.erb:48
+  [1m[36mTouristSpot Load (0.7ms)[0m  [1m[34mSELECT  `tourist_spots`.* FROM `tourist_spots` ORDER BY `tourist_spots`.`impressions_count` DESC LIMIT 10[0m
+  ↳ app/views/layouts/_sidebar.html.erb:80
+  [1m[36mActsAsTaggableOn::Tag Load (0.9ms)[0m  [1m[34mSELECT  tags.*, taggings.tags_count AS count FROM `tags` JOIN (SELECT taggings.tag_id, COUNT(taggings.tag_id) AS tags_count FROM `taggings` WHERE (taggings.taggable_type = 'TouristSpot' AND taggings.context = 'tags') AND (taggings.taggable_id IN (1)) GROUP BY taggings.tag_id HAVING (COUNT(taggings.tag_id) > 0)) AS taggings ON taggings.tag_id = tags.id ORDER BY `tags`.`taggings_count` DESC LIMIT 10[0m
+  ↳ app/views/layouts/_sidebar.html.erb:134
+  [1m[36mTouristSpot Load (0.6ms)[0m  [1m[34mSELECT  `tourist_spots`.* FROM `tourist_spots` WHERE `tourist_spots`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/layouts/_sidebar.html.erb:210
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/layouts/_sidebar.html.erb:215
+  [1m[36mCACHE TouristSpot Load (0.0ms)[0m  [1m[34mSELECT  `tourist_spots`.* FROM `tourist_spots` WHERE `tourist_spots`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/_sidebar.html.erb:210
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/_sidebar.html.erb:215
+  [1m[36mCACHE TouristSpot Load (0.0ms)[0m  [1m[34mSELECT  `tourist_spots`.* FROM `tourist_spots` WHERE `tourist_spots`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/_sidebar.html.erb:210
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/_sidebar.html.erb:215
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT  1 AS one FROM `users` ORDER BY `users`.`point` DESC LIMIT 10) subquery_for_count[0m
+  ↳ app/views/layouts/_sidebar.html.erb:252
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` ORDER BY `users`.`point` DESC LIMIT 10[0m
+  ↳ app/models/user.rb:96
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` ORDER BY `users`.`point` DESC LIMIT 10[0m
+  ↳ app/views/layouts/_sidebar.html.erb:275
+  Rendered layouts/_sidebar.html.erb (50.4ms)
+  Rendered homes/top.html.erb within layouts/application (8681.2ms)
+  [1m[36mTouristSpot Load (0.5ms)[0m  [1m[34mSELECT `tourist_spots`.* FROM `tourist_spots`[0m
+  ↳ app/views/layouts/application.html.erb:7
+  [1m[36mActsAsTaggableOn::Tagging Load (0.5ms)[0m  [1m[34mSELECT `taggings`.* FROM `taggings` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'TouristSpot'[0m
+  ↳ app/views/layouts/application.html.erb:7
+  [1m[36mActsAsTaggableOn::Tag Load (0.7ms)[0m  [1m[34mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'TouristSpot' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  ↳ app/views/layouts/application.html.erb:7
+  [1m[36mCACHE Genre Load (0.0ms)[0m  [1m[34mSELECT `genres`.* FROM `genres`[0m
+  ↳ app/views/layouts/_header.html.erb:38
+  [1m[36mCACHE Scene Load (0.0ms)[0m  [1m[34mSELECT `scenes`.* FROM `scenes`[0m
+  ↳ app/views/layouts/_header.html.erb:56
+  Rendered layouts/_header.html.erb (9.3ms)
+  Rendered layouts/_main.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.9ms)
+Completed 200 OK in 10847ms (Views: 10614.5ms | ActiveRecord: 24.0ms)
+
+
+Started GET "/images/others/logo.png" for 172.26.0.1 at 2021-01-13 03:26:14 +0000
+Started GET "/attachments/55f520da1418aa551583600e24207294e82f320d/store/17e95a0ea5a8d174e7778058e22ec0c8e5c02214baeb31456debf2a7c3f4/genre_image" for 172.26.0.1 at 2021-01-13 03:26:14 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (5.0ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /usr/local/bundle/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Started GET "/attachments/9d453929cdae5d798dc367d702f156965166b734/store/f56f7e5f9859f9ddf749ed8c41afe75c34e9870fdef07d118e50241ebdd9/scene_image" for 172.26.0.1 at 2021-01-13 03:26:14 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/images/others/logo.png"):
+  
+actionpack (5.2.4.4) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.4) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.4) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /usr/local/bundle/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Refile::App: [2021-01-13 03:26:15 +0000] GET "/55f520da1418aa551583600e24207294e82f320d/store/17e95a0ea5a8d174e7778058e22ec0c8e5c02214baeb31456debf2a7c3f4/genre_image" 200 180.7ms
+
+Refile::App: [2021-01-13 03:26:15 +0000] GET "/9d453929cdae5d798dc367d702f156965166b734/store/f56f7e5f9859f9ddf749ed8c41afe75c34e9870fdef07d118e50241ebdd9/scene_image" 200 38.5ms
+
+Started GET "/users/2" for 172.26.0.1 at 2021-01-13 03:26:18 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:80
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:6
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `relationships` WHERE `relationships`.`follower_id` = 2[0m
+  ↳ app/views/users/show.html.erb:114
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `relationships` WHERE `relationships`.`followed_id` = 2[0m
+  ↳ app/views/users/show.html.erb:117
+  Rendered users/show.html.erb within layouts/application (20.3ms)
+  [1m[36mGenre Load (0.7ms)[0m  [1m[34mSELECT `genres`.* FROM `genres`[0m
+  ↳ app/views/layouts/_header.html.erb:38
+  [1m[36mScene Load (0.6ms)[0m  [1m[34mSELECT `scenes`.* FROM `scenes`[0m
+  ↳ app/views/layouts/_header.html.erb:56
+  Rendered layouts/_header.html.erb (10.4ms)
+  Rendered layouts/_main.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (1.1ms)
+Completed 200 OK in 958ms (Views: 921.7ms | ActiveRecord: 5.8ms)
+
+
+Started GET "/users/images/others/logo.png" for 172.26.0.1 at 2021-01-13 03:26:19 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/users/images/others/logo.png"):
+  
+actionpack (5.2.4.4) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.4) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.4) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/attachments/55f520da1418aa551583600e24207294e82f320d/store/17e95a0ea5a8d174e7778058e22ec0c8e5c02214baeb31456debf2a7c3f4/genre_image" for 172.26.0.1 at 2021-01-13 03:26:22 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Started GET "/attachments/9d453929cdae5d798dc367d702f156965166b734/store/f56f7e5f9859f9ddf749ed8c41afe75c34e9870fdef07d118e50241ebdd9/scene_image" for 172.26.0.1 at 2021-01-13 03:26:22 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Refile::App: [2021-01-13 03:26:22 +0000] GET "/55f520da1418aa551583600e24207294e82f320d/store/17e95a0ea5a8d174e7778058e22ec0c8e5c02214baeb31456debf2a7c3f4/genre_image" 200 61.3ms
+
+Refile::App: [2021-01-13 03:26:22 +0000] GET "/9d453929cdae5d798dc367d702f156965166b734/store/f56f7e5f9859f9ddf749ed8c41afe75c34e9870fdef07d118e50241ebdd9/scene_image" 200 86.3ms
+
+Started GET "/users/1" for 172.26.0.1 at 2021-01-13 03:26:26 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:80
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:6
+  [1m[36mEntry Load (1.1ms)[0m  [1m[34mSELECT `entries`.* FROM `entries` WHERE `entries`.`user_id` = 2[0m
+  ↳ app/controllers/users_controller.rb:10
+  [1m[36mEntry Load (0.7ms)[0m  [1m[34mSELECT `entries`.* FROM `entries` WHERE `entries`.`user_id` = 1[0m
+  ↳ app/controllers/users_controller.rb:11
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 2 AND `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:63
+  Rendered users/_followbutton.html.erb (4.9ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `relationships` WHERE `relationships`.`follower_id` = 1[0m
+  ↳ app/views/users/show.html.erb:114
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `relationships` WHERE `relationships`.`followed_id` = 1[0m
+  ↳ app/views/users/show.html.erb:117
+  Rendered users/show.html.erb within layouts/application (30.6ms)
+  [1m[36mGenre Load (0.6ms)[0m  [1m[34mSELECT `genres`.* FROM `genres`[0m
+  ↳ app/views/layouts/_header.html.erb:38
+  [1m[36mScene Load (0.5ms)[0m  [1m[34mSELECT `scenes`.* FROM `scenes`[0m
+  ↳ app/views/layouts/_header.html.erb:56
+  Rendered layouts/_header.html.erb (9.0ms)
+  Rendered layouts/_main.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 947ms (Views: 904.4ms | ActiveRecord: 7.8ms)
+
+
+Started GET "/users/images/others/logo.png" for 172.26.0.1 at 2021-01-13 03:26:27 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/users/images/others/logo.png"):
+  
+actionpack (5.2.4.4) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.4) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.4) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/follow/1" for 172.26.0.1 at 2021-01-13 03:26:28 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by RelationshipsController#follow as JS
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ /usr/local/bundle/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/relationships_controller.rb:6
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 2 AND `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:63
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:53
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:53
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:53
+  [1m[36mRelationship Create (5.0ms)[0m  [1m[32mINSERT INTO `relationships` (`follower_id`, `followed_id`, `created_at`, `updated_at`) VALUES (2, 1, '2021-01-13 03:26:28', '2021-01-13 03:26:28')[0m
+  ↳ app/models/user.rb:53
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:53
+  Rendering relationships/follow.js.erb
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 2 AND `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:63
+  Rendered users/_followbutton.html.erb (3.9ms)
+  Rendered relationships/follow.js.erb (139.0ms)
+Completed 200 OK in 475ms (Views: 287.8ms | ActiveRecord: 11.5ms)
+
+
+Started GET "/users/1" for 172.26.0.1 at 2021-01-13 03:26:32 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:80
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:6
+  [1m[36mEntry Load (0.7ms)[0m  [1m[34mSELECT `entries`.* FROM `entries` WHERE `entries`.`user_id` = 2[0m
+  ↳ app/controllers/users_controller.rb:10
+  [1m[36mEntry Load (0.6ms)[0m  [1m[34mSELECT `entries`.* FROM `entries` WHERE `entries`.`user_id` = 1[0m
+  ↳ app/controllers/users_controller.rb:11
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 2 AND `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:63
+  Rendered users/_followbutton.html.erb (4.3ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `relationships` WHERE `relationships`.`follower_id` = 1[0m
+  ↳ app/views/users/show.html.erb:114
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `relationships` WHERE `relationships`.`followed_id` = 1[0m
+  ↳ app/views/users/show.html.erb:117
+  Rendered users/show.html.erb within layouts/application (27.8ms)
+  [1m[36mGenre Load (0.6ms)[0m  [1m[34mSELECT `genres`.* FROM `genres`[0m
+  ↳ app/views/layouts/_header.html.erb:38
+  [1m[36mScene Load (0.5ms)[0m  [1m[34mSELECT `scenes`.* FROM `scenes`[0m
+  ↳ app/views/layouts/_header.html.erb:56
+  Rendered layouts/_header.html.erb (8.5ms)
+  Rendered layouts/_main.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 870ms (Views: 835.6ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/users/images/others/logo.png" for 172.26.0.1 at 2021-01-13 03:26:33 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/users/images/others/logo.png"):
+  
+actionpack (5.2.4.4) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.4) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.4) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/users/follower/1" for 172.26.0.1 at 2021-01-13 03:26:34 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#follower as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:53
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:54
+  Rendering users/follower.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 1 AND `users`.`id` != 2[0m
+  ↳ app/views/users/follower.html.erb:2
+  Rendered users/follower.html.erb within layouts/application (3.6ms)
+  [1m[36mGenre Load (0.5ms)[0m  [1m[34mSELECT `genres`.* FROM `genres`[0m
+  ↳ app/views/layouts/_header.html.erb:38
+  [1m[36mScene Load (0.5ms)[0m  [1m[34mSELECT `scenes`.* FROM `scenes`[0m
+  ↳ app/views/layouts/_header.html.erb:56
+  Rendered layouts/_header.html.erb (8.6ms)
+  Rendered layouts/_main.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 716ms (Views: 692.9ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/users/follower/images/others/logo.png" for 172.26.0.1 at 2021-01-13 03:26:35 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/users/follower/images/others/logo.png"):
+  
+actionpack (5.2.4.4) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.4) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.4) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.4) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:4
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT GET_LOCK('3023990675252534715', 0)[0m
+  ↳ bin/rails:4
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:4
+Migrating to CreateCoupons (20210113051401)
+  [1m[35m (16.9ms)[0m  [1m[35mCREATE TABLE `coupons` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` int, `image_id` varchar(255), `is_valid` tinyint(1) DEFAULT TRUE, `limit` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20210113051401_create_coupons.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20210113051401')[0m
+  ↳ bin/rails:4
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::InternalMetadata Load (1.7ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  ↳ bin/rails:4
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT RELEASE_LOCK('3023990675252534715')[0m
+  ↳ bin/rails:4
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:4
