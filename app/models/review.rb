@@ -28,12 +28,16 @@ class Review < ApplicationRecord
       user.rank = 'レギュラー'
     elsif user.point < 50
       user.rank = 'シルバー'
+      Coupon.coupon_create(user)
     elsif user.point < 100
       user.rank = 'ゴールド'
+      Coupon.coupon_create(user)
     elsif user.point < 300
-      user.rank = 'プラチナ'
+      user.rank = 'プラチナ'   
+      Coupon.coupon_create(user)
     elsif user.point >= 300
       user.rank = 'ダイヤモンド'
+      Coupon.coupon_create(user)
     end
     user.save!
   end

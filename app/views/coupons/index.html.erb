@@ -1,0 +1,22 @@
+<div class="row">
+  <% if @coupons.present? %>
+    <% @coupons.each do |coupon| %>
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <%= image_tag 'others/coupon.jpg', class: 'img-responsive' %>
+          <div class="caption">
+            <p class="text-center">
+              <% limit = coupon.created_at + coupon.limit.minutes %>
+              有効期限
+              <%= limit.to_s(:datetime_jp) %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="centered">
+      クーポンは存在しません
+    </p>
+  <% end %>
+</div>
