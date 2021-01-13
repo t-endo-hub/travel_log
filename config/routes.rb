@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get 'tourist_spot/tag/search', to: 'tourist_spots#tag_search'
   post 'follow/:id', to: 'relationships#follow', as: 'follow'
   post 'unfollow/:id', to: 'relationships#unfollow', as: 'unfollow'
+  get 'users/following/:user_id', to: 'users#following', as:'following'
+  get 'users/follower/:user_id', to: 'users#follower', as:'follower'
+
 
 
 

@@ -41,6 +41,19 @@ class UsersController < ApplicationController
   def keyword_search
     @users = User.keyword_search(params[:search])
   end
+
+  # 自分がフォローしているユーザー一覧
+  def following
+    @user = User.find(params[:user_id])
+    @followings = @user.following_user.where.not(id: current_user.id).all
+  end
+
+  # 自分をフォローしているユーザー一覧
+  def follower
+    @user = User.find(params[:user_id])
+    @followers = @user.follower_user.where.not(id: current_user.id).all
+  end
+  
   
 
   private

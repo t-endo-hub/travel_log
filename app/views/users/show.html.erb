@@ -110,6 +110,12 @@
       <li class="nav-item" role='presentation'>
         <%= link_to '行きたい観光地', '#' %>
       </li>
+      <li class="nav-item" role='presentation'>
+        <%= link_to "#{ @user.follower.count }フォロー中", following_path(@user) %>
+      </li>
+      <li class="nav-item" role='presentation'>
+        <%= link_to "#{ @user.followed.count }フォロワー", follower_path(@user) %>
+      </li>
     </ul>
     </div>
   </div>
