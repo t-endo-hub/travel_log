@@ -72,4 +72,5 @@ gem 'acts-as-taggable-on'
 gem 'jquery-ui-rails'
 gem 'gon'
 gem 'geocoder'
+gem 'whenever', require: false
 

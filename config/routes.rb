@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'coupons/index'
   get 'rooms/index'
   get 'rooms/show'
   resources :genres
@@ -26,6 +27,8 @@ Rails.application.routes.draw do
   resources :users
   resources :messages, only: [:create, :destroy]
   resources :rooms, only: [:create, :show, :index]
+  resources :coupons, only: [:create, :index]
+
 
   resources :tourist_spots do
     resource :favorites, only: [:create, :destroy]
