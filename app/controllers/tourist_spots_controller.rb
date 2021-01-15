@@ -1,18 +1,9 @@
 class TouristSpotsController < ApplicationController
   before_action :set_tourist_spot, only: [:show, :update, :edit, :destroy]
+  before_action :set_genre_scene, only: [:new, :edit]
 
   def new
     @tourist_spot = TouristSpot.new
-    @genres = Genre.all
-    @scenes = Scene.all
-    @genre_names = []
-    @scene_names = []
-    @genres.each do |genre|
-      @genre_names.push(genre.name)
-    end
-    @scenes.each do |scene|
-      @scene_names.push(scene.name)
-    end
   end
 
   def create
@@ -107,6 +98,19 @@ class TouristSpotsController < ApplicationController
     @tourist_spot = TouristSpot.find(params[:id])
   end
 
+  def set_genre_scene
+    @genres = Genre.all
+    @scenes = Scene.all
+    @genre_names = []
+    @scene_names = []
+    @genres.each do |genre|
+      @genre_names.push(genre.name)
+    end
+    @scenes.each do |scene|
+      @scene_names.push(scene.name)
+    end
+  end
+
   def tourist_spot_params
     params.require(:tourist_spot).permit(
       :spot_image,
@@ -123,6 +127,7 @@ class TouristSpotsController < ApplicationController
       :phone_number,
       :business_hour,
       :parking,
+      :home_page,
       :tag_list)
   end
 end

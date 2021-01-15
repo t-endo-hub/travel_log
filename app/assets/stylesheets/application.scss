@@ -233,6 +233,13 @@ footer {
   transform: scale(1.01, 1.01);
 }
 
+// カルーセル画像中央寄せ
+.carousel-image {
+  width: 40%;
+  margin: 0 auto;
+}
+
+
 // 左側に隙間
 .margin-left--10px {
   margin-left: 10px;

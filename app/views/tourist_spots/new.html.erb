@@ -2,14 +2,43 @@
   <div class="col-md-3"></div>
   <div class="col-md-6">
     <%= form_with(model: @tourist_spot, local: true) do |f| %>
-      <%= f.label :spot_image, '画像' %>
-      <span class="label label-danger">必須</span>
+      <%= f.file_field :spot_image, id: 'image', class: 'img_field', style:"display:none;" %>
+      <%= attachment_image_tag @tourist_spot, :spot_image, onClick:"$('.img_field').click()", fallback: 'others/no_image.png',id: 'image-preview', class: 'center-block img-thumbnail img-responsive img_prev' %>
       <br>
-      <div class="img_prev"></div>
-      <%= f.attachment_field :spot_image, class: 'img_field', style: 'display:none;' %>
-      <div class="btn btn-warning" onclick="$('.img_field').click()">
-        写真アップロード
-      </div>
+
+      <script>
+        const uploadImageModule =(() => {
+        const inputElement = document.getElementById('image')
+        const previewElement = document.getElementById('image-preview')
+        
+        inputElement.addEventListener("change", event => {
+        event.preventDefault();     // デフォルトイベントのキャンセル
+        event.stopPropagation();    // イベントのバブリングを防ぐ
+        
+        // type="file"を指定されたinput要素のchangeイベントは「ファイルのリスト」を返す
+        const file = event.target.files[0];
+        
+        // ファイルが存在しないか、ファイル形式が"image/*"ではないとき
+        if (!file || !file.type.match(/image\/*/)) {
+            alert('画像ファイルではありません。')
+            return false;
+        }
+        
+        // FileReaderのインスタンスを生成（ローカルファイルを読み込むオブジェクト）
+        const reader = new FileReader();
+        
+        // FileReaderの読み込みが完了した結果（アップロードした画像ファイルのデータ）を、img要素のsrcにセット
+        reader.addEventListener('load', event => {
+            // event.target.resultは、base64エンコードされた画像データ
+            previewElement.setAttribute('src', event.target.result);
+        })
+        
+        // セットされたオブジェクトを読み込む
+        reader.readAsDataURL(file);
+        });
+        })();
+      </script>
+
       <br>
       <br>
 
@@ -79,9 +108,14 @@
       <%= f.text_area :business_hour, placeholder: '例) 開園時間：8:00～22:00 季節により異なります', class: 'form-control', style: 'height: 100px;'%>
       <br>
 
-      <%= f.label :is_parking, '駐車場' %>
+      <%= f.label :home_page, 'ホームページ' %>
       <span class="label label-danger">必須</span>
-      <%= f.text_area :is_parking, placeholder: '例) 有 (敷地内に200台)', class: 'form-control' %>
+      <%= f.text_area :home_page, placeholder: '例) https://www.tokyodisneyresort.jp/tdl/', class: 'form-control' %>
+      <br>
+
+      <%= f.label :parking, '駐車場' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_area :parking, placeholder: '例) 有 (敷地内に200台)', class: 'form-control' %>
       <br>
 
       <%= f.submit '登録', class: 'btn btn-primary' %>
