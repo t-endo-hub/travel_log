@@ -219,7 +219,6 @@ ActiveRecord::Schema.define(version: 2021_01_14_015152) do
     t.string "profile_image_id"
     t.integer "point", default: 0, null: false
     t.string "rank", default: "0", null: false
-    t.boolean "is_valid", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

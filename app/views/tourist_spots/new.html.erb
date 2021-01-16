@@ -50,6 +50,7 @@
       <%= f.label :tag_list, 'タグ' %>
       <span class="label label-default">任意</span>
       <br>
+      <% byebug %>
       <%= f.text_field :tag_list, value: @tourist_spot.tag_list.join(','), class: 'form-control', id: 'tags' %>
       <br>
 

@@ -128,6 +128,7 @@ class TouristSpotsController < ApplicationController
       :business_hour,
       :parking,
       :home_page,
-      :tag_list)
+      :tag_list
+    )
   end
 end

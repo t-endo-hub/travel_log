@@ -1,7 +1,6 @@
 class TouristSpot < ApplicationRecord
   attachment :spot_image
   is_impressionable counter_cache: true # PV数取得
-  acts_as_taggable # タグ付け
 
   belongs_to :user
   has_many :favorites
@@ -26,6 +25,7 @@ class TouristSpot < ApplicationRecord
   validates :parking, presence: true, length: { maximum: 100 }
 
 
+  acts_as_taggable # タグ付け
 
   # 住所自動入力
   include JpPrefecture
