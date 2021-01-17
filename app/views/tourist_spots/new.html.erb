@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-3"></div>
   <div class="col-md-6">
-    <%= form_with(model: @tourist_spot, local: true) do |f| %>
+    <%= form_with model: @tourist_spot, local: true do |f| %>
       <%= f.file_field :spot_image, id: 'image', class: 'img_field', style:"display:none;" %>
       <%= attachment_image_tag @tourist_spot, :spot_image, onClick:"$('.img_field').click()", fallback: 'others/no_image.png',id: 'image-preview', class: 'center-block img-thumbnail img-responsive img_prev' %>
       <br>
@@ -45,13 +45,6 @@
       <%= f.label :name, '施設、観光地名' %>
       <span class="label label-danger">必須</span>
       <%= f.text_field :name, placeholder: '例) 東京ディズニーランド', class: 'form-control' %>
-      <br>
-
-      <%= f.label :tag_list, 'タグ' %>
-      <span class="label label-default">任意</span>
-      <br>
-      <% byebug %>
-      <%= f.text_field :tag_list, value: @tourist_spot.tag_list.join(','), class: 'form-control', id: 'tags' %>
       <br>
 
       <%= label_tag 'ジャンル' %>

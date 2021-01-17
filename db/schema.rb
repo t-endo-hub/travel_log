@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 2021_01_14_015152) do
     t.bigint "user_id"
     t.string "name", null: false
     t.string "spot_image_id", null: false
-    t.integer "postcode", null: false
+    t.string "postcode", null: false
     t.integer "prefecture_code", null: false
     t.string "address_city", null: false
     t.string "address_street", null: false
