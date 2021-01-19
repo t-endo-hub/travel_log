@@ -4,7 +4,7 @@ class CreateTouristSpots < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.string :name, null: false
       t.string :spot_image_id, null: false
-      t.integer :postcode, null: false
+      t.string :postcode, null: false
       t.integer :prefecture_code, null: false
       t.string :address_city, null: false
       t.string :address_street, null: false
