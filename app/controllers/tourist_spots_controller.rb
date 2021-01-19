@@ -7,16 +7,15 @@ class TouristSpotsController < ApplicationController
   end
 
   def create
-    tourist_spot = TouristSpot.new(tourist_spot_params)
-    tourist_spot.user_id = current_user.id
-    if tourist_spot.save
+    @tourist_spot = TouristSpot.new(tourist_spot_params)
+    @tourist_spot.user_id = current_user.id
+    if @tourist_spot.save
       # 中間テーブルも同時に作成
-      TouristSpotGenre.create(tourist_spot_id: tourist_spot.id, genre_id: Genre.find_by(name: params[:genre]).id)
-      TouristSpotScene.create(tourist_spot_id: tourist_spot.id, scene_id: Scene.find_by(name: params[:scene]).id)
+      TouristSpotGenre.create(tourist_spot_id: @tourist_spot.id, genre_id: Genre.find_by(name: params[:genre]).id)
+      TouristSpotScene.create(tourist_spot_id: @tourist_spot.id, scene_id: Scene.find_by(name: params[:scene]).id)
       flash[:notice] = "観光地を登録しました"
       redirect_to tourist_spot_path(tourist_spot)
     else
-      flash[:alert] = "観光地の登録に失敗しました"
       render 'new'
     end
   end

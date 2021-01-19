@@ -1,0 +1,58 @@
+ja:
+  activerecord:
+    attributes:
+      comment:
+        title: タイトル
+        body: コメント内容
+      contact:
+        name: 氏名
+        email: メールアドレス
+        title: タイトル
+        body: お問い合わせ内容
+      event:
+        title: スケジュール名
+        body: スケジュール内容
+      genre:
+        name: ジャンル名
+      message:
+        body: メッセージ内容
+      review:
+        images: 写真
+        title: タイトル
+        body: レビュー内容
+        score: 点数
+      scene:
+        name: 利用シーン名
+      tourist_spot:
+        genre_id: ジャンル
+        scene_id: 利用シーン
+        name: 観光スポット名
+        spot_image: 写真
+        postcode: 郵便番号
+        prefecture_code: 都道府県
+        address_city: 市区町村
+        address_street: 番地
+        address_building: 建物名
+        introduction: 紹介文
+        access: アクセス方法
+        phone_number: 電話番号
+        home_page: ホームページ
+        parking: 駐車場
+        business_hour: 営業時間
+        latitude: 緯度
+        longitude: 経度
+      user:
+        email: メールアドレス
+        encrypted_password: パスワード
+        name: 氏名
+        sex: 性別
+        age: 年齢
+        postcode: 郵便番号
+        prefecture_code: 都道府県
+        address_city: 市区町村
+        address_street: 番地
+        address_building: 建物名
+        introduction: 自己紹介文
+        profile_image_id: プロフィール写真
+        point: ポイント
+        rank: ランク
