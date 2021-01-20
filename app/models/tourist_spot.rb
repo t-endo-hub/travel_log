@@ -114,8 +114,4 @@ class TouristSpot < ApplicationRecord
    def full_address
     '〒' + self.postcode.to_s + ' ' + prefecture_name + ' ' + self.address_city + ' ' + self.address_street + ' ' + self.address_building
   end
-
-  
-  
-  
 end
