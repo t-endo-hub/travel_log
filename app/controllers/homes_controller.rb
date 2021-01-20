@@ -11,4 +11,8 @@ class HomesController < ApplicationController
     @users = User.ranking
     gon.tourist_spots = TouristSpot.all
   end
+
+  def new
+    @children = Genre.find(params[:parent_id]).children
+  end
 end

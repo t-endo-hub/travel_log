@@ -25,7 +25,7 @@
         <% end %>
 
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
+          <li class="dropdown" role='presentation'>
             <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
               <i class="fas fa-list-ul"></i>
               <span>
@@ -34,12 +34,15 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role='menu'>
-              <li>
-                <% Genre.all.each do |genre| %>
-                  <%= link_to  genre.name, tourist_spot_genre_search_path(genre_search: genre.id) %>
+              <li role='presentation'>
+                <% Genre.where(ancestry: nil).each do |genre| %>
+                  <%= link_to genre.name, tourist_spot_genre_search_path(genre_search: genre.id), class: 'parent-genre', id: "#{genre.id}" %>
                 <% end %>
               </li>
               <br>
+              <li role='presentation' class='children-list'></li>
+              <br>
+              <li role="presentation" class='grandchildren-list'></li>
             </ul>
           </li>
 
