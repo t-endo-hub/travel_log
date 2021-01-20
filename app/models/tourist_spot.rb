@@ -63,7 +63,7 @@ class TouristSpot < ApplicationRecord
   def self.genre_search(genre_search)
     TouristSpot.joins(:tourist_spot_genres).where("tourist_spot_genres.genre_id = #{genre_search}")
   end
-  
+
   # シーン検索
   def self.scene_search(scene_search)
     TouristSpot.joins(:tourist_spot_scenes).where("tourist_spot_scenes.scene_id = #{scene_search}")
@@ -113,5 +113,44 @@ class TouristSpot < ApplicationRecord
    # 住所を結合
    def full_address
     '〒' + self.postcode.to_s + ' ' + prefecture_name + ' ' + self.address_city + ' ' + self.address_street + ' ' + self.address_building
+  end
+
+    # 並び替え
+  def self.sort(sort, tourist_spots)
+    if tourist_spots.present?
+      case sort
+      
+      when "2"
+        # PV数順
+        tourist_spots.order(impressions_count: 'DESC')
+      when "3"
+        # 点数順
+        TouristSpot.find(
+          Review.where(tourist_spot_id: tourist_spots.pluck(:id))
+            .group(:tourist_spot_id)
+            .order('avg(score) DESC')
+            .pluck(:tourist_spot_id)
+        )
+      when "4"
+        # レビュー数順
+        TouristSpot.find(
+          Review.where(tourist_spot_id: tourist_spots.pluck(:id))
+            .group(:tourist_spot_id)
+            .order('count(tourist_spot_id) DESC')
+            .pluck(:tourist_spot_id)
+        )
+      when "5"
+        # 新着順
+        tourist_spots.order(id: 'DESC')
+      when "6"
+        # ランダム表示
+        tourist_spots.order('RAND()').limit(1)
+      else
+        tourist_spots
+      end
+    else
+      # kaminariのエラー対策で空の配列を代入
+      tourist_spots = []
+    end
   end
 end
