@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function() {
     // 子ジャンルのHTMLを作成
     function buildChildHTML(child) {
       var html = `<a class="children-genre" id="${child.id}"
-                  href="/user/tourist_spot/genre/search?genre_search=${child.id}">${child.name}</a>`;
+                  href="/tourist_spot/genre/search?genre_search=${child.id}">${child.name}</a>`;
       return html;
     }
 
@@ -30,7 +30,7 @@ $(document).on('turbolinks:load', function() {
     // 孫ジャンルのHTMLを作成
     function buildGrandChildHTML(child) {
       var html = `<a class="grandchildren-genre" id="${child.id}"
-                  href="/user/tourist_spot/genre/search?genre_search=${child.id}">${child.name}</a>`;
+                  href="/tourist_spot/genre/search?genre_search=${child.id}">${child.name}</a>`;
       return html;
     }
 

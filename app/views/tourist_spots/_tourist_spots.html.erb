@@ -60,6 +60,8 @@
   <div class="col-md-4">
     <%= render 'layouts/sidebar', tourist_spots_fav: TouristSpot.fav_ranking,
                                   tourist_spots_pv: TouristSpot.pv_ranking,
+                                  reviews: Review.ranking,
+                                  users: User.ranking,
                                   tags: TouristSpot.tag_ranking
     %>
   </div>
