@@ -4,19 +4,34 @@ class TouristSpotsController < ApplicationController
 
   def new
     @tourist_spot = TouristSpot.new
+    @genre_parent_array = Genre.genre_parent_array_create # 親ジャンルのみを抽出し配列化
+  end
+
+  # 親ジャンルが選択された後に動くアクション
+  def get_genre_children
+    @genre_children = Genre.find(params[:parent_id]).children # 選択された親ジャンルに紐付く子ジャンルの配列を取得
+  end
+
+  # 子ジャンルが選択された後に動くアクション
+  def get_genre_grandchildren
+    @genre_grandchildren = Genre.find(params[:child_id]).children # 選択された子ジャンルに紐付く孫ジャンルの配列を取得
   end
 
   def create
     @tourist_spot = TouristSpot.new(tourist_spot_params)
     @tourist_spot.user_id = current_user.id
     if @tourist_spot.save
-      # 中間テーブルも同時に作成
-      TouristSpotGenre.create(tourist_spot_id: @tourist_spot.id, genre_id: Genre.find_by(name: params[:genre]).id)
-      TouristSpotScene.create(tourist_spot_id: @tourist_spot.id, scene_id: Scene.find_by(name: params[:scene]).id)
-      flash[:notice] = "観光地を登録しました"
-      redirect_to tourist_spot_path(tourist_spot)
+      # ジャンル(中間テーブルのレコード)を作成
+      TouristSpotGenre.maltilevel_genre_create(
+        @tourist_spot,
+        params[:parent_id],
+        params[:children_id],
+        params[:grandchildren_id]
+      )
+      redirect_to tourist_spot_path(@tourist_spot)
     else
-      render 'new'
+      @genre_parent_array = Genre.genre_parent_array_create
+			render 'new'
     end
   end
 
@@ -27,26 +42,32 @@ class TouristSpotsController < ApplicationController
   end
 
   def edit
+    unless @tourist_spot.user == current_user
+      redirect_to root_path
+    end
+    @genre_parent_array = Genre.genre_parent_array_create
   end
 
   def update
     if @tourist_spot.update(tourist_spot_params)
-      flash[:notice] = '観光地を編集しました'
-      redirect_to root_path
+      tourist_spot_genres = TouristSpotGenre.where(tourist_spot_id: @tourist_spot.id)
+      tourist_spot_genres.destroy_all # ジャンル(中間テーブルのレコード)を一旦全削除
+      TouristSpotGenre.maltilevel_genre_create(
+        @tourist_spot,
+        params[:parent_id],
+        params[:children_id],
+        params[:grandchildren_id]
+      )
+      redirect_to tourist_spot_path(@tourist_spot)
     else
-      flash[:alert] = '観光地の編集に失敗しました'
-      render root_path
-    end
+      @genre_parent_array = Genre.genre_parent_array_create
+			render 'edit'
+		end
   end
 
   def destroy
-    if @tourist_spot.destroy
-      flash[:notice] = '観光地を削除しました'
-      redirect_to root_path
-    else
-      flash[:alert] = '観光地の削除に失敗しました'
-      render root_path
-    end
+    @tourist_spot.destroy
+		redirect_to root_path
   end
 
   # キーワード検索

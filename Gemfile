@@ -74,3 +74,4 @@ gem 'gon'
 gem 'geocoder'
 gem 'whenever', require: false
 gem 'rails-i18n'
+gem 'ancestry'

@@ -13,6 +13,7 @@
 
 
 //= require rails-ujs
+//= require turbolinks
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
@@ -82,6 +83,3 @@ $(function () {
     return false;
   });
 });
-
-
-// 画像プレビュー
