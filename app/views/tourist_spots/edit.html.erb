@@ -57,13 +57,16 @@
       <%= f.text_field :tag_list, value: @tourist_spot.tag_list.join(','), id: 'tags', class: 'form-control' %>
       <br>
 
-      <%= f.label :genre, 'ジャンル' %>
-      <span class="label label-danger">
-      必須
-      </span>
-      <br>
-      <%= select_tag 'genre', options_for_select(@genre_names), class: 'form-control' %>
-      <br>
+      <div class="genre-form">
+        <%= f.label :genre, 'ジャンル' %>
+        <span class="label label-danger">
+        必須
+        </span>
+        <br>
+        <%= select_tag 'parent_id', options_for_select(@genre_parent_array), class: 'form-control', id: 'parent-genre' %>
+        <i class="fas fa-chevron-down">
+        <br>
+      </div>
 
       <%= f.label :scene, '利用シーン' %>
       <span class="label label-danger">
@@ -167,3 +170,5 @@
   </div>
   <div class="col-md-3"></div>
 </div>
+
+<%= javascript_include_tag 'genre_form.js' %>

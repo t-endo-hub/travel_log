@@ -28,7 +28,7 @@ class TouristSpotsController < ApplicationController
         params[:children_id],
         params[:grandchildren_id]
       )
-      redirect_to user_tourist_spot_path(@tourist_spot)
+      redirect_to tourist_spot_path(@tourist_spot)
     else
       @genre_parent_array = Genre.genre_parent_array_create
 			render 'new'
@@ -42,26 +42,32 @@ class TouristSpotsController < ApplicationController
   end
 
   def edit
+    unless @tourist_spot.user == current_user
+      redirect_to root_path
+    end
+    @genre_parent_array = Genre.genre_parent_array_create
   end
 
   def update
     if @tourist_spot.update(tourist_spot_params)
-      flash[:notice] = '観光地を編集しました'
-      redirect_to root_path
+      tourist_spot_genres = TouristSpotGenre.where(tourist_spot_id: @tourist_spot.id)
+      tourist_spot_genres.destroy_all # ジャンル(中間テーブルのレコード)を一旦全削除
+      TouristSpotGenre.maltilevel_genre_create(
+        @tourist_spot,
+        params[:parent_id],
+        params[:children_id],
+        params[:grandchildren_id]
+      )
+      redirect_to tourist_spot_path(@tourist_spot)
     else
-      flash[:alert] = '観光地の編集に失敗しました'
-      render root_path
-    end
+      @genre_parent_array = Genre.genre_parent_array_create
+			render 'edit'
+		end
   end
 
   def destroy
-    if @tourist_spot.destroy
-      flash[:notice] = '観光地を削除しました'
-      redirect_to root_path
-    else
-      flash[:alert] = '観光地の削除に失敗しました'
-      render root_path
-    end
+    @tourist_spot.destroy
+		redirect_to root_path
   end
 
   # キーワード検索
