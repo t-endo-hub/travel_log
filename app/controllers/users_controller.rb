@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update] 
   def show
+    @reviews = @user.reviews.page(params[:page]).per(20)
     @user = User.find(params[:id])
     # Entryモデルからログインユーザーのレコードを抽出
     @current_entry = Entry.where(user_id: current_user.id)
@@ -45,13 +46,13 @@ class UsersController < ApplicationController
   # 自分がフォローしているユーザー一覧
   def following
     @user = User.find(params[:user_id])
-    @followings = @user.following_user.where.not(id: current_user.id).all
+    @followings = @user.following_user.where.not(id: current_user.id).page(params[:page]).per(40)
   end
 
   # 自分をフォローしているユーザー一覧
   def follower
     @user = User.find(params[:user_id])
-    @followers = @user.follower_user.where.not(id: current_user.id).all
+    @followers = @user.follower_user.where.not(id: current_user.id).page(params[:page]).per(40)
   end
   
   

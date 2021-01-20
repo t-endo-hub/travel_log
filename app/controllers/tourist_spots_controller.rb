@@ -74,6 +74,8 @@ class TouristSpotsController < ApplicationController
   def keyword_search
     @keyword = params[:keyword_search]
     @tourist_spots = TouristSpot.keyword_search(params[:keyword_search])
+    kaminari = TouristSpot.sort(params[:sort], @tourist_spots) # kaminariの仕様上、Arrayから直接ページネーションをする事が出来ないので一旦変数に代入
+    @tourist_spots = Kaminari.paginate_array(kaminari).page(params[:page]).per(20)
   end
   
 
@@ -81,23 +83,29 @@ class TouristSpotsController < ApplicationController
   def genre_search
     @tourist_spots = TouristSpot.genre_search(params[:genre_search])
     @genre = Genre.find(params[:genre_search])
+    kaminari = TouristSpot.sort(params[:sort], @tourist_spots)
+    @tourist_spots = Kaminari.paginate_array(kaminari).page(params[:page]).per(20)
   end
   
   # 利用シーン検索
   def scene_search
     @tourist_spots = TouristSpot.scene_search(params[:scene_search])
     @scene = Scene.find(params[:scene_search])
+    kaminari = TouristSpot.sort(params[:sort], @tourist_spots)
+    @tourist_spots = Kaminari.paginate_array(kaminari).page(params[:page]).per(20)
   end
 
   # 都道府県検索
   def prefecture_search
     @tourist_spots = TouristSpot.prefecture_search(params[:prefecture_search])
     @prefecture = JpPrefecture::Prefecture.find(code: params[:prefecture_search])
+    kaminari = TouristSpot.sort(params[:sort], @tourist_spots)
+    @tourist_spots = Kaminari.paginate_array(kaminari).page(params[:page]).per(20)
   end
 
   # タグ検索
   def tag_search
-    @tourist_spots = TouristSpot.tagged_with(params[:tag_name])
+    @tourist_spots = TouristSpot.tagged_with(params[:tag_name]).page(params[:page]).per(20)
     @tags = TouristSpot.tag_counts.order(taggings_count: 'DESC').limit(20)
   end
 

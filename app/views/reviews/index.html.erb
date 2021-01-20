@@ -5,5 +5,8 @@
   <%= render 'reviews', reviews: @tourist_spot_reviews %>
 </div>
 
-
-
+<div class="row">
+  <% if @reviews.present? %>
+    <%= paginate @reviews %>
+  <% end %>
+</div>
