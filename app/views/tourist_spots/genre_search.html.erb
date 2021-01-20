@@ -1,6 +1,16 @@
 <div class="row">
   <%= link_to 'ジャンル一覧', root_path, class: 'margin-left--10px' %>
   <i class="fas fa-angle-right margin-left--10px"></i>
+  <% if @genre.childless? %>
+    <%= link_to @genre.root.name, tourist_spot_genre_search_path(genre_search: @genre.root.id), class: 'margin-left--10px' %>
+    <i class="fas fa-angle-right margin-left--10px"></i>
+  <% end %>
+
+  <% if @genre.has_parent? %>
+    <%= link_to @genre.parent.name, tourist_spot_genre_search_path(genre_search: @genre.parent.id), class: 'margin-left--10px' %>
+    <i class="fas fa-angle-right margin-left--10px"></i>
+  <% end %>
+ 
   <%= link_to @genre.name, tourist_spot_genre_search_path, class: 'margin-left--10px' %>
   <br>
 </div>
