@@ -3,7 +3,7 @@
     <div id='genre-search'></div>
     <br>
     <div class="row">
-      <div class="page-header">
+      <div class="page-header" id='introjs-step2'>
         <h3>
           <i class="fas fa-list-ul"></i>
           ジャンルから探す
@@ -22,7 +22,7 @@
           
     <div id='scene-search'></div>
     <div class="row">
-      <div class="page-header">
+      <div class="page-header" id='introjs-step3'>
         <h3>
           <i class="fas fa-bullseye"></i>
           利用シーンから探す
@@ -41,7 +41,7 @@
 
     <div id='prefecture-search'></div>
     <div class="row">
-      <div class="page-header">
+      <div class="page-header" id='introjs-step4'>
         <h3>
           <i class="fas fa-globe-asia"></i>
           都道府県から探す
@@ -73,7 +73,7 @@
 
 <div id='location-search'></div>
 <div class="row">
-  <div class="page-header">
+  <div class="page-header" id='introjs-step5'>
     <h3>
       <i class="fas fa-map-marker-alt"></i>
       現在地から探す
@@ -137,6 +137,8 @@
     }
 </script>
 
+<%= javascript_include_tag 'intro.js' %>
+<%= javascript_include_tag 'tutorial.js' %>
 
 
 
