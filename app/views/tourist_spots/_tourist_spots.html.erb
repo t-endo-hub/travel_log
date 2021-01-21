@@ -55,7 +55,9 @@
       <% else %>
         <p class="centered">観光スポットは存在しません</p>
       <% end %>
+      <%= paginate tourist_spots %>
     </div>
+    <div class="col-md-3"></div>
   </div>
   <div class="col-md-4">
     <%= render 'layouts/sidebar', tourist_spots_fav: TouristSpot.fav_ranking,

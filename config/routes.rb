@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   post 'unfollow/:id', to: 'relationships#unfollow', as: 'unfollow'
   get 'users/following/:user_id', to: 'users#following', as:'following'
   get 'users/follower/:user_id', to: 'users#follower', as:'follower'
-	get 'get_genre/new', to: 'homes#new', defaults: { format: 'json' }
+  get 'get_genre/new', to: 'homes#new', defaults: { format: 'json' }
+  
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',

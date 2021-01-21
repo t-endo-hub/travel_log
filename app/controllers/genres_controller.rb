@@ -3,7 +3,7 @@ class GenresController < ApplicationController
 
   def index
     @genre = Genre.new
-    @genres = Genre.all
+    @genres = Genre.all.page(params[:page]).per(1)
   end
 
   def edit
@@ -24,7 +24,7 @@ class GenresController < ApplicationController
     if @genre.save
       flash[:notice] = 'ジャンルを登録しました'
     else
-      flash[:alert] = 'ジャンルの登録に失敗しました'
+      @genres = Genre.all.page(params[:page]).per(20)
     end
       redirect_to genres_path
   end

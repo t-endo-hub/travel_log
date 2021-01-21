@@ -3,7 +3,7 @@ class ScenesController < ApplicationController
 
   def index
     @scene = Scene.new
-    @scenes = Scene.all
+    @scenes = Scene.all.page(params[:page]).per(20)
   end
 
   def edit

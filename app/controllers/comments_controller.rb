@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to tourist_spot_review_path(@review.tourist_spot, @review)
     else
-      @comments = @review.comments.all
+      @comments = @review.comments.order(id: 'desc').page(params[:page]).per(20)
       render '/reviews/show'
     end
   end
