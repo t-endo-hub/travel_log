@@ -10,7 +10,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"><img src="images/others/logo.png" alt="ロゴ"></a>
+        <%= link_to root_path, class: 'novbar-brand', 'data-turbolinks': false do %>
+          <%= image_tag 'others/logo.png', class: 'header__logo' %>
+        <% end %>
       </div>
 
       <div id='navbarEexample7' class='collapse navbar-collapse'>

@@ -1,5 +1,10 @@
-# ジャンル
+# 利用シーン
+Scene.create(name: 'デート', scene_image: File.open('./app/assets/images/scenes/date.jpg'))
+Scene.create(name: '一人旅', scene_image: File.open('./app/assets/images/scenes/traveling_alone.jpg'))
+Scene.create(name: '家族旅行', scene_image: File.open('./app/assets/images/scenes/family_trip.jpg'))
+Scene.create(name: 'ドライブ', scene_image: File.open('./app/assets/images/scenes/drive.jpg'))
 
+# ジャンル
 # テーマパーク・レジャーランド
 genre1_child_array = ['遊び', '学び', '体験', '食べ物']
 genre1_grandchild_array = [['屋外', '屋内'], ['屋外', '屋内'], ['屋外', '屋内'], ['屋外', '屋内']]
