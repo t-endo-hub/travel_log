@@ -42,4 +42,45 @@ class Review < ApplicationRecord
     user.save!
   end
   
+  def self.sort(sort, reviews)
+    if reviews.present?
+      case sort
+      when '1'
+        # おすすめ順
+        Review.find(
+          Like.where(review_id: reviews.pluck(:id))
+            .group(:review_id)
+            .order('count(review_id) DESC')
+            .pluck(:review_id)
+        )
+      when '2'
+        # 新着順
+        reviews.order(id: 'DESC')
+      when '3'
+        # コメント数順
+        # おすすめ順
+        Review.find(
+          Comment.where(review_id: reviews.pluck(:id))
+            .group(:review_id)
+            .order('count(review_id) DESC')
+            .pluck(:review_id)
+        )
+      when '4'
+        # 点数順
+        reviews.order(score: 'DESC')
+      when '5'
+        # 男性のみ
+        reviews.includes(:user).where(users: { sex:'男性' })
+      when '6'
+        # 女性のみ
+        reviews.includes(:user).where(users: { sex:'女性' })
+      else
+        reviews
+      end
+    else
+      # kaminariのエラー対策で空の配列を代入
+      reviews = []
+    end
+  end
+
 end
