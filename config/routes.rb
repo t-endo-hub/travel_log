@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/homes/guest_sign_in', to: 'homes#new_guest'
   get 'coupons/index'
   get 'rooms/index'
   get 'rooms/show'
