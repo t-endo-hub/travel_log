@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     @review = @comment.review
     if @comment.save
+      @review.create_notification_comment!(current_user, @comment.id)
       redirect_to tourist_spot_review_path(@review.tourist_spot, @review)
     else
       @comments = @review.comments.order(id: 'desc').page(params[:page]).per(20)

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :messages, only: [:create, :destroy]
   resources :rooms, only: [:create, :show, :index]
   resources :coupons, only: [:create, :index]
+  resources :notifications, only: [:index, :destroy]
 
 
   resources :tourist_spots do

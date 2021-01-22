@@ -6,6 +6,7 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:id])
     unless current_user.following?(@user)
       current_user.follow(params[:id])
+      @user.create_notification_follow!(current_user)
     end
   end
 

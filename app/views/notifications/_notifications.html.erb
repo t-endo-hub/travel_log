@@ -1,0 +1,45 @@
+<div class="table-responsive">
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <% visitor = notification.visitor %>
+          <% visited = notification.visited %>
+          <%= link_to user_path(visitor) do %>
+            <%= attachment_image_tag visitor, :profile_image, size: '50x50', fallback: 'others/no_image.jpg', class: 'img-thumbnail img-responsive img-hover' %>
+            <span class="margin-left--10px">
+              <%= visitor.name %>
+              さんが
+            </span>
+          <% end %>
+
+          <% case notification.action when 'follow' %>
+            あなたをフォローしました
+          <% when 'like' %>
+            <%= link_to 'あなたの投稿', tourist_spot_review_path(notification.review, notification.review.tourist_spot), style: 'font-weight: bold;' %>
+            にいいねしました
+          <% when 'comment' %>
+            <% if notification.review.user_id == visited.id %>
+              <%= link_to 'あなたの投稿', tourist_spot_review_path(notification.review, notification.review.tourist_spot), style: 'font-weight: bold:' %>
+            <% else %>
+              <%= link_to tourist_spot_review_path(notification.review, notification.review.tourist_spot) do %>
+                <%= notification.review.user.name + 'さんの投稿' %>
+                にコメントしました
+              <% end %>
+              <p class="text-muted text-center">
+                <%= Comment.find_by(notification.comment_id)&.body %>
+              </p>
+            <% end %>
+          <% when 'message' %>
+            あなたにメッセージを送信しました
+            <%= link_to room_path(notification.message.room) do %>
+              <p class="text-muted text-center">
+                <%= Message.find_by(notification.message_id)&.body %>
+              </p>
+            <% end %>
+          <% end %> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
