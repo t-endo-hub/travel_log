@@ -19,9 +19,8 @@ class User < ApplicationRecord
   has_many :following_user, through: :follower, source: :followed
   has_many :follower_user, through: :followed, source: :follower
   has_many :coupons, dependent: :destroy
-
-
-
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   enum sex: { '男性': 0, '女性': 1, 'その他': 2 }
   enum is_valid: { '有効': true, '退会済': false }
@@ -103,6 +102,29 @@ class User < ApplicationRecord
     end
     return @my_rank
   end
-  
+
+  # フォロー通知
+  def create_notification_follow!(current_user)
+    temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ? ',current_user.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
+    end
+  end
+
+  # DM通知
+  def create_notification_message!(current_user, message_id, visited_id)
+    # binding.pry
+    # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
+    notification = current_user.active_notifications.new(
+      message_id: message_id,
+      visited_id: visited_id,
+      action: 'message'
+    )
+    notification.save if notification.valid?
+  end
   
 end

@@ -86,6 +86,9 @@
 
           <% if user_signed_in? %>
             <li class="dropdown">
+              <% if unchecked_notifications(current_user).present? %>
+                <i class="fa fa-circle header__notification-icon--1" style='color: gold;'></i>
+              <% end %>
               <a class="dropdown-toggle header__acount-link" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
                 <%= attachment_image_tag current_user, :profile_image, size: '30x30', fallback: 'others/no_image.jpg',class: 'img-thumbnail img-responsive img-hover' %>
                 <span>
@@ -101,10 +104,25 @@
                   <% end %>
                 </li>
                 <li>
+                  <% if unchecked_notifications(current_user).present? %>
+                    <i class="fas fa-circle header__notifications-icon--2" style='color: gold;'></i>
+                  <% end %>
+                  <%= link_to notifications_path, class: 'header__notifications-link' do %>
+                    <i class="fas fa-bell"></i>
+                    通知
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to rooms_path do %>
+                    <i class="fas fa-envelope"></i>
+                    メッセージ
+                  <% end %>
+                </li>
+                <li>
                   <%= link_to coupons_path do %>
                     <i class="fas fa-gift"></i>
                     クーポン
-                   <% end %>
+                  <% end %>
                 </li>
                 <li>
                   <%= link_to edit_user_path(current_user) do %>
