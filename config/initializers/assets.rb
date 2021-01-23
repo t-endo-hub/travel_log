@@ -16,6 +16,8 @@ Rails.application.config.assets.precompile += %w( genre_form.js )
 Rails.application.config.assets.precompile += %w( genre_window.js )
 Rails.application.config.assets.precompile += %w( tutorial.js )
 Rails.application.config.assets.precompile += %w( intro.js )
+Rails.application.config.assets.precompile += %w( tag-it.js )
+
 
 
 

@@ -47,6 +47,12 @@
       <%= f.text_field :name, placeholder: '例) 東京ディズニーランド', class: 'form-control' %>
       <br>
 
+      <%= f.label :tag_list, 'タグ' %>
+      <span class="label label-default">任意</span>
+      <br>
+      <%= f.text_field :tag_list, value: @tourist_spot.tag_list.join(','), id: 'tags' %>
+      <br>
+
       <div class="genre-form">
         <%= label_tag 'ジャンル' %>
         <span class="label label-danger">必須</span>
@@ -54,7 +60,6 @@
         <i class="fas fa-chevron-down"></i>
       </div>
       <br>
-
       
       <%= label_tag '利用シーン' %>
       <span class="label label-danger">必須</span>
@@ -122,4 +127,5 @@
   <div class="col-md-3"></div>
 </div>
 
+<%= javascript_include_tag 'tag-it.js' %>
 <%= javascript_include_tag 'genre_form.js' %>

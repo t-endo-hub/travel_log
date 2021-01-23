@@ -24,11 +24,6 @@
 *   jQuery v1.4+
 *   jQuery UI v1.8+
 */
-
-$(document).on('ready page:load', function () {
-	return $('#tags').tagit();
-});
-
 (function($) {
 
     $.widget('ui.tagit', {
