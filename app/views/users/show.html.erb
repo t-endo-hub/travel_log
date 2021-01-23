@@ -52,16 +52,16 @@
               </p>
             <% end %>
             <div>
-              <%= attachment_image_tag @user, :profile_image, size: '400x400', fallback: 'no_image.jpg', class: 'img-thumbnail img-responsive' %>
+              <%= attachment_image_tag @user, :profile_image, size: '400x400', fallback: 'others/no_image.jpg', class: 'img-thumbnail img-responsive' %>
               <br>
               <h4>
                 <strong>
                   <%= @user.name %>
-                  | (
+                  (
                   <%= @user.age %>
-                  | 歳
+                  歳
                   <%= @user.sex %>
-                  |)
+                  )
                 </strong>
               </h4>
               <br>

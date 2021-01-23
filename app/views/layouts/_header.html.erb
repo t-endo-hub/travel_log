@@ -10,20 +10,18 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to root_path, class: 'novbar-brand', 'data-turbolinks': false do %>
+        <%= link_to root_path, class: 'navbar-brand', 'data-turbolinks': false do %>
           <%= image_tag 'others/logo.png', class: 'header__logo' %>
         <% end %>
       </div>
 
       <div id='navbarEexample7' class='collapse navbar-collapse'>
         <% if user_signed_in? %>
-          <p class="nabvar-text">
             <span>
               ようこそ
               <%= link_to current_user.name, user_path(current_user) %>
               さん！
             </span>
-          </p>
         <% end %>
 
         <ul class="nav navbar-nav navbar-right">
@@ -87,7 +85,7 @@
           <% if user_signed_in? %>
             <li class="dropdown">
               <% if unchecked_notifications(current_user).present? %>
-                <i class="fa fa-circle header__notification-icon--1" style='color: gold;'></i>
+                <i class="fa fa-circle header__notifications-icon--1" style='color: gold;'></i>
               <% end %>
               <a class="dropdown-toggle header__acount-link" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
                 <%= attachment_image_tag current_user, :profile_image, size: '30x30', fallback: 'others/no_image.jpg',class: 'img-thumbnail img-responsive img-hover' %>
@@ -105,11 +103,11 @@
                 </li>
                 <li>
                   <% if unchecked_notifications(current_user).present? %>
-                    <i class="fas fa-circle header__notifications-icon--2" style='color: gold;'></i>
-                  <% end %>
-                  <%= link_to notifications_path, class: 'header__notifications-link' do %>
-                    <i class="fas fa-bell"></i>
-                    通知
+                    <i class="fa fa-circle header__notifications-icon--2" style='color: gold;'></i>
+                    <%= link_to notifications_path, class: 'header__notifications-link' do %>
+                      <i class="fas fa-bell"></i>
+                      通知
+                    <% end %>
                   <% end %>
                 </li>
                 <li>
@@ -150,6 +148,9 @@
                 <i class="fas fa-sign-in-alt"></i>
                 ログイン
               <% end %>
+            </li>
+            <li>
+              <%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, method: :post %>
             </li>
           <% end %>
         </ul>
