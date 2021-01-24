@@ -7,8 +7,10 @@ class User < ApplicationRecord
   attachment :profile_image
 
   has_many :tourist_spots
-  has_many :favorites
-  has_many :wents
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_tourist_spots, through: :favorites, source: :tourist_spot
+  has_many :wents, dependent: :destroy
+  has_many :went_tourist_spots, through: :wents, source: :tourist_spot
   has_many :reviews
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -24,6 +26,8 @@ class User < ApplicationRecord
 
   enum sex: { '男性': 0, '女性': 1, 'その他': 2 }
   enum is_valid: { '有効': true, '退会済': false }
+  enum rank: { 'レギュラー': 0, 'シルバー': 1, 'ゴールド': 2, 'プラチナ': 3, 'ダイヤモンド': 4 }
+
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :sex, presence: true

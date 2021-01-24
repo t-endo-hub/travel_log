@@ -30,6 +30,7 @@ class TouristSpot < ApplicationRecord
   # 住所自動入力
   include JpPrefecture
   jp_prefecture :prefecture_code
+
   
   # 都道府県名
   def prefecture_name

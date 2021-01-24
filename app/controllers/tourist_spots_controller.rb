@@ -120,6 +120,17 @@ class TouristSpotsController < ApplicationController
     gon.open_weather_api = ENV['OPEN_WEATHER_MAP_API']
     gon.prefecture_name = @tourist_spot.prefecture_name
   end
+
+  # 行きたい！一覧
+  def favorites
+    @tourist_spots = current_user.favorite_tourist_spots.all.page(params[:page]).per(20)
+  end
+
+  # 行った！一覧
+  def wents
+    @tourist_spots = current_user.went_tourist_spots.all.page(params[:page]).per(20)
+  end
+  
   
 
   
