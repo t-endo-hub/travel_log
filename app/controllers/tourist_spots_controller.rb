@@ -123,14 +123,20 @@ class TouristSpotsController < ApplicationController
 
   # 行きたい！一覧
   def favorites
-    @tourist_spots = current_user.favorite_tourist_spots.all.page(params[:page]).per(20)
+    @tourist_spots = current_user.favorite_tourist_spots.rank(:row_order).page(params[:page]).per(20)
   end
 
   # 行った！一覧
   def wents
-    @tourist_spots = current_user.went_tourist_spots.all.page(params[:page]).per(20)
+    @tourist_spots = current_user.went_tourist_spots.rank(:row_order).page(params[:page]).per(20)
   end
   
+  # ドラッグ&ドロップ
+  def sort
+    tourist_spot = TouristSpot.find(params[:tourist_spot_id])
+    tourist_spot.update(tourist_spot_params)
+    render body: nil
+  end
   
 
   
@@ -170,7 +176,8 @@ class TouristSpotsController < ApplicationController
       :business_hour,
       :parking,
       :home_page,
-      :tag_list
+      :tag_list,
+      :row_order_position
     )
   end
 end

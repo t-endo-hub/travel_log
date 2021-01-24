@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         <% tourist_spots.each do |tourist_spot| %>
-          <tr>
+          <tr class="item" data = { model_name: tourist_spot.class.name.underscore, update_url: user_tourist_spot_sort_path(tourist_spot) }>
             <td>
               <%= link_to tourist_spot_path(tourist_spot) do %>
                 <%= attachment_image_tag tourist_spot, :spot_image, size: '50x50', class: 'img-thumbnail img-responsive img-hover' %>
@@ -54,3 +54,5 @@
     </table>
   </div>
 </div>
+
+<%= javascript_include_tag 'table_sort.js' %>
