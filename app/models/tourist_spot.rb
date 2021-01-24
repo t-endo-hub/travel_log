@@ -30,6 +30,10 @@ class TouristSpot < ApplicationRecord
   # 住所自動入力
   include JpPrefecture
   jp_prefecture :prefecture_code
+
+  # ドラッグ&ドロップ時の並び順を管理
+  include RankedModel
+  ranks :row_order
   
   # 都道府県名
   def prefecture_name

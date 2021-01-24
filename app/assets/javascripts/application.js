@@ -17,6 +17,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery-ui/effects/effect-highlight
+//= require jquery-ui/widgets/sortable
 //= require bootstrap-sprockets
 //= require jquery.jpostal
 //= require tag-it

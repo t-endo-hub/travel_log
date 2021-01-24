@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get 'users/following/:user_id', to: 'users#following', as:'following'
   get 'users/follower/:user_id', to: 'users#follower', as:'follower'
   get 'get_genre/new', to: 'homes#new', defaults: { format: 'json' }
+  get 'favorites', to: 'tourist_spots#favorites'
+  get 'wents', to: 'tourist_spots#wents'
+
   
 
   devise_for :users, controllers: {
@@ -38,6 +41,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :edit, :update, :destroy]
     end
     get 'map', to: 'tourist_spots#map'
+    put :sort
   end
   root 'homes#top'
 
