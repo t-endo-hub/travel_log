@@ -6,10 +6,9 @@
 <p class="weather-text">
   <%= tourist_spot.prefecture_name %>
 </p>
+<div id="weather"></div>
 
-  <div id="weather"></div>
-
-  <script>
+<script>
     window.onload = function() {
       var api_key = gon.open_weather_api;
       var city = gon.prefecture_name;
@@ -49,4 +48,4 @@
         '</div>';
       return html
     }
-  </script>
+</script>

@@ -5,41 +5,6 @@
       <%= f.file_field :spot_image, id: 'image', class: 'img_field', style:"display:none;" %>
       <%= attachment_image_tag @tourist_spot, :spot_image, onClick:"$('.img_field').click()", fallback: 'others/no_image.png',id: 'image-preview', class: 'center-block img-thumbnail img-responsive img_prev' %>
       <br>
-
-      <script>
-        const uploadImageModule =(() => {
-        const inputElement = document.getElementById('image')
-        const previewElement = document.getElementById('image-preview')
-        
-        inputElement.addEventListener("change", event => {
-        event.preventDefault();     // デフォルトイベントのキャンセル
-        event.stopPropagation();    // イベントのバブリングを防ぐ
-        
-        // type="file"を指定されたinput要素のchangeイベントは「ファイルのリスト」を返す
-        const file = event.target.files[0];
-        
-        // ファイルが存在しないか、ファイル形式が"image/*"ではないとき
-        if (!file || !file.type.match(/image\/*/)) {
-            alert('画像ファイルではありません。')
-            return false;
-        }
-        
-        // FileReaderのインスタンスを生成（ローカルファイルを読み込むオブジェクト）
-        const reader = new FileReader();
-        
-        // FileReaderの読み込みが完了した結果（アップロードした画像ファイルのデータ）を、img要素のsrcにセット
-        reader.addEventListener('load', event => {
-            // event.target.resultは、base64エンコードされた画像データ
-            previewElement.setAttribute('src', event.target.result);
-        })
-        
-        // セットされたオブジェクトを読み込む
-        reader.readAsDataURL(file);
-        });
-        })();
-      </script>
-
-      <br>
       <br>
 
       <%= f.label :name, '施設、観光地名' %>
@@ -129,3 +94,6 @@
 
 <%= javascript_include_tag 'tag-it.js' %>
 <%= javascript_include_tag 'genre_form.js' %>
+<%= javascript_include_tag 'image_preview.js' %>
+<%= javascript_include_tag 'jquery.jpostal.js' %>
+<%= javascript_include_tag 'tourist_spot_address_autofill.js' %>

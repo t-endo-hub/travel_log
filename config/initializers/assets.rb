@@ -18,6 +18,11 @@ Rails.application.config.assets.precompile += %w( tutorial.js )
 Rails.application.config.assets.precompile += %w( intro.js )
 Rails.application.config.assets.precompile += %w( tag-it.js )
 Rails.application.config.assets.precompile += %w( table_sort.js )
+Rails.application.config.assets.precompile += %w( image_preview.js )
+Rails.application.config.assets.precompile += %w( jquery.jpostal.js )
+Rails.application.config.assets.precompile += %w( tourist_spot_address_autofill.js )
+Rails.application.config.assets.precompile += %w( user_address_autofill.js )
+
 
 
 
