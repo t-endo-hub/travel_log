@@ -1,62 +1,106 @@
-<h2>Sign upp</h2>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <%= render 'users/shared/links' %>
+    <h3 class="text-center">
+      会員情報入力
+    </h3>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), builder: CustomFormBuilder) do |f| %>
+      <%= f.label :name, '氏名' %>
+      <span class="label label-danger">
+        必須
+      </span>
+      <br>
+      <%= f.text_field :name, autofocus: true, placeholder: '例) 田中 太郎', autocomplete: 'name', class: 'form-control' %>
+      <br>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+      <%= f.label :age, '年齢' %>
+      <span class="label label-danger">
+       必須
+      </span>
+      <br>
+      <%= f.number_field :age, placeholder: '例）22', autocomplete: 'age', class: 'form-control' %>
+      <br>
 
-    <%= f.label :profile_imate %><br />
-    <%= f.attachment_field :profile_image, autofocus: true %>
+      <%= f.label :sex, '性別' %>
+      <span class="label label-danger">
+        必須
+      </span>
+      <br>
+      <%= f.select :sex, User.sexes.keys, { prompt: '選択してください' }, class: 'form-control' %>
+      <br>
 
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+      <%= f.label :introduction, '自己紹介文' %>
+      <span class="label label-default">
+        任意
+      </span>
+      <%= f.text_area :introduction, placeholder: '例）よろしくお願いします', autocomplete: 'introduction', class: 'form-control' %>
+      <br>
 
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    <br>
-    
-    <%= f.label :age, '年齢' %>
-    <span class="label label-danger">
-      必須
-    </span>
-    <br>
-    <%= f.number_field :age, placeholder: '例) 22', autocomplete: 'age', class: "form-control" %>
-    <br>
+      <%= f.label :postcode, '郵便番号' %>
+      <span class="label label-default">
+        任意
+      </span>
+      <br>
+      <%= f.text_field :postcode, placeholder: '例）123-1234', autofocus: true, autocomplete: 'postcode', class: 'form-control' %>
+      <br>
 
-    <%= f.label :sex, '性別' %>
-    <span class="label label-danger">
-      必須
-    </span>
-    <br>
-    <%= f.select :sex, User.sexes.keys, { prompt: '選択してください'}, class: 'form-control' %>
-    <br>
+      <%= f.label :prefecture_name, '都道府県' %>
+      <span class="label label-default">
+        任意
+      </span>
+      <br>
+      <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: 'form-control' %>
+      <br>
 
-    <%= f.label :postcode, '郵便番号' %>
-    <%= f.text_field :postcode, class: 'form-control' %>
+      <%= f.label :address_city, '市区町村' %>
+      <span class="label label-default">
+        任意
+      </span>
+      <br>
+      <%= f.text_field :address_city, placeholder: '例）新宿区', autocomplete: 'address_city', class: 'form-control' %>
+      <br>
 
-    <%= f.label :prefecture_code, '都道府県' %><br />
-    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: 'form-control' %>
+      <%= f.label :address_street, '番地' %>
+      <span class="label label-default">
+        任意
+      </span>
+      <br>
+      <%= f.text_field :address_street, placeholder: '例）西新宿2-8-1', autocomplete: 'address_street', class: 'form-control' %>
+      <br>
 
-    <%= f.label :address_city, '市区町村' %>
-    <%= f.text_field :address_city, class: 'form-control' %>
+      <%= f.label :address_building, '建物' %>
+      <span class="label label-default">
+        任意
+      </span>
+      <br>
+      <%= f.text_field :address_building, placeholder: '例）グランドハイツ 123号', autocomplete: 'address_building', class: 'form-control' %>
+      <br>
 
-    <%= f.label :address_street, '番地' %>
-    <%= f.text_field :address_street, class: 'form-control' %>
+      <%= f.label :email, 'メールアドレス' %>
+      <span class="label label-danger">
+        必須
+      </span>
+      <br>
+      <%= f.email_field :email, placeholder: '例）abc@abc.com', autocomplete: 'email', class: 'form-control' %>
+      <br>
 
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+      <%= f.label :password, 'パスワード' %>
+      <span class="label label-danger">
+        必須
+      </span>
+      <br>
+      <%= f.password_field :password, placeholder: '8~20文字', autocomplete: 'new-password', class: 'form-control' %>
+      <br>
 
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <%= f.label :password_confirmation, 'パスワード（再確認）' %>
+      <br>
+      <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control' %>
+      <br>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-<% end %>
-
-<%= render "users/shared/links" %>
-
-<%= javascript_include_tag 'jquery.jpostal.js' %>
-<%= javascript_include_tag 'tourist_spot_address_autofill.js' %>
-
-
+      <br>
+      <%= f.submit '新規会員登録', class: 'btn btn-success btn-lg btn-block' %>
+    <% end %>
+  </div>
+  <div class="col-md-3"></div>
+</div>
