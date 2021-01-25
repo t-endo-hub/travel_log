@@ -19,9 +19,8 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, error: 'log/crontab_error.log', standard: 'log/crontab.log' # ログを書き出すようにしておくとデバッグが楽
-ENV.each { |k, v| env(k, v) } #追加
-
+env :PATH, ENV['PATH'] # 絶対パスから相対パス指定
+set :output, 'log/cron.log' # ログの出力先ファイルを設定
 set :environment, :production # 環境を設定
 
 
