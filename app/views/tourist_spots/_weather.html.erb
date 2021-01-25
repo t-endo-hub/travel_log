@@ -13,7 +13,7 @@
     window.onload = function() {
       var api_key = gon.open_weather_api;
       var city = gon.prefecture_name;
-      var url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + api_key;
+      var url = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + api_key;
       $.ajax({
         url: url,
         dataType: "json",
