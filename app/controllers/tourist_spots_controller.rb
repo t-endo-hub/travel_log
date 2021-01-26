@@ -177,7 +177,8 @@ class TouristSpotsController < ApplicationController
       :parking,
       :home_page,
       :tag_list,
-      :row_order_position
+      :row_order_position,
+      { scene_ids: [] }
     )
   end
 end

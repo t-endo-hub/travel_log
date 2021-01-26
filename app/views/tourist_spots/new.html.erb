@@ -28,7 +28,12 @@
       
       <%= label_tag '利用シーン' %>
       <span class="label label-danger">必須</span>
-      <%= select_tag 'scene', options_for_select(@scene_names), class: 'form-control' %>
+      <%= collection_check_boxes(:tourist_spot, :scene_ids, Scene.all, :id, :name) do |b| %>
+        <span class="margin-left--10px">
+          <%= b.label { b.check_box + ' ' + b.text } %>
+        </span>
+      <% end %>
+      <br>
       <br>
 
       <%= f.label :postcode, '郵便番号' %>
