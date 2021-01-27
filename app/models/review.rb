@@ -26,22 +26,23 @@ class Review < ApplicationRecord
 
   #ユーザーのポイントによってランク付け
   def user_rank_update(user)
-    if user.point < 10
+    case user.point
+    when 0
       user.rank = 'レギュラー'
-    elsif user.point < 50
+    when 1
       user.rank = 'シルバー'
       Coupon.coupon_create(user)
-    elsif user.point < 100
+    when 2
       user.rank = 'ゴールド'
       Coupon.coupon_create(user)
-    elsif user.point < 300
-      user.rank = 'プラチナ'   
+    when 3
+      user.rank = 'プラチナ'
       Coupon.coupon_create(user)
-    elsif user.point >= 300
+    when 4
       user.rank = 'ダイヤモンド'
       Coupon.coupon_create(user)
     end
-    user.save!
+    user.save(validate: false)
   end
   
   def self.sort(sort, reviews)

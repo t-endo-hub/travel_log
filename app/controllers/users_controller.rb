@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update] 
   def show
     @reviews = @user.reviews.page(params[:page]).per(20)
-    @user = User.find(params[:id])
     # Entryモデルからログインユーザーのレコードを抽出
     @current_entry = Entry.where(user_id: current_user.id)
     # Entryモデルからメッセージ相手のレコードを抽出

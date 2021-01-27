@@ -21,7 +21,7 @@
       <tbody>
         <% @genres.each do |genre| %>
           <tr>
-            <td><%= attachment_image_tag genre, :genre_image, fallback: 'no_image_jpg', size: '100x100' %></td>
+            <td><%= attachment_image_tag genre, :genre_image, fallback: 'others/no_image.jpg', size: '100x100' %></td>
             <td><%= genre.name %></td>
             <td>
               <%= link_to '編集', edit_genre_path(genre), class: 'btn btn-primary' %>
@@ -31,4 +31,8 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="row">
+  <%= paginate @genres %>
 </div>

@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = @review.comments
+    @comments = @review.comments.order(id: 'DESC').page(params[:page]).per(20)
   end
 
   def edit

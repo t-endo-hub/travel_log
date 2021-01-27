@@ -42,7 +42,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :introduction
       t.string :profile_image_id
       t.integer :point, default: 0, null: false
-      t.string :rank, default: 0, null: false
+
       t.timestamps null: false
     end
 
