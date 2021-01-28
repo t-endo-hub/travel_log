@@ -1,6 +1,8 @@
 class TouristSpotsController < ApplicationController
   before_action :set_tourist_spot, only: [:show, :update, :edit, :destroy]
   before_action :set_genre_scene, only: [:new, :edit, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
 
   def new
     @tourist_spot = TouristSpot.new

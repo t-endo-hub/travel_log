@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, except: [:index, :new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @tourist_spot = TouristSpot.find(params[:tourist_spot_id])

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update] 
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+
   def show
     @reviews = @user.reviews.page(params[:page]).per(20)
     # Entryモデルからログインユーザーのレコードを抽出
