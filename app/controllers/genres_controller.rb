@@ -12,7 +12,7 @@ class GenresController < ApplicationController
   def update
     if @genre.update(genre_params)
       flash[:notice] = 'ジャンルを更新しました'
-      redirect_to genres_path
+      redirect_to genres_
     else
       flash[:alert] = 'ジャンルの更新に失敗しました'
       render 'edit'

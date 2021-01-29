@@ -11,7 +11,7 @@
       </div>
       <% @genres.each do |genre| %>
         <div class="col-md-4">
-          <%= link_to tourist_spot_genre_search_path(genre_search: genre.id) do %>
+          <%= link_to user_tourist_spot_genre_search_path(genre_search: genre.id) do %>
             <%= attachment_image_tag genre, :genre_image, fallback: 'others/no_image.jpg', size: '150x150', class: 'img-responsive img-rounded img-hover top-image' %>
             <p><%= genre.name %></p>
           <% end %>
@@ -30,7 +30,7 @@
       </div>
       <% @scenes.each do |scene| %>
         <div class="col-md-4">
-          <%= link_to tourist_spot_scene_search_path(scene_search: scene.id) do %>
+          <%= link_to user_tourist_spot_scene_search_path(scene_search: scene.id) do %>
             <%= attachment_image_tag scene, :scene_image, fallback: 'no_image.jpg', size: '150x150', class: 'img-responsive img-rounded img-hover top-image' %>
             <p><%= scene.name %></p>
           <% end %>
@@ -49,7 +49,7 @@
       </div>
       <% JpPrefecture::Prefecture.all.each do |prefecture| %>
         <div class="col-md-4">
-          <%= link_to tourist_spot_prefecture_search_path(prefecture_search: prefecture.code) do %>
+          <%= link_to user_tourist_spot_prefecture_search_path(prefecture_search: prefecture.code) do %>
             <%= image_tag "prefectures/#{ prefecture.name }.jpg", class: 'img-responsive img-rounded img-hover top-image' %>
             <p><%= prefecture.name %></p>
           <% end %>

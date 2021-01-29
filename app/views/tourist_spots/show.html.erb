@@ -31,7 +31,7 @@
             </th>
             <td>
               <% @tourist_spot.tag_list.each do |tag| %>
-                <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag), class: 'label label-default margin-left--10px' %>
+                <%= link_to tag, user_tourist_spot_tag_search_path(tag_name: tag), class: 'label label-default margin-left--10px' %>
               <% end %>
             </td>
           </tr>
@@ -109,8 +109,8 @@
 
     <% if @tourist_spot.user == current_user %>
       <div class="pull-right">
-        <%= link_to '編集', edit_tourist_spot_path(@tourist_spot), class: 'btn btn-primary' %>
-        <%= link_to '削除', tourist_spot_path(@tourist_spot), method: :delete, data: { confirm: '本当に削除しますか?' }, class: 'btn btn-danger margin-left--10px' %>
+        <%= link_to '編集', user_edit_tourist_spot_path(@tourist_spot), class: 'btn btn-primary' %>
+        <%= link_to '削除', user_tourist_spot_path(@tourist_spot), method: :delete, data: { confirm: '本当に削除しますか?' }, class: 'btn btn-danger margin-left--10px' %>
       </div>
     <% end %>
   </div>

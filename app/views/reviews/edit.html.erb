@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-8 mx-auto">
     <h3>レビュー編集</h3>
-    <%= form_with(model: @review, url: tourist_spot_review_path(@review.tourist_spot, @review), method: :put, local: true) do |f| %>
+    <%= form_with(model: @review, url: user_tourist_spot_review_path(@review.tourist_spot, @review), method: :put, local: true) do |f| %>
       <%= f.label :review_image, '画像' %>
       <%= f.file_field :review_image, class: 'form-control' %>
       
@@ -16,6 +16,6 @@
 
       <%= f.submit '変更', class: 'btn btn-primary' %>
     <% end %>
-    <%= link_to '削除', tourist_spot_review_path(@review), method: :delete, class: 'btn btn-danger' %>
+    <%= link_to '削除', user_tourist_spot_review_path(@review), method: :delete, class: 'btn btn-danger' %>
   </div>
 </div>

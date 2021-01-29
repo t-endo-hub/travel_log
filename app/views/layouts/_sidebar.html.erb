@@ -37,7 +37,7 @@
               <% end %>
             </td>
             <td>
-              <%= link_to tourist_spot_path(tourist_spot) do %>
+              <%= link_to user_tourist_spot_path(tourist_spot) do %>
                 <%= attachment_image_tag tourist_spot, :spot_image, fallback: 'others/no_image.jpg', size: '50x50', class: 'img-thumbnail img-rounded img-responsive img-hover' %>
                 <span class="margin-left--10px">
                   <%= tourist_spot.name %>
@@ -91,7 +91,7 @@
               <% end %>
             </td>
             <td>
-              <%= link_to tourist_spot_path(tourist_spot) do %>
+              <%= link_to user_tourist_spot_path(tourist_spot) do %>
                 <%= attachment_image_tag tourist_spot, :spot_image, fallback: 'others/no_image.jpg', size: '50x50', class: 'img-thumbnail img-rounded img-responsive img-hover' %>
                 <span class="margin-left--10px">
                   <%= tourist_spot.name %>
@@ -145,7 +145,7 @@
               <% end %>
             </td>
             <td class="text-center">
-              <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag.name) %>
+              <%= link_to tag, user_tourist_spot_tag_search_path(tag_name: tag.name) %>
             </td>
             <td class="text-center">
               <%= tag.taggings_count %>
@@ -207,12 +207,12 @@
               </div>
             </td>
             <td class="text-center">
-              <%= link_to tourist_spot_path(review.tourist_spot) do %>
+              <%= link_to user_tourist_spot_path(review.tourist_spot) do %>
                 <%= review.tourist_spot.name %>
               <% end %>
             </td>
             <td class="text-center">
-              <%= link_to user_path(review.user) do %>
+              <%= link_to user_user_path(review.user) do %>
                 <%= review.user.name %>
               <% end %>
             </td>
@@ -232,7 +232,7 @@
   </div>
   
   <div class="row">
-    <%= form_with url: user_keyword_search_path, method: :get, local: true do %>
+    <%= form_with url: user_user_keyword_search_path, method: :get, local: true do %>
       <div class="col-md-8">
         <%= text_field_tag :search, '', placeholder: 'ユーザーキーワード検索', class: 'form-control' %>
       </div>
@@ -286,7 +286,7 @@
               <% end %>
             </td>
             <td class="text-center">
-              <%= link_to user_path(user) do %>
+              <%= link_to user_user_path(user) do %>
                 <%= attachment_image_tag user, :profile_image, fallback: 'others/no_image.jpg', size: '50x50', class: 'img-thumbnail img-responsive img-hover' %>
               <% end %>
               <br>

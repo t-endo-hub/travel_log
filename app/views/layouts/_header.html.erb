@@ -19,7 +19,7 @@
         <% if user_signed_in? %>
             <span>
               ようこそ
-              <%= link_to current_user.name, user_path(current_user) %>
+              <%= link_to current_user.name, user_user_path(current_user) %>
               さん！
             </span>
         <% end %>
@@ -36,7 +36,7 @@
             <ul class="dropdown-menu" role='menu'>
               <li role='presentation'>
                 <% Genre.where(ancestry: nil).each do |genre| %>
-                  <%= link_to genre.name, tourist_spot_genre_search_path(genre_search: genre.id), class: 'parent-genre', id: "#{genre.id}" %>
+                  <%= link_to genre.name, user_tourist_spot_genre_search_(genre_search: genre.id), class: 'parent-genre', id: "#{genre.id}" %>
                 <% end %>
               </li>
               <br>
@@ -57,7 +57,7 @@
             <ul class="dropdown-menu" role='menu'>
               <li>
                 <% Scene.all.each do |scene| %>
-                  <%= link_to  scene.name, tourist_spot_scene_search_path(scene_search: scene.id) %>
+                  <%= link_to  scene.name, user_tourist_spot_scene_search_path(scene_search: scene.id) %>
                 <% end %>
               </li>
               <br>
@@ -75,7 +75,7 @@
             <ul class="dropdown-menu" role='menu'>
               <li>
                 <% JpPrefecture::Prefecture.all.each do |prefecture| %>
-                  <%= link_to prefecture.name, tourist_spot_prefecture_search_path(prefecture_search: prefecture.code)%>
+                  <%= link_to prefecture.name, user_tourist_spot_prefecture_search_path(prefecture_search: prefecture.code)%>
                 <% end %>
               </li>
               <br>
@@ -96,7 +96,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <%= link_to user_path(current_user) do %>
+                  <%= link_to user_user_path(current_user) do %>
                     <i class="fas fa-user"></i>
                     マイページ
                   <% end %>
@@ -104,38 +104,38 @@
                 <li>
                   <% if unchecked_notifications(current_user).present? %>
                     <i class="fa fa-circle header__notifications-icon--2" style='color: gold;'></i>
-                    <%= link_to notifications_path, class: 'header__notifications-link' do %>
+                    <%= link_to user_notifications_path, class: 'header__notifications-link' do %>
                       <i class="fas fa-bell"></i>
                       通知
                     <% end %>
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to rooms_path do %>
+                  <%= link_to user_rooms_path do %>
                     <i class="fas fa-envelope"></i>
                     メッセージ
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to coupons_path do %>
+                  <%= link_to user_coupons_path do %>
                     <i class="fas fa-gift"></i>
                     クーポン
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to favorites_path do %>
+                  <%= link_to user_favorites_path do %>
                     <i class="fas fa-star"></i>
                     行きたい観光地
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to wents_path do %>
+                  <%= link_to user_wents_path do %>
                     <i class="fas fa-circle"></i>
                     行った観光地
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to edit_user_path(current_user) do %>
+                  <%= link_to user_edit_user_path(current_user) do %>
                     <i class="fas fa-user-cog"></i>
                     プロフィール編集
                   <% end %>
@@ -162,7 +162,7 @@
               <% end %>
             </li>
             <li>
-              <%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, method: :post %>
+              <%= link_to 'ゲストログイン（閲覧用）', user_homes_guest_sign_in_path, method: :post %>
             </li>
           <% end %>
         </ul>

@@ -30,16 +30,16 @@
 
   <ul class="nav nav-justified border-bottom">
     <li class="nav-item">
-      <%= link_to '観光地トップ', tourist_spot_path(tourist_spot), class: 'nav-link'%>
+      <%= link_to '観光地トップ', user_tourist_spot_path(tourist_spot), class: 'nav-link'%>
     </li>
     <li class="nav-item">
-      <%= link_to "#{ tourist_spot.reviews.count}レビュー", tourist_spot_reviews_path(tourist_spot), class: 'nav-link' %>
+      <%= link_to "#{ tourist_spot.reviews.count}レビュー", user_tourist_spot_reviews_path(tourist_spot), class: 'nav-link' %>
     </li>
     <li class="nav-item">
-      <%= link_to 'レビュー投稿', new_tourist_spot_review_path(tourist_spot), class: 'nav-link' %>
+      <%= link_to 'レビュー投稿', user_new_tourist_spot_review_path(tourist_spot), class: 'nav-link' %>
     </li>
     <li class="nav-item">
-      <%= link_to '地図', tourist_spot_map_path(tourist_spot), class: 'nav-link', 'data-turbolinks': false %>
+      <%= link_to '地図', user_tourist_spot_map_path(tourist_spot), class: 'nav-link', 'data-turbolinks': false %>
     </li>
   </ul>
   <br>

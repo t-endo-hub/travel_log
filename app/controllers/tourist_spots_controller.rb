@@ -30,7 +30,7 @@ class TouristSpotsController < ApplicationController
         params[:children_id],
         params[:grandchildren_id]
       )
-      redirect_to tourist_spot_path(@tourist_spot)
+      redirect_to user_tourist_spot_(@tourist_spot)
     else
       @genre_parent_array = Genre.genre_parent_array_create
 			render 'new'
@@ -60,7 +60,7 @@ class TouristSpotsController < ApplicationController
         params[:children_id],
         params[:grandchildren_id]
       )
-      redirect_to tourist_spot_path(@tourist_spot)
+      redirect_to user_tourist_spot_path(@tourist_spot)
     else
       @genre_parent_array = Genre.genre_parent_array_create
 			render 'edit'

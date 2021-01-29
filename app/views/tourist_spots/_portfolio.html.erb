@@ -24,7 +24,7 @@
         <% tourist_spots.each do |tourist_spot| %>
           <tr class="item" data = { model_name: tourist_spot.class.name.underscore, update_url: user_tourist_spot_sort_path(tourist_spot) }>
             <td>
-              <%= link_to tourist_spot_path(tourist_spot) do %>
+              <%= link_to user_tourist_spot_path(tourist_spot) do %>
                 <%= attachment_image_tag tourist_spot, :spot_image, size: '50x50', class: 'img-thumbnail img-responsive img-hover' %>
                 <span class="margin-left--10px">
                   <%= tourist_spot.name %>

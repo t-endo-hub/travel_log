@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = 'ユーザー情報を編集しました'
-      redirect_to user_path(@user)
+      redirect_to user_user_path(@user)
     else
       flash[:alert] = 'ユーザー情報の編集に失敗しました'
       render 'edit'

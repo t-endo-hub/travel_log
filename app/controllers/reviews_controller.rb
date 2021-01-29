@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
       review.user.point += 1 # レビューを投稿したユーザーにポイントを与える
       review.user_rank_update(review.user) # レビューを投稿したユーザーのランクをアップデート
       flash[:notice] = 'レビューを追加しました'
-      redirect_to tourist_spot_path(@tourist_spot)
+      redirect_to tourist_spot_(@tourist_spot)
     else
       flash[:alert] = 'レビューの追加に失敗しました'
       render 'new'
@@ -37,7 +37,7 @@ class ReviewsController < ApplicationController
   def update
     if @review.update(review_params)
       flash[:notice] = "レビューを編集しました"
-      redirect_to tourist_spot_reviews_path(@review.tourist_spot)
+      redirect_to user_tourist_spot_reviews_path(@review.tourist_spot)
     else
       flash[:alert] = "レビューの編集に失敗しました"
       render 'edit'
@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
   def destroy
     if @review.destroy
       flash[:notice] = "レビューを削除しました"
-      redirect_to tourist_spot_reviews_path(@review.tourist_spot)
+      redirect_to user_tourist_spot_reviews_path(@review.tourist_spot)
     else
       flash[:alert] = "レビューの削除に失敗しました"
       render 'edit'

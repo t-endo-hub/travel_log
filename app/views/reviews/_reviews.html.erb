@@ -4,7 +4,7 @@
     <% if reviews.present? %>
       <% reviews.each do |review| %>
         <div class="thumbnail">
-          <%= link_to tourist_spot_review_path(review.tourist_spot, review) do %>
+          <%= link_to user_tourist_spot_review_path(review.tourist_spot, review) do %>
             <%= attachment_image_tag review, :review_image, fallback: 'no_image.jpg' ,class: 'img-responsive img-hover' %>
           <% end %>
           <div class="caption">
@@ -13,14 +13,14 @@
             </p>
             <p>
               <%= attachment_image_tag review.user, :profile_image, fallback: 'others/no_image.jpg', size: '50x50', class: 'img-thumbnail img-responsive img-hover' %>
-              <%= link_to review.user.name, user_path(review.user), class: 'margin-left--10px' %>
+              <%= link_to review.user.name, user_user_path(review.user), class: 'margin-left--10px' %>
               (<%= review.user.age %>
               歳
               <%= review.user.sex %>
               )
             </p>
             <p>
-              <%= link_to review.title, tourist_spot_review_path(review.tourist_spot, review) %>
+              <%= link_to review.title, user_tourist_spot_review_path(review.tourist_spot, review) %>
             </p>
             <p>
               <%= review.body %>
@@ -29,7 +29,7 @@
               <span id="likebutton-<%= review.id %>">
                 <%= render 'reviews/likebutton', review: review %>
               </span>
-              <%= link_to tourist_spot_review_path(review.tourist_spot, review), class: 'margin-left--10px' do %>
+              <%= link_to user_tourist_spot_review_path(review.tourist_spot, review), class: 'margin-left--10px' do %>
                 <i class="fas fa-comment-dots"></i>
                 コメント
                 <%= review.comments.count %>

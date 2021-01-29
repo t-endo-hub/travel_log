@@ -5,7 +5,7 @@
       <% if tourist_spots.present? %>
         <% tourist_spots.each.with_index(1) do |tourist_spot, index| %>
           <div class="thumbnail">
-            <%= link_to tourist_spot_path(tourist_spot) do %>
+            <%= link_to tourist_spot_(tourist_spot) do %>
               <% if index == 1 || index == 2 || index == 3 %>
                 <div class="ribbon-wrapper">
                   <span class="ribbon">
@@ -29,10 +29,10 @@
                 <div class="score">
                   <%= tourist_spot.average_score %>点
                 </div>
-                <%= link_to "#{ tourist_spot.reviews.count }レビュー", tourist_spot_reviews_path(tourist_spot), class: 'btn btn-default margin-left--10px' %>
+                <%= link_to "#{ tourist_spot.reviews.count }レビュー", user_tourist_spot_reviews_path(tourist_spot), class: 'btn btn-default margin-left--10px' %>
               </p>
               <p>
-                <%= link_to tourist_spot.name, tourist_spot_path(tourist_spot) %>
+                <%= link_to tourist_spot.name, user_tourist_spot_path(tourist_spot) %>
               </p>
               <p>
                 <%= link_to tourist_spot.prefecture_name %>
@@ -46,7 +46,7 @@
               </p>
               <p>
                 <% tourist_spot.tag_list.each do |tag| %>
-                  <%= link_to tag, tourist_spot_tag_search_path(tag_name: tag), class: 'label label-default margin-left--10px' %>
+                  <%= link_to tag, user_tourist_spot_tag_search_path(tag_name: tag), class: 'label label-default margin-left--10px' %>
                 <% end %>
               </p>
             </div>

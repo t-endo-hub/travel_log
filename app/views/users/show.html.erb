@@ -64,8 +64,8 @@
               <br>
 
               <% if @user == current_user %>
-                <%= link_to 'プロフィールを編集', edit_user_path(@user), class: 'btn btn-primary' %>
-                <%= link_to '退会', user_path(@user), method: :delete, data: { confirm: '本当に退会しますか？' }, class: 'btn btn-danger margin-left--10px' %>
+                <%= link_to 'プロフィールを編集', user_edit_user_path(@user), class: 'btn btn-primary' %>
+                <%= link_to '退会', user_user_path(@user), method: :delete, data: { confirm: '本当に退会しますか？' }, class: 'btn btn-danger margin-left--10px' %>
               <% end %>
               <br>
               <br>
@@ -77,9 +77,9 @@
                   </div>
                   <br>
                   <% if @is_room == true %>
-                    <%= link_to 'メッセージ', room_path(@room_id), class: 'btn btn-success' %>
+                    <%= link_to 'メッセージ', user_room_path(@room_id), class: 'btn btn-success' %>
                   <% else %>
-                    <%= form_with model: @room, url: rooms_path, local: true do |f| %>
+                    <%= form_with model: @room, url: user_rooms_path, local: true do |f| %>
                       <%= fields_for @entry do |e| %>
                         <%= e.hidden_field :user_id,value: @user.id %>
                       <% end %>
@@ -104,19 +104,19 @@
 <div class="row">
   <ul class="nav nav-tabs nav-justified">
     <li role="presentation">
-      <%= link_to 'ユーザートップ', user_path(@user) %>
+      <%= link_to 'ユーザートップ', user_user_path(@user) %>
     </li>
     <li role="presentation">
-      <%= link_to '行った観光地', wents_path(@user) %>
+      <%= link_to '行った観光地', user_wents_path(@user) %>
     </li>
     <li role="presentation">
-      <%= link_to '行きたい観光地', favorites_path(@user) %>
+      <%= link_to '行きたい観光地', user_favorites_path(@user) %>
     </li>
     <li role="presentation">
-      <%= link_to "#{ @user.follower.count }フォロー中", following_path(@user) %>
+      <%= link_to "#{ @user.follower.count }フォロー中", user_following_path(@user) %>
     </li>
     <li role="presentation">
-      <%= link_to "#{ @user.followed.count }フォロワー", follower_path(@user) %>
+      <%= link_to "#{ @user.followed.count }フォロワー", user_follower_path(@user) %>
     </li>
   </ul>
   <br>
