@@ -1,0 +1,38 @@
+<div class="row">
+  <%= render 'user/detail', tourist_spot: @tourist_spot %>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'user/weather', tourist_spot: @tourist_spot %>
+  </div>
+  <div class="col-md-9">
+    <div id="map" style='height: 550px; width: 100%; margin-top: 30px;'></div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap">
+    </script>
+    <script>
+      let map;
+      let latitude = gon.latitude;
+      let longitude = gon.longitude;
+
+      function initMap() {
+        geocoder = new google.maps.Geocoder()
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {
+            lat: latitude,
+            lng: longitude
+          },
+          zoom: 12,
+        });
+
+        marker = new google.maps.Marker({
+          position: {
+            lat: latitude,
+            lng: longitude
+          },
+          map: map
+        });
+      }
+    </script>
+  </div>
+</div>

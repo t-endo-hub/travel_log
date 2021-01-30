@@ -1,0 +1,38 @@
+<div class="row">
+  <% if @followers.present? %>
+    <% @followers.each do |user| %>
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <div class="caption">
+            <p>
+              <%= link_to user_user_path(user) do %>
+                <%= attachment_image_tag user, :profile_image, fallback: 'others/no_image.png', class: 'img-responsive img-hover' %>
+                <%= user.name %>
+              <% end %>
+            </p>
+            <%= link_to "#{ user.follower.count }フォロー中", user_following_path(user) %>
+            <br>
+            <%= link_to "#{ user.followed.count }フォロワー", user_follower_path(user) %>
+            <% if user_signed_in? %>
+              <% unless user == current_user %>
+                <span id='followbutton_#{ user.id }' >
+                  <%= render 'user/users/followbutton', user:user %>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="centered">
+      <p>
+        ユーザーが存在しません
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <%= paginate @followers %>
+</div>

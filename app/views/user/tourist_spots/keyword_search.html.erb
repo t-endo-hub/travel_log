@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="page-header">
+    <h3>
+      キーワード検索：<strong><%= @keyword_search %></strong>
+    </h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6"></div>
+  <div class="col-md-6">
+    <%= form_with url: user_tourist_spot_keyword_search_path, method: :get, local: true do %>
+      <div class="col-md-9">
+        <%= hidden_field_tag :keywork_search, @keywork_search %>
+        <%= select_tag 'sort', options_for_select([['おすすめ順', '1'], ['PV数', '2'], ['点数順', '3'], ['レビュー数', '4'], ['新着順', '5'], ['ランダム表示', '6']]), include_blank: '-----', class: 'form-control' %>
+      </div>
+      <%= submit_tag '並び替え', class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>
+<br>
+
+
+<div class="row">
+  <%= render 'user/tourist_spots', tourist_spots: @tourist_spots %>
+</div>

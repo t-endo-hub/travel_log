@@ -38,7 +38,7 @@
     if (parentGenre != '---') {
       // 親ジャンルが初期値でないことを確認
       $.ajax({
-        url: '/get_genre/children',
+        url: '/user/get_genre/children',
         type: 'GET',
         data: {
           parent_id: parentGenre,
@@ -70,7 +70,7 @@
     if (childId != '---') {
       // 子ジャンルが初期値でないことを確認
       $.ajax({
-        url: '/get_genre/grandchildren',
+        url: '/user/get_genre/grandchildren',
         type: 'GET',
         data: {
           child_id: childId,

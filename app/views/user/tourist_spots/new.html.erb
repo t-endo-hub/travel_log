@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <%= form_with model: @tourist_spot, url: user_tourist_spots_path, local: true, builder: CustomFormBuilder do |f| %>
+      <%= f.file_field :spot_image, id: 'image', class: 'img_field', style:"display:none;" %>
+      <%= attachment_image_tag @tourist_spot, :spot_image, onClick:"$('.img_field').click()", fallback: 'others/no_image.png',id: 'image-preview', class: 'center-block img-thumbnail img-responsive img_prev' %>
+      <br>
+      <br>
+
+      <%= f.label :name, '施設、観光地名' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_field :name, placeholder: '例) 東京ディズニーランド', class: 'form-control' %>
+      <br>
+
+      <%= f.label :tag_list, 'タグ' %>
+      <span class="label label-default">任意</span>
+      <br>
+      <%= f.text_field :tag_list, value: @tourist_spot.tag_list.join(','), id: 'tags' %>
+      <br>
+
+      <div class="genre-form">
+        <%= label_tag 'ジャンル' %>
+        <span class="label label-danger">必須</span>
+        <%= select_tag 'parent_id', options_for_select(@genre_parent_array), class: 'form-control', id: 'parent-genre' %>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <br>
+      
+      <%= label_tag '利用シーン' %>
+      <span class="label label-danger">必須</span>
+      <%= collection_check_boxes(:tourist_spot, :scene_ids, Scene.all, :id, :name) do |b| %>
+        <span class="margin-left--10px">
+          <%= b.label { b.check_box + ' ' + b.text } %>
+        </span>
+      <% end %>
+      <br>
+      <br>
+
+      <%= f.label :postcode, '郵便番号' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_field :postcode, placeholder: '例) 279-0031', class: 'form-control' %>
+      <br>
+
+      <%= f.label :prefecture_name, '都道府県' %>
+      <span class="label label-danger">必須</span>
+      <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: 'form-control' %>
+      <br>
+
+      <%= f.label :address_city, '市区町村' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_field :address_city, placeholder: '例) 浦安市舞浜',class: 'form-control' %>
+      <br>
+
+      <%= f.label :address_street, '番地' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_field :address_street, placeholder: '例) 1-1', class: 'form-control' %>
+      <br>
+
+      <%= f.label :address_building, '建物' %>
+      <span class="label label-default">任意</span>
+      <%= f.text_field :address_building, placeholder: '例) 山田ビル' ,class: 'form-control' %>
+      <br>
+
+      <%= f.label :introduction, '紹介文' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_area :introduction, placeholder: '例) “夢がかなう場所”、東京ディズニーリゾート。ここはそれぞれが明確に異なるテーマと楽しさを持つ個性的な施設の集まりでありながら、エリア全体としては調和のとれた時間と空間が創出される場所です。',class: 'form-control', style: 'height: 200px;' %>
+      <br>
+
+      <%= f.label :access, 'アクセス方法' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_area :access, placeholder: '例) JR舞浜駅でディズニーリゾートラインに乗り換え、「東京ディズニーシー・ステーション」で下車ください。',class: 'form-control' %>
+      <br>
+
+      <%= f.label :phone_number, '電話番号' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_field :phone_number, placeholder: '例) 045-330-0000',class: 'form-control' %>
+      <br>
+
+      <%= f.label :business_hour, '営業時間' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_area :business_hour, placeholder: '例) 開園時間：8:00～22:00 季節により異なります', class: 'form-control', style: 'height: 100px;'%>
+      <br>
+
+      <%= f.label :home_page, 'ホームページ' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_area :home_page, placeholder: '例) https://www.tokyodisneyresort.jp/tdl/', class: 'form-control' %>
+      <br>
+
+      <%= f.label :parking, '駐車場' %>
+      <span class="label label-danger">必須</span>
+      <%= f.text_area :parking, placeholder: '例) 有 (敷地内に200台)', class: 'form-control' %>
+      <br>
+
+      <%= f.submit '登録', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+<%= javascript_include_tag 'tag-it.js' %>
+<%= javascript_include_tag 'genre_form.js' %>
+<%= javascript_include_tag 'image_preview.js' %>
+<%= javascript_include_tag 'jquery.jpostal.js' %>
+<%= javascript_include_tag 'tourist_spot_address_autofill.js' %>

@@ -36,7 +36,7 @@
             <ul class="dropdown-menu" role='menu'>
               <li role='presentation'>
                 <% Genre.where(ancestry: nil).each do |genre| %>
-                  <%= link_to genre.name, user_tourist_spot_genre_search_(genre_search: genre.id), class: 'parent-genre', id: "#{genre.id}" %>
+                  <%= link_to genre.name, user_tourist_spot_genre_search_path(genre_search: genre.id), class: 'parent-genre', id: "#{genre.id}" %>
                 <% end %>
               </li>
               <br>
@@ -135,7 +135,7 @@
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to user_edit_user_path(current_user) do %>
+                  <%= link_to edit_user_user_path(current_user) do %>
                     <i class="fas fa-user-cog"></i>
                     プロフィール編集
                   <% end %>
@@ -162,7 +162,7 @@
               <% end %>
             </li>
             <li>
-              <%= link_to 'ゲストログイン（閲覧用）', user_homes_guest_sign_in_path, method: :post %>
+              <%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, method: :post %>
             </li>
           <% end %>
         </ul>
