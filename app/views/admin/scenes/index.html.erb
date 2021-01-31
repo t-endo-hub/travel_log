@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4">
-    <%= form_with model: @scene, local: true do |f| %>
+    <%= form_with model: @scene, url: new_admin_scene_path, local: true do |f| %>
       <%= f.label :scene_image, '画像' %>
       <%= f.file_field :scene_image, autofocus: true %>
       <br>
@@ -24,8 +24,8 @@
             <td><%= attachment_image_tag scene, :scene_image, fallback: 'no_image_jpg', size: '100x100' %></td>
             <td><%= scene.name %></td>
             <td>
-              <%= link_to '編集', edit_scene_path(scene), class: 'btn btn-primary' %>
-              <%= link_to '削除', scene_path(scene), method: :delete, class: 'btn btn-danger' %>
+              <%= link_to '編集', edit_admin_scene_path(scene), class: 'btn btn-primary' %>
+              <%= link_to '削除', admin_scene_path(scene), method: :delete, class: 'btn btn-danger' %>
           </tr>
         <% end %>
       </tbody>

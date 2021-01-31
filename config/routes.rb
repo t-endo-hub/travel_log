@@ -1,12 +1,22 @@
 Rails.application.routes.draw do
 	root 'homes#top'
 	post '/homes/guest_sign_in', to: 'homes#new_guest'
-	get 'get_genre/new', to: 'homes#new', defaults: { format: 'json' }
+  get 'get_genre/new', to: 'homes#new', defaults: { format: 'json' }
+
+  devise_for :admins, controllers: {
+		sessions:      'admins/sessions',
+	}
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: "users/sessions",
   }
+
+  namespace :admin do
+    get 'top', to: 'homes#top'
+    resources :genres, only: [:new, :create, :index, :edit, :update, :destroy]
+		resources :scenes, only: [:new, :create, :index, :edit, :update, :destroy]
+  end
 
   namespace :user do
     resources :tourist_spots, only: [:new, :create, :show, :edit, :update, :destroy] do

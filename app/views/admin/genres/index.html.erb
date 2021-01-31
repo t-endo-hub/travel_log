@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4">
-    <%= form_with model: @genre, local: true do |f| %>
+    <%= form_with model: @genre, url: new_admin_genre_path, local: true do |f| %>
       <%= f.label :genre_image, '画像' %>
       <%= f.file_field :genre_image, autofocus: true %>
       <br>
@@ -24,8 +24,8 @@
             <td><%= attachment_image_tag genre, :genre_image, fallback: 'others/no_image.jpg', size: '100x100' %></td>
             <td><%= genre.name %></td>
             <td>
-              <%= link_to '編集', edit_genre_path(genre), class: 'btn btn-primary' %>
-              <%= link_to '削除', genre_path(genre), method: :delete, class: 'btn btn-danger' %>
+              <%= link_to '編集', edit_admin_genre_path(genre), class: 'btn btn-primary' %>
+              <%= link_to '削除', admin_genre_path(genre), method: :delete, class: 'btn btn-danger' %>
           </tr>
         <% end %>
       </tbody>
