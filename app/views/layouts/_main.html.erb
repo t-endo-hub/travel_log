@@ -32,19 +32,21 @@
     </div>
   <% end %>
   <div class="container">
-    <%= form_with url: user_tourist_spot_keyword_search_path, method: :get, local: true do %>
-      <div class="row">
-        <div class="col-md-10">
-          <%= text_field_tag :keyword_search, '', placeholder: '観光スポットキーワード検索', id: 'introjs-step1', class: 'form-control' %>
+    <%  unless request.path.include?('admin') || request.path.include?('sign') %>
+      <%= form_with url: user_tourist_spot_keyword_search_path, method: :get, local: true do %>
+        <div class="row">
+          <div class="col-md-10">
+            <%= text_field_tag :keyword_search, '', placeholder: '観光スポットキーワード検索', id: 'introjs-step1', class: 'form-control' %>
+          </div>
+          <div class="col-md-2">
+            <%= button_tag type: 'submit', name: nil, class: 'btn btn-info btn-block' do %>
+              <i class="fas fa-search"></i>
+              検索
+            <% end %>
+          </div>
+          <br>
         </div>
-        <div class="col-md-2">
-          <%= button_tag type: 'submit', name: nil, class: 'btn btn-info btn-block' do %>
-            <i class="fas fa-search"></i>
-            検索
-          <% end %>
-        </div>
-        <br>
-      </div>
+      <% end %>
     <% end %>
   <div>
 </main>
