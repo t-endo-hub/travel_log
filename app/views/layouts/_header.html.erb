@@ -25,62 +25,64 @@
         <% end %>
 
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown" role='presentation'>
-            <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
-              <i class="fas fa-list-ul"></i>
-              <span>
-                ジャンルから探す
-              </span>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role='menu'>
-              <li role='presentation'>
-                <% Genre.where(ancestry: nil).each do |genre| %>
-                  <%= link_to genre.name, user_tourist_spot_genre_search_path(genre_search: genre.id), class: 'parent-genre', id: "#{genre.id}" %>
-                <% end %>
-              </li>
-              <br>
-              <li role='presentation' class='children-list'></li>
-              <br>
-              <li role="presentation" class='grandchildren-list'></li>
-            </ul>
-          </li>
+          <% unless admin_signed_in? %>
+            <li class="dropdown" role='presentation'>
+              <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
+                <i class="fas fa-list-ul"></i>
+                <span>
+                  ジャンルから探す
+                </span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role='menu'>
+                <li role='presentation'>
+                  <% Genre.where(ancestry: nil).each do |genre| %>
+                    <%= link_to genre.name, user_tourist_spot_genre_search_path(genre_search: genre.id), class: 'parent-genre', id: "#{genre.id}" %>
+                  <% end %>
+                </li>
+                <br>
+                <li role='presentation' class='children-list'></li>
+                <br>
+                <li role="presentation" class='grandchildren-list'></li>
+              </ul>
+            </li>
 
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
-              <i class="fas fas-bullseye"></i>
-              <span>
-                利用シーンから探す
-              </span>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role='menu'>
-              <li>
-                <% Scene.all.each do |scene| %>
-                  <%= link_to  scene.name, user_tourist_spot_scene_search_path(scene_search: scene.id) %>
-                <% end %>
-              </li>
-              <br>
-            </ul>
-          </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
+                <i class="fas fas-bullseye"></i>
+                <span>
+                  利用シーンから探す
+                </span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role='menu'>
+                <li>
+                  <% Scene.all.each do |scene| %>
+                    <%= link_to  scene.name, user_tourist_spot_scene_search_path(scene_search: scene.id) %>
+                  <% end %>
+                </li>
+                <br>
+              </ul>
+            </li>
 
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
-              <i class="fas fa-globe-asia"></i>
-              <span>
-                都道府県から探す
-              </span>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role='menu'>
-              <li>
-                <% JpPrefecture::Prefecture.all.each do |prefecture| %>
-                  <%= link_to prefecture.name, user_tourist_spot_prefecture_search_path(prefecture_search: prefecture.code)%>
-                <% end %>
-              </li>
-              <br>
-            </ul>
-          </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle='dropdown' href='#' role='button' aria-expanded='false'>
+                <i class="fas fa-globe-asia"></i>
+                <span>
+                  都道府県から探す
+                </span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role='menu'>
+                <li>
+                  <% JpPrefecture::Prefecture.all.each do |prefecture| %>
+                    <%= link_to prefecture.name, user_tourist_spot_prefecture_search_path(prefecture_search: prefecture.code)%>
+                  <% end %>
+                </li>
+                <br>
+              </ul>
+            </li>
+          <% end %>
 
           <% if user_signed_in? %>
             <li class="dropdown">
@@ -147,6 +149,19 @@
                   <% end %>
                 </li>
               </ul>
+            </li>
+          <% elsif admin_signed_in? %>
+            <li>
+              <%= link_to '管理者画面トップ', admin_top_path %>
+            </li>
+            <li>
+              <%= link_to 'ジャンル一覧', admin_genres_path %>
+            </li>
+            <li>
+              <%= link_to '利用シーン', admin_scenes_path %>
+            </li>
+            <li>
+              <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
             </li>
           <% else %>
             <li>

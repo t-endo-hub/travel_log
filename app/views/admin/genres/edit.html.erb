@@ -1,7 +1,7 @@
 <h3>ジャンル編集</h3>
 <div class="row">
   <div class="col-md-8">
-    <%= form_with model: @genre, method: :put, local: true do |f| %>
+    <%= form_with model: @genre, url: edit_admin_genre_path(@genre), local: true, class: 'genre__form', builder: CustomFormBuilder do |f| %>
       <%= f.label :genre_image, '画像' %>
       <br>
       <%= attachment_image_tag @genre, :genre_image, fallback: 'no_image.jpg', size: '400x400' %>

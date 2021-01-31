@@ -1,4 +1,4 @@
-class ScenesController < ApplicationController
+class Admin::ScenesController < ApplicationController
   before_action :set_scene, only: [:edit, :update, :destroy]
 
   def index

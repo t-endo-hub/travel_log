@@ -12,7 +12,12 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
   }
 
-  
+  namespace :admin do
+    get 'top', to: 'homes#top'
+    resources :genres, only: [:new, :create, :index, :edit, :update, :destroy]
+		resources :scenes, only: [:new, :create, :index, :edit, :update, :destroy]
+  end
+
   namespace :user do
     resources :tourist_spots, only: [:new, :create, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]

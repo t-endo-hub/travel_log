@@ -1,7 +1,7 @@
 <h3>シーン編集</h3>
 <div class="row">
   <div class="col-md-8">
-    <%= form_with model: @scene, method: :put, local: true do |f| %>
+    <%= form_with model: @scene, url: edit_admin_scenes_path, local: true, builder: CustomFormBuilder do |f| %>
       <%= f.label :scene_image, '画像' %>
       <br>
       <%= attachment_image_tag @scene, :scene_image, fallback: 'no_image.jpg', size: '400x400' %>
