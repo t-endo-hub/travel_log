@@ -1,12 +1,12 @@
 <% @tourist_spot.impressionist_count(filter: :session_hash) %>
 
 <div class="row">
-  <%= render 'user/detail', tourist_spot: @tourist_spot %>
+  <%= render 'detail', tourist_spot: @tourist_spot %>
 </div>
 
 <div class="row">
   <div class="col-md-3">
-    <%= render 'user/weather', tourist_spot: @tourist_spot %>
+    <%= render 'weather', tourist_spot: @tourist_spot %>
   </div>
   <div class="col-md-9">
     <div class="page-header">
